@@ -1,23 +1,23 @@
 Front End Phase:
 
 New Pages:
-	-Assignment Page
-	-Admin Page
-	-Instructors Page
-	-Welcome page (Login & Signup)
-	-General leaderboard Page
+	-Assignment Page----------Khaled
+	-Admin dashboard Page-------Ramez
+	-Instructors dashboard Page-----Nour
+	-Welcome page (Login & Signup)-----Mahdy
+	-General leaderboard Page-----Mahdy
 
 
 Home Page: Remove Slider make it into one picture
 	   Replace About section with profile section
-	   Remove Pricing Section
+	   Remove Pricing Section----------Ramez
 
-Contact Page: Remove Sponsors Div
+Contact Page: Remove Sponsors Div-----Khaled
 
 
 Single Course Page: Construct Badges of course, assigments timeline, instructors names and course description, leaderboard of
-	             course
+	             course ------Mahdy & Khaled
 
 About us Page: Remove Sponsord Div
 	       Remove Testomonials
-	       Make About us Paragraph
+	       Make About us Paragraph -------Nour
