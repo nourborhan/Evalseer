@@ -1,0 +1,23 @@
+Front End Phase:
+
+New Pages:
+	-Assignment Page
+	-Admin Page
+	-Instructors Page
+	-Welcome page (Login & Signup)
+	-General leaderboard Page
+
+
+Home Page: Remove Slider make it into one picture
+	   Replace About section with profile section
+	   Remove Pricing Section
+
+Contact Page: Remove Sponsors Div
+
+
+Single Course Page: Construct Badges of course, assigments timeline, instructors names and course description, leaderboard of
+	             course
+
+About us Page: Remove Sponsord Div
+	       Remove Testomonials
+	       Make About us Paragraph
