@@ -1,0 +1,7 @@
+@media  (max-width: 767px) {
+    .add-pad
+    {
+        padding-left:2rem;
+        padding-right:2rem;
+    }
+  }
