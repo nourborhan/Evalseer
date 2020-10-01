@@ -5,7 +5,7 @@ $("#hints-table tr").hover(function(){
     let tabletd='#hints-table tr:nth-child('+(val+1)+') td';
 
     $(tabletd).removeClass('none').removeClass('fadeout');
-    
+
     $(tabletd).addClass('block').outerWidth();
 
     $(tabletd).addClass('fadein');
