@@ -21,3 +21,11 @@ Single Course Page: Construct Badges of course, assigments timeline, instructors
 About us Page: Remove Sponsord Div
 	       Remove Testomonials
 	       Make About us Paragraph -------Nour
+
+
+- Html Pages = All
+- Surveys = Mahdy
+- Database = Mahdy
+- Research Deep learning in auto assessment = Nour & Ramez
+- Tanzeel Course el ragel we studying it = All
+- Search in machine learning AWS Services = Khaled
