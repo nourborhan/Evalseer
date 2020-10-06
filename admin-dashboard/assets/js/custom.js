@@ -40,37 +40,37 @@
             Morris.Bar({
                 element: 'morris-bar-chart',
                 data: [{
-                    y: '2006',
+                    y: 'Jan',
                     a: 100,
                     b: 90
                 }, {
-                    y: '2007',
+                    y: 'Feb',
                     a: 75,
                     b: 65
                 }, {
-                    y: '2008',
+                    y: 'Mar',
                     a: 50,
                     b: 40
                 }, {
-                    y: '2009',
+                    y: 'Apr',
                     a: 75,
                     b: 65
                 }, {
-                    y: '2010',
+                    y: 'May',
                     a: 50,
                     b: 40
                 }, {
-                    y: '2011',
+                    y: 'Jun',
                     a: 75,
                     b: 65
                 }, {
-                    y: '2012',
+                    y: 'Jul',
                     a: 100,
                     b: 90
                 }],
                 xkey: 'y',
                 ykeys: ['a', 'b'],
-                labels: ['Series A', 'Series B'],
+                labels: ['Professor Access', 'Student Access'],
                 hideHover: 'auto',
                 resize: true
             });
@@ -81,13 +81,13 @@
             Morris.Donut({
                 element: 'morris-donut-chart',
                 data: [{
-                    label: "Download Sales",
-                    value: 12
+                    label: "Hint Sales",
+                    value: 50
                 }, {
-                    label: "In-Store Sales",
+                    label: "Deadline Extent Sales",
                     value: 30
                 }, {
-                    label: "Mail-Order Sales",
+                    label: "Reset Submission Sales",
                     value: 20
                 }],
                 resize: true
