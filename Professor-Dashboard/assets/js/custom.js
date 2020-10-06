@@ -40,37 +40,37 @@
             Morris.Bar({
                 element: 'morris-bar-chart',
                 data: [{
-                    y: '1',
+                    y: 'A1',
                     a: 100,
                     b: 90
                 }, {
-                    y: '2',
+                    y: 'A2',
                     a: 75,
                     b: 65
                 }, {
-                    y: '3',
+                    y: 'A3',
                     a: 50,
                     b: 40
                 }, {
-                    y: '4',
+                    y: 'A4',
                     a: 75,
                     b: 65
                 }, {
-                    y: '5',
+                    y: 'A5',
                     a: 50,
                     b: 40
                 }, {
-                    y: '6',
+                    y: 'A6',
                     a: 75,
                     b: 65
                 }, {
-                    y: '7',
+                    y: 'A7',
                     a: 100,
                     b: 90
                 }],
                 xkey: 'y',
                 ykeys: ['a', 'b'],
-                labels: ['Series A', 'Series B'],
+                labels: ['Submitted', 'Ignored'],
                 hideHover: 'auto',
                 resize: true
             });
