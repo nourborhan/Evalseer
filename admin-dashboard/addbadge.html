@@ -184,12 +184,27 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                         </div>
                        
                         <div class="panel-body">
+                            <!-- <form>
                           <h5>Upload Badge Image (PNG ONLY)</h5>
                           <input required type="file" accept=".png">
                           <br>
                           <h5>Enter Badge Description</h5>
-                          <input required type="textarea" style="width: 50%;height: 100px;">
+                          <textarea class="form-control" style="width: 50%;" rows="5"></textarea>
+                          <br>
+                          <button style="margin-top: 5px;" class="btn btn-primary">Add Badge</button>
+                                </form> -->
 
+                                <form>
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Upload Badge Image</label>
+                                      <input required type="file" accept=".png">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="exampleInputPassword1">Enter Badge Description</label>
+                                      <textarea class="form-control" style="width: 50%;" rows="5"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Add Badge</button>
+                                  </form>
 
                         </div>
                         
