@@ -214,4 +214,14 @@
         mainApp.main_fun();
     });
 
+    $('#Course').change(function(){
+        let selection = $('#Course option:selected').val();
+
+           if(selection == 'CSC240' || selection == 'CSC250')
+           {
+               $('#Assignment-Panel').css('display','block');
+           }
+       }); 
+
 }(jQuery));
+
