@@ -2814,7 +2814,7 @@ select.mobile-device {
     font-size: 18px;
     border: 2px solid #ffffff !important;
     color: #ffffff;
-    background-color: transparent;
+   background-color: #000!important;
 }
 
 .btn-dark {
@@ -2827,8 +2827,10 @@ select.mobile-device {
 
 .btn-light:hover,
 .btn-light:focus {
-    border-color: rgba(255, 255, 255, 0.6);
-    color: rgba(255, 255, 255, 0.6);
+    background-color:#eea412 !important;
+    border-color: #eea412 !important;
+    color: rgba(255, 255, 255, 0.6)!important;
+
 }
 
 body.host_version .slide-btn.btn-light{
