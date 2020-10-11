@@ -84,7 +84,10 @@
                         <li class="nav-item"><a class="nav-link" href="leaderboard-page.php">Leaderboard</a></li>
 						<li class="nav-item active"><a class="nav-link" href="Badges.php">Achievements</a></li>
 						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-					</ul>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="hover-btn-new log orange" href="#"><span>Logout</span></a></li>
+                    </ul>
 					
 				</div>
 			</div>
