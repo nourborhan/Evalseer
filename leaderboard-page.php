@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
  
      <!-- Site Metas -->
-    <title>SmartEDU - Education Responsive HTML5 Template</title>  
+     <title>Evalseer - Leaderboards</title>   
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -51,46 +51,7 @@
 	<!-- END LOADER -->	
 
     <!-- Start header -->
-	<header class="top-navbar">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="index.php">
-					<img src="images/logo.png" alt="" />
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbars-host">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="about.php">About Us</a></li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Courses </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="course.php">CSC 105 </a>
-							</div>
-						</li>
-						<!-- <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="blog.php">Blog </a>
-								<a class="dropdown-item" href="blog-single.php">Blog single </a>
-							</div>
-                        </li> -->
-                        <li class="nav-item active"><a class="nav-link" href="leaderboard-page.php">Leaderboard</a></li>
-						<li class="nav-item"><a class="nav-link" href="Badges.php">Achievements</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log orange" href="#"><span>Logout</span></a></li>
-                    </ul>
-					
-				</div>
-			</div>
-		</nav>
-	</header>
+	<?php include_once("partials/header.php") ?>
 	<!-- End header -->
 	
 	<!-- <div style="background: url(images/b4.png)no-repeat;" class="all-title-box">
@@ -172,6 +133,15 @@
     <script src="js/all.js"></script>
     <!-- ALL PLUGINS -->
     <script src="js/custom.js"></script>
+
+    <script>
+
+	$(document).ready(function(){
+
+		$('#nav-leaderboards').addClass("active");
+	})
+
+	</script>
 
 </body>
 </html>
