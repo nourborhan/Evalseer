@@ -1,0 +1,89 @@
+
+.hints-li
+{
+	width:350px;
+	height:70px;
+}
+
+.hint-div
+{
+	background-color: dimgray;
+	color: white;
+	width: 100%;
+	height: 100%;
+}
+
+#hints-table th
+{
+	width:20%;
+}
+#hints-table td
+{
+	background-image: linear-gradient(to right,rgba(198, 200, 202,0) ,rgba(198, 200, 202,1));
+	width: 100%;
+	display: none;
+	opacity: 0;
+	transition: opacity 700ms;
+	padding: 0;
+	height: 51px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+#hints-table input[type=submit]
+{
+	color:white;
+	width:100%;
+	height:51px;
+	background: none;
+	border:none;
+	font-size:17px;
+}
+
+.fadein
+{
+	opacity:1 !important;
+}
+
+.block
+{
+	display:block !important;
+}
+
+.fadeout
+{
+	opacity:0 !important;
+}
+
+.none
+{
+	display:none !important;
+}
+@media  (max-width: 767px) {
+    .add-pad
+    {
+        padding-left:2rem;
+        padding-right:2rem;
+	}
+	
+
+
+	#hints-table input[type=submit]
+	{
+		
+		font-size:16px;
+	}
+
+	#hints-table th
+	{
+		width:60%;
+		padding:0;
+		text-align: center;
+		padding-top: 12px;
+		padding-bottom:12px;
+	}
+
+  }
