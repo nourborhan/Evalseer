@@ -13,7 +13,7 @@
     <meta name="author" content="">
 
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="images/evalicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="images/evalico.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
