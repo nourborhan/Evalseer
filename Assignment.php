@@ -166,8 +166,8 @@
 
                         <label for="ta">Write Your Code</label>
                         <textarea required class="form-control" name="code" rows="10" cols="50"></textarea><br><br>
-                        <!-- <label for="in">Enter Your Input</label>
-                        <textarea class="form-control" name="input" rows="10" cols="50"></textarea><br><br> -->
+                        <label for="in">Enter Your Input</label>
+                        <textarea class="form-control" name="input" rows="10" cols="50"></textarea><br><br>
                         <input type="submit" id="st" class="btn btn-success" value="Run Code"><br><br><br>
 
 
