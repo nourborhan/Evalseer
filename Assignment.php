@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="style.css">
-
+    <!-- Numbered Text Area CSS -->
+    <link rel="stylesheet" href="css/jquery-linedtextarea.css">
     <!-- ALL VERSION CSS -->
     <link rel="stylesheet" href="css/versions.css">
     <!-- Responsive CSS -->
@@ -165,7 +166,7 @@
                         <br><br>
 
                         <label for="ta">Write Your Code</label>
-                        <textarea required class="form-control" name="code" rows="10" cols="50"></textarea><br><br>
+                        <textarea required class="lined" name="code" rows="10" cols="145" id="code"></textarea><br><br>
                         <label for="in">Enter Your Input</label>
                         <textarea class="form-control" name="input" rows="10" cols="50"></textarea><br><br>
                         <input type="submit" id="st" class="btn btn-success" value="Run Code"><br><br><br>
@@ -236,12 +237,14 @@
     <!-- ALL PLUGINS -->
     <script src="js/custom.js"></script>
     <script src="js/assingment.js"></script>
+    <script src="js/jquery-linedtextarea.js"></script>
 
     <script>
 
 	$(document).ready(function(){
 
 		$('#nav-courses').addClass("active");
+        $("#code").linedtextarea();
 	})
 
 	</script>
