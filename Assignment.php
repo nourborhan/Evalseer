@@ -155,15 +155,30 @@
 
                 <div class="col-12 add-pad mx-auto">
                     <h2 class="font-weight-normal mb-3 ">Submit Your Assignment</h2>
-                    <form action="" method="post">
+                    <form action="compile.php" id="form" name="f2" method="POST" >
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <input type="file" class="form-control-file" id="assignment-upload" name="assignment">
-                        </div>
+                        </div> -->
 
-                        <input type="submit" class="btn btn-primary float-right mt-4" name="subbmit-assignment" value="Submit Assignment">
+                        <form>
+                        <br><br>
+
+                        <label for="ta">Write Your Code</label>
+                        <textarea required class="form-control" name="code" rows="10" cols="50"></textarea><br><br>
+                        <!-- <label for="in">Enter Your Input</label>
+                        <textarea class="form-control" name="input" rows="10" cols="50"></textarea><br><br> -->
+                        <input type="submit" id="st" class="btn btn-success" value="Run Code"><br><br><br>
+
+
+
+
+                        <!-- <input type="submit" class="btn btn-primary float-right mt-4" name="subbmit-assignment" value="Submit Assignment"> -->
 
                     </form>
+
+                    <label for="out">Output</label>
+                    <textarea id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
                 </div>
             
             </div>
@@ -230,6 +245,47 @@
 	})
 
 	</script>
+
+        <script>
+            //wait for page load to initialize script
+            $(document).ready(function(){
+                //listen for form submission
+                $('form').on('submit', function(e){
+                //prevent form from submitting and leaving page
+                e.preventDefault();
+
+                // AJAX 
+                $.ajax({
+                        type: "POST", //type of submit
+                        cache: false, //important or else you might get wrong data returned to you
+                        url: "compile.php", //destination
+                        datatype: "html", //expected data format from process.php
+                        data: $('form').serialize(), //target your form's data and serialize for a POST
+                        success: function(result) { // data is the var which holds the output of your process.php
+
+                            // locate the div with #result and fill it with returned data from process.php
+                            $('#outputdiv').html(result);
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+        
+        $(document).ready(function(){
+
+            $("#st").click(function(){
+        
+                $("#outputdiv").html("Loading ......");
+
+
+            });
+
+        });
+
+
+        </script>
 </body>
 
 
