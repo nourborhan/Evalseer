@@ -178,7 +178,7 @@
                     </form>
 
                     <label for="out">Output</label>
-                    <textarea id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
+                    <textarea readonly id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
                 </div>
             
             </div>
