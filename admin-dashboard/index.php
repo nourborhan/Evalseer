@@ -25,7 +25,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Evalseer Admin</a> 
+                <a class="navbar-brand" href="index.php">Evalseer Admin</a> 
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
@@ -42,19 +42,19 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 				
 					
                     <li>
-                        <a class="active-menu"  href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                        <a class="active-menu"  href="index.php"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li>
                      <li>
-                        <a  href="addbadge.html"><i class="fa fa-qrcode fa-3x"></i> Add Bagdes</a>
+                        <a  href="addbadge.php"><i class="fa fa-qrcode fa-3x"></i> Add Bagdes</a>
                     </li>
                     <li>
-                        <a  href="courses.html"><i class="fa fa-desktop fa-3x"></i> Courses</a>
+                        <a  href="courses.php"><i class="fa fa-desktop fa-3x"></i> Courses</a>
                     </li>
 						   <li  >
-                        <a   href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Charts</a>
+                        <a   href="chart.php"><i class="fa fa-bar-chart-o fa-3x"></i> Charts</a>
                     </li>	
                       <li  >
-                        <a  href="professorers.html"><i class="fa fa-table fa-3x"></i> Professors</a>
+                        <a  href="professorers.php"><i class="fa fa-table fa-3x"></i> Professors</a>
                     </li>
                    
                 </ul>
