@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2020 at 12:22 AM
+-- Generation Time: Oct 22, 2020 at 08:15 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -113,14 +113,6 @@ CREATE TABLE `capabilities` (
   `Assignbadges` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `capabilities`
---
-
-INSERT INTO `capabilities` (`CapabilitiesID`, `Viewcourses`, `Enrollcourses`, `Createcourses`, `Updatecourses`, `Activeornotcourses`, `Viewassignments`, `Createassignments`, `Reviewassignments`, `UpdateAssignments`, `CreateBadges`, `UpdateBadges`, `Assignbadges`) VALUES
-(1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0),
-(2, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -130,9 +122,11 @@ INSERT INTO `capabilities` (`CapabilitiesID`, `Viewcourses`, `Enrollcourses`, `C
 CREATE TABLE `course` (
   `CourseID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
+  `Coursecode` varchar(255) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Description` mediumtext NOT NULL,
   `Grade` int(11) NOT NULL,
+  `Gradetopass` int(11) NOT NULL,
   `Startdate` date NOT NULL,
   `Enddate` date NOT NULL,
   `Active` tinyint(1) NOT NULL,
@@ -140,13 +134,6 @@ CREATE TABLE `course` (
   `Timemodified` date NOT NULL,
   `Suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `course`
---
-
-INSERT INTO `course` (`CourseID`, `UserID`, `Name`, `Description`, `Grade`, `Startdate`, `Enddate`, `Active`, `Timeceated`, `Timemodified`, `Suspended`) VALUES
-(1, 2, 'Introduction to Computer Science', 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.', 100, '2020-10-14', '2020-10-29', 1, '2020-10-14', '2020-10-29', 0);
 
 -- --------------------------------------------------------
 
@@ -159,27 +146,6 @@ CREATE TABLE `courseedducator` (
   `UserID` int(11) NOT NULL COMMENT 'Doctors id ',
   `Primaryeducatorflag` tinyint(1) NOT NULL,
   `Assistantflag` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `courseedducator`
---
-
-INSERT INTO `courseedducator` (`CourseID`, `UserID`, `Primaryeducatorflag`, `Assistantflag`) VALUES
-(1, 2, 1, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `featurelist`
---
-
-CREATE TABLE `featurelist` (
-  `FeaturelistID` int(11) NOT NULL,
-  `featuresID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Description` text NOT NULL,
-  `suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -196,12 +162,19 @@ CREATE TABLE `features` (
   `Indentations` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `features`
+-- Table structure for table `featurescategory`
 --
 
-INSERT INTO `features` (`FeaturesID`, `Compiling`, `Sytling`, `Comments`, `Indentations`) VALUES
-(1, 1, 0, 0, 0);
+CREATE TABLE `featurescategory` (
+  `FeaturescategoryID` int(11) NOT NULL,
+  `featuresID` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Description` text NOT NULL,
+  `suspended` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -213,16 +186,8 @@ CREATE TABLE `role` (
   `RoleID` int(11) NOT NULL,
   `CapabilitiiesID` int(11) NOT NULL,
   `Name` varchar(255) NOT NULL,
-  `Description` text NOT NULL
+  `Bio` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `role`
---
-
-INSERT INTO `role` (`RoleID`, `CapabilitiiesID`, `Name`, `Description`) VALUES
-(1, 1, 'admin', 'admin of evalseer'),
-(2, 2, 'instructor', 'instructor');
 
 -- --------------------------------------------------------
 
@@ -269,14 +234,6 @@ CREATE TABLE `user` (
   `Title` varchar(255) NOT NULL,
   `Suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `Name`, `Age`, `Mobile`, `Title`, `Suspended`) VALUES
-(1, 1, 'admin', 'admin', 'ramez1700124@miuegypt.edu.eg', 'john doe', 77, 10000, 'admin', 0),
-(2, 2, 'prof', 'prof', 'test@test', 'Al Pacino', 70, 12322322, 'instructor', 0);
 
 --
 -- Indexes for dumped tables
@@ -334,17 +291,17 @@ ALTER TABLE `courseedducator`
   ADD KEY `CourseID` (`CourseID`);
 
 --
--- Indexes for table `featurelist`
---
-ALTER TABLE `featurelist`
-  ADD PRIMARY KEY (`FeaturelistID`),
-  ADD KEY `featuresID` (`featuresID`);
-
---
 -- Indexes for table `features`
 --
 ALTER TABLE `features`
   ADD PRIMARY KEY (`FeaturesID`);
+
+--
+-- Indexes for table `featurescategory`
+--
+ALTER TABLE `featurescategory`
+  ADD PRIMARY KEY (`FeaturescategoryID`),
+  ADD KEY `featuresID` (`featuresID`);
 
 --
 -- Indexes for table `role`
@@ -393,31 +350,31 @@ ALTER TABLE `badges`
 -- AUTO_INCREMENT for table `capabilities`
 --
 ALTER TABLE `capabilities`
-  MODIFY `CapabilitiesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `CapabilitiesID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `featurelist`
---
-ALTER TABLE `featurelist`
-  MODIFY `FeaturelistID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `features`
 --
 ALTER TABLE `features`
-  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `featurescategory`
+--
+ALTER TABLE `featurescategory`
+  MODIFY `FeaturescategoryID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `testcases`
@@ -429,7 +386,7 @@ ALTER TABLE `testcases`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -456,7 +413,7 @@ ALTER TABLE `assignmentdetails`
 --
 ALTER TABLE `assignments`
   ADD CONSTRAINT `assignments_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `assignments_ibfk_2` FOREIGN KEY (`FeaturelistID`) REFERENCES `featurelist` (`FeaturelistID`);
+  ADD CONSTRAINT `assignments_ibfk_2` FOREIGN KEY (`FeaturelistID`) REFERENCES `featurescategory` (`FeaturescategoryID`);
 
 --
 -- Constraints for table `course`
@@ -472,10 +429,10 @@ ALTER TABLE `courseedducator`
   ADD CONSTRAINT `courseedducator_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
--- Constraints for table `featurelist`
+-- Constraints for table `featurescategory`
 --
-ALTER TABLE `featurelist`
-  ADD CONSTRAINT `featurelist_ibfk_1` FOREIGN KEY (`featuresID`) REFERENCES `features` (`FeaturesID`);
+ALTER TABLE `featurescategory`
+  ADD CONSTRAINT `featurescategory_ibfk_1` FOREIGN KEY (`featuresID`) REFERENCES `features` (`FeaturesID`);
 
 --
 -- Constraints for table `role`
