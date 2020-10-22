@@ -74,19 +74,21 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                 <hr />
                 <div class="row">
                     <div class="col-md-12">
-                        <label>Select Course:</label>
-                        <select name="courses" id="Course">
-                            <option value="default" selected disabled>--None--</option>
-                            <option value="CSC240">Algorithms I</option>
-                            <option value="CSC250">Algorithms II</option>
-                        </select>
-
-                        <div class="panel panel-default" id="Assignment-Panel" style="display: none;">
+                        
+                        
+                        <div class="panel panel-default">
                             <div class="panel-heading">
-                                Assignment Form
+                                Create Assignment
                             </div>
+                            
                             <div class="panel-body">
-                                <div class="row">
+                                <label>Select Course:</label>
+                                <select style="margin-bottom:10px" name="courses" id="Course">
+                                    <option value="default" selected disabled>--None--</option>
+                                    <option value="CSC240">Algorithms I</option>
+                                    <option value="CSC250">Algorithms II</option>
+                                </select>
+                                <div id="Assignment-Panel" style="display: none;" class="row">
                                     <div class="col-md-12">
 
                                         <form role="form">
@@ -144,6 +146,79 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                         </div>
                     </div>
                 </div>
+                <!-- end row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default" id="">
+                            <div class="panel-heading">
+                                Edit Assignments
+                            </div>
+                            <div class="panel-body">
+                                <select id="assignments-edit-div" style="margin-bottom:10px" name="select_projects" id="select_projects">
+                                    <option selected disabled>Select Assignment</option>
+                                    <optgroup label="CSC 104">
+                                        <option value="">Assignmet 1</option>
+                                    </optgroup>
+                                    <optgroup label="CSC 105">
+                                        <option value="">Assignment 1</option>
+                                        <option value="">Assignment 2</option>
+                                    </optgroup>
+                                </select>
+                                <div style="display:none" id="edit-assignment">
+                                        <form role="form">
+                                            <div class="form-group">
+                                                <label>Assignment Title</label>
+                                                <input class="form-control" placeholder="Please enter title" value="Assignment 1" />
+                                            </div>
+                                            <!-- Assignment Title -->
+                                            <div class="form-group">
+                                                <label>Assignment Description</label>
+                                                <textarea class="form-control" rows="3">Some to text to clarify the assigmnet requirments</textarea>
+                                            </div>
+                                            <!-- Assignment Description -->
+                                            <div class="form-group">
+                                                <label>PDF Instructions (Optional)</label>
+                                                <input type="file" />
+                                            </div>
+                                            <!-- PDF instructions -->
+                                            <div class="form-group">
+                                                <label>Grading Criteria</label>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" checked value="" />Criterion 1
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" checked value="" />Criterion 1
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" />Criterion 1
+                                                    </label>
+                                                </div>
+                                                <!-- Grading Cirteria -->
+                                                <div class="form-group">
+                                                    <label>First Hint</label>
+                                                    <input class="form-control" placeholder="Mandatory" value="You can use the variable in a loop" />
+
+                                                    <label>Second Hint</label>
+                                                    <input class="form-control" placeholder="Optional" />
+
+                                                    <label>Third Hint</label>
+                                                    <input class="form-control" placeholder="Optional" />
+                                                </div>
+                                                <!-- Hints -->
+                                                <button type="submit" class="btn btn-success">Announce
+                                                    Assignment</button>
+                                            </div>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>           
+                    </div>    
+                </div>
             </div>
         </div>
         <!-- /. PAGE INNER  -->
@@ -167,6 +242,10 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                 {
                     $('#Assignment-Panel').css('display','block');
                 }
+            }); 
+
+            $('#assignments-edit-div').change(function(){
+             $('#edit-assignment').show();
             }); 
     </script>
 
