@@ -136,6 +136,11 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                                     <input class="form-control" placeholder="Optional" />
                                                 </div>
                                                 <!-- Hints -->
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" />Hide From Students
+                                                    </label>
+                                                </div>
                                                 <button type="submit" class="btn btn-success">Announce
                                                     Assignment</button>
                                             </div>
@@ -210,6 +215,11 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                                     <input class="form-control" placeholder="Optional" />
                                                 </div>
                                                 <!-- Hints -->
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" />Hide From Students
+                                                    </label>
+                                                </div>
                                                 <button type="submit" class="btn btn-success">Announce
                                                     Assignment</button>
                                             </div>
