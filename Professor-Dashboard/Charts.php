@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="Dashboard.html">EvalSeer</a>
+                <a class="navbar-brand" href="Dashboard.php">EvalSeer</a>
             </div>
             <div style="color: white;
 padding: 15px 50px 5px 50px;
@@ -44,22 +44,22 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     </li>
 
                     <li>
-                        <a href="Dashboard.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                        <a href="Dashboard.php"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li>
 
                     <li>
-                        <a class="active-menu" href="Charts.html"><i class="fa fa-bar-chart-o fa-3x"></i> Student
+                        <a class="active-menu" href="Charts.php"><i class="fa fa-bar-chart-o fa-3x"></i> Student
                             Charts</a>
                     </li>
                     <li>
-                        <a href="Leaderboard.html"><i class="fa fa-table fa-3x"></i> Leaderboards</a>
+                        <a href="Leaderboard.php"><i class="fa fa-table fa-3x"></i> Leaderboards</a>
                     </li>
                     <li>
-                        <a href="Assignments.html"><i class="fa fa-edit fa-3x"></i> Assignments</a>
+                        <a href="Assignments.php"><i class="fa fa-edit fa-3x"></i> Assignments</a>
                     </li>
 
                     <li>
-                        <a href="Courses.html"><i class="fa  fa-file-text-o fa-3x"></i>Courses</a>
+                        <a href="Courses.php"><i class="fa  fa-file-text-o fa-3x"></i>Courses</a>
                     </li>
                 </ul>
             </div>

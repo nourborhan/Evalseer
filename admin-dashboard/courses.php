@@ -148,15 +148,17 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 <div id="csc104" style="display: none;">
                                     <h5><strong>Course Title</strong></h5><span>Computer Progamming I</span>
                                     <h5><strong>Course Code</strong></h5><span>CSC 104</span>
+                                    <h5><strong>Total Grade</strong></h5><span>100</span>
+                                    <h5><strong>Start Date</strong></h5><span>1/1/2001</span>
+                                    <h5><strong>End Date</strong></h5><span>1/1/2001</span>
                                     <h5><strong>Course Description</strong></h5>
                                     <p><strong>CSC 104:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, sunt voluptatibus ducimus sapiente corrupti minima quis officiis? Dolores eius incidunt nisi, iusto mollitia omnis asperiores, esse distinctio tempore, est et!</p>
-
                                     <div class="col-md-6">
-                                    <h5><strong>Assigned Proffessors</strong></h5>
-                                    <ul>
-                                        <li>Dr. No</li>
-                                        <li>Dr. Strange</li>
-                                    </ul>
+                                        <h5><strong>Assigned Proffessors</strong></h5>
+                                        <ul>
+                                            <li>Dr. No</li>
+                                            <li>Dr. Strange</li>
+                                        </ul>
                                     </div>
                                     <div class="col-md-6">
                                         <h5><strong>Assigned TAs</strong></h5>
@@ -172,6 +174,9 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 <div id="csc105" style="display: none;">
                                     <h5><strong>Course Title</strong></h5><span>Computer Progamming II</span>
                                     <h5><strong>Course Code</strong></h5><span>CSC 105</span>
+                                    <h5><strong>Total Grade</strong></h5><span>100</span>
+                                    <h5><strong>Start Date</strong></h5><span>1/1/2001</span>
+                                    <h5><strong>End Date</strong></h5><span>1/1/2001</span>
                                     <h5><strong>Course Description</strong></h5>
                                     <p><strong>CSC 105:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, sunt voluptatibus ducimus sapiente corrupti minima quis officiis? Dolores eius incidunt nisi, iusto mollitia omnis asperiores, esse distinctio tempore, est et!</p>
 
@@ -214,6 +219,18 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Course Code</label>
                                     <input type="text" class="form-control" placeholder="Enter Course Code">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Course Total Grade</label>
+                                    <input type="number" max="100" class="form-control" placeholder="Enter Course Total grade">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Course Start Date</label>
+                                    <input type="date" class="form-control" placeholder="Enter Course Code">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Course End Date</label>
+                                    <input type="date" class="form-control" placeholder="Enter Course Code">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Course Description</label>
