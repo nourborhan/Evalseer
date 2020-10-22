@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2020 at 08:15 PM
+-- Generation Time: Oct 22, 2020 at 11:12 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -76,6 +76,13 @@ CREATE TABLE `assignments` (
   `Suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `assignments`
+--
+
+INSERT INTO `assignments` (`AssignmentiD`, `UserID`, `FeaturelistID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `NBofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`) VALUES
+(1, 2, 1, 'first assignment', 'use for loops', '2020-10-14', '2020-10-16', 5, 2, '2020-10-06', '2020-10-14', 'Automatic', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +120,15 @@ CREATE TABLE `capabilities` (
   `Assignbadges` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `capabilities`
+--
+
+INSERT INTO `capabilities` (`CapabilitiesID`, `Viewcourses`, `Enrollcourses`, `Createcourses`, `Updatecourses`, `Activeornotcourses`, `Viewassignments`, `Createassignments`, `Reviewassignments`, `UpdateAssignments`, `CreateBadges`, `UpdateBadges`, `Assignbadges`) VALUES
+(1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0),
+(2, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1),
+(3, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -135,6 +151,13 @@ CREATE TABLE `course` (
   `Suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`CourseID`, `UserID`, `Coursecode`, `Name`, `Description`, `Grade`, `Gradetopass`, `Startdate`, `Enddate`, `Active`, `Timeceated`, `Timemodified`, `Suspended`) VALUES
+(1, 3, 'csc105', 'computer science 105', 'test', 100, 50, '2020-10-04', '2020-10-31', 1, '2020-09-01', '2020-10-14', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -147,6 +170,13 @@ CREATE TABLE `courseedducator` (
   `Primaryeducatorflag` tinyint(1) NOT NULL,
   `Assistantflag` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `courseedducator`
+--
+
+INSERT INTO `courseedducator` (`CourseID`, `UserID`, `Primaryeducatorflag`, `Assistantflag`) VALUES
+(1, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -162,6 +192,13 @@ CREATE TABLE `features` (
   `Indentations` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `features`
+--
+
+INSERT INTO `features` (`FeaturesID`, `Compiling`, `Sytling`, `Comments`, `Indentations`) VALUES
+(1, 1, 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -176,6 +213,13 @@ CREATE TABLE `featurescategory` (
   `suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `featurescategory`
+--
+
+INSERT INTO `featurescategory` (`FeaturescategoryID`, `featuresID`, `Name`, `Description`, `suspended`) VALUES
+(1, 1, 'compiling', 'used for loop', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -189,6 +233,15 @@ CREATE TABLE `role` (
   `Bio` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`RoleID`, `CapabilitiiesID`, `Name`, `Bio`) VALUES
+(1, 1, 'student', 'student'),
+(2, 2, 'instructor', 'instructor'),
+(3, 3, 'admin', 'admin');
+
 -- --------------------------------------------------------
 
 --
@@ -201,6 +254,13 @@ CREATE TABLE `studentsenrolled` (
   `StduentGrade` int(11) NOT NULL,
   `Rank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `studentsenrolled`
+--
+
+INSERT INTO `studentsenrolled` (`UserID`, `CourseID`, `StduentGrade`, `Rank`) VALUES
+(1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -234,6 +294,15 @@ CREATE TABLE `user` (
   `Title` varchar(255) NOT NULL,
   `Suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `Name`, `Age`, `Mobile`, `Title`, `Suspended`) VALUES
+(1, 1, 'test', 'test', 'test@test.com', 'test', 20, 1017377002, 'student', 0),
+(2, 2, 'instructor', 'test', 'testing@testing.com', 'instructor', 30, 129932002, 'instructor', 0),
+(3, 3, 'admin', 'admin', 'admin@admin.com', 'admin', 40, 231299332, 'admin', 0);
 
 --
 -- Indexes for dumped tables
@@ -338,7 +407,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `AssignmentiD` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `AssignmentiD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `badges`
@@ -350,31 +419,31 @@ ALTER TABLE `badges`
 -- AUTO_INCREMENT for table `capabilities`
 --
 ALTER TABLE `capabilities`
-  MODIFY `CapabilitiesID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CapabilitiesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `features`
 --
 ALTER TABLE `features`
-  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `featurescategory`
 --
 ALTER TABLE `featurescategory`
-  MODIFY `FeaturescategoryID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `FeaturescategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `testcases`
@@ -386,7 +455,7 @@ ALTER TABLE `testcases`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
