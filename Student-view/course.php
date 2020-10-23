@@ -187,7 +187,7 @@
                     
                 </div>
             </div><!-- end title -->
-			<div class="timeline">
+			<div class="timeline" >
 				<div class="timeline__wrap">
 					<div class="timeline__items">
 						<div class="timeline__item">
@@ -199,7 +199,7 @@
 								</div>
 							</a>
 						</div>
-						<div class="timeline__item">
+						<!-- <div class="timeline__item">
 							<a href="Assignment.php">
 								<div class="timeline__content img-bg-02">
 									<h2>Assignment 2</h2>
@@ -207,8 +207,8 @@
 										ipsum dolor sit amet, consectetur adipiscing elit.</p>
 								</div>
 							</a>	
-						</div>
-						<div class="timeline__item">
+						</div> -->
+						<!-- <div class="timeline__item">
 							<a href="Assignment.php">
 								<div class="timeline__content img-bg-03">
 									<h2>Assignment 3</h2>
@@ -216,8 +216,8 @@
 										ipsum dolor sit amet, consectetur adipiscing elit.</p>
 								</div>
 							</a>
-						</div>
-						<div class="timeline__item">
+						</div> -->
+						<!-- <div class="timeline__item">
 							<a href="Assignment.php">
 								<div class="timeline__content img-bg-04">
 									<h2>Assignment 4</h2>
@@ -225,8 +225,8 @@
 										ipsum dolor sit amet, consectetur adipiscing elit.</p>
 								</div>
 							</a>
-						</div>
-						<div class="timeline__item">
+						</div> -->
+						<!-- <div class="timeline__item">
 							<a href="Assignment.php">
 								<div class="timeline__content img-bg-01">
 									<h2>Assignment 5</h2>
@@ -261,7 +261,7 @@
 										ipsum dolor sit amet, consectetur adipiscing elit.</p>
 								</div>
 							</a>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -315,8 +315,8 @@
 	<script src="js/timeline.min.js"></script>
 	<script>
 		timeline(document.querySelectorAll('.timeline'), {
-			forceVerticalMode: 700,
-			mode: 'horizontal',
+			// forceVerticalMode: ,
+			mode: 'vertical',
 			verticalStartPosition: 'left',
 			visibleItems: 4
 		});
