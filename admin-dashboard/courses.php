@@ -212,78 +212,83 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit Course</button>
 
                                 </div> -->
-                            </div>
+                                <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Edit Course</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="form-group">
+                                                        <label for="exampleInputEmail1">Course Title</label>
+                                                        <input type="text" class="form-control" placeholder="Enter Course Title">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Code</label>
+                                                            <input type="text" class="form-control" placeholder="Enter Course Code">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Total Grade</label>
+                                                            <input type="number" max="100" class="form-control" placeholder="Enter Course Total grade">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Pass Grade</label>
+                                                            <input type="number" max="100" class="form-control" placeholder="Enter Course passing grade">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Start Date</label>
+                                                            <input type="date" class="form-control" placeholder="Enter Course Code">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course End Date</label>
+                                                            <input type="date" class="form-control" placeholder="Enter Course Code">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Description</label>
+                                                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div id="list1" class="dropdown-check-list" tabindex="100">
+                                                                <span class="anchor">Assign Proffessors</span>
+                                                                <ul class="items">
+                                                                <li><input type="checkbox" checked /> Dr. Hannibal </li>
+                                                                <li><input type="checkbox" /> Dr. No</li>
+                                                                <li><input type="checkbox" /> Dr. Strange </li>
+                                                                <li><input type="checkbox" /> Dr. Zhivago </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div id="list2" class="dropdown-check-list" tabindex="100">
+                                                                <span class="anchor">Assign Teaching Assistants</span>
+                                                                <ul class="items">
+                                                                <li><input type="checkbox" checked /> Jesse Pinkman </li>
+                                                                <li><input type="checkbox" /> Miss Moneypenny</li>
+                                                                <li><input type="checkbox" /> Gale Boetticher </li>
+                                                                <li><input type="checkbox" /> Al Neri </li>
+                                                                <li><input type="checkbox" /> Paulie Gualteri </li>
+                                                                <li><input type="checkbox" /> Frank Pentangli </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>                        
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Edit Course</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Course Title</label>
-                                  <input type="text" class="form-control" placeholder="Enter Course Title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Course Code</label>
-                                    <input type="text" class="form-control" placeholder="Enter Course Code">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Course Total Grade</label>
-                                    <input type="number" max="100" class="form-control" placeholder="Enter Course Total grade">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Course Start Date</label>
-                                    <input type="date" class="form-control" placeholder="Enter Course Code">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Course End Date</label>
-                                    <input type="date" class="form-control" placeholder="Enter Course Code">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Course Description</label>
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <div id="list1" class="dropdown-check-list" tabindex="100">
-                                        <span class="anchor">Assign Proffessors</span>
-                                        <ul class="items">
-                                          <li><input type="checkbox" checked /> Dr. Hannibal </li>
-                                          <li><input type="checkbox" /> Dr. No</li>
-                                          <li><input type="checkbox" /> Dr. Strange </li>
-                                          <li><input type="checkbox" /> Dr. Zhivago </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div id="list2" class="dropdown-check-list" tabindex="100">
-                                        <span class="anchor">Assign Teaching Assistants</span>
-                                        <ul class="items">
-                                          <li><input type="checkbox" checked /> Jesse Pinkman </li>
-                                          <li><input type="checkbox" /> Miss Moneypenny</li>
-                                          <li><input type="checkbox" /> Gale Boetticher </li>
-                                          <li><input type="checkbox" /> Al Neri </li>
-                                          <li><input type="checkbox" /> Paulie Gualteri </li>
-                                          <li><input type="checkbox" /> Frank Pentangli </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                              </form>                        
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
                     <!-- /. ROW  -->
             <div class="row">
                 <div class="col-md-12">

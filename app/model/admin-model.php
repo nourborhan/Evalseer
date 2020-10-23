@@ -67,9 +67,78 @@ class Admin extends model {
                 '.$TAlist.'
                 </ul>
             </div>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit Course</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal'.$row["Coursecode"].'">Edit Course</button>
 
-        </div>';
+        </div>
+        
+        
+                                <div class="modal fade" id="myModal'.$row["Coursecode"].'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Edit Course</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="form-group">
+                                                        <label for="exampleInputEmail1">Course Title</label>
+                                                        <input type="text" class="form-control" value="'.$row["Name"].'" placeholder="Enter Course Title">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Code</label>
+                                                            <input type="text" class="form-control" value="'.$row["Coursecode"].'" placeholder="Enter Course Code">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Total Grade</label>
+                                                            <input type="number" max="100" value="'.$row["Grade"].'" class="form-control" placeholder="Enter Course Total grade">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Pass Grade</label>
+                                                            <input type="number" max="100" value="'.$row["Gradetopass"].'" class="form-control" placeholder="Enter Course passing grade">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Start Date</label>
+                                                            <input type="date" class="form-control" value="'.$row["Startdate"].'"  placeholder="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course End Date</label>
+                                                            <input type="date" class="form-control" value="'.$row["Enddate"].'" placeholder="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Course Description</label>
+                                                            <textarea class="form-control" rows="5" id="comment">'.$row["Description"].'</textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div id="list1" class="dropdown-check-list" tabindex="100">
+                                                                <span class="anchor">Assign Proffessors</span>
+                                                                <ul class="items">
+                                                                    <li><input type="checkbox" checked /> Dr. Hannibal </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div id="list2" class="dropdown-check-list" tabindex="100">
+                                                                <span class="anchor">Assign Teaching Assistants</span>
+                                                                <ul class="items">
+                                                                    <li><input type="checkbox" checked /> Tom Hagen</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>                        
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+        
+        ';
         }
     }
 
@@ -109,6 +178,19 @@ class Admin extends model {
 
                 echo '<input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">'.$row["Coursecode"].'</label>
+                <br>';
+            }
+    }
+
+    function readInstructors__suspendsection()
+    {
+        $sql="SELECT Name FROM user WHERE Title='Teaching Assistant' OR Title='instructor' ";
+        $Result = mysqli_query($this->db->getConn(),$sql);
+        while($row=$Result->fetch_assoc())
+            {
+
+                echo '<input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">'.$row["Name"].'</label>
                 <br>';
             }
     }
