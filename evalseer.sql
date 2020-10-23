@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2020 at 11:12 PM
+-- Generation Time: Oct 23, 2020 at 05:17 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -176,7 +176,8 @@ CREATE TABLE `courseedducator` (
 --
 
 INSERT INTO `courseedducator` (`CourseID`, `UserID`, `Primaryeducatorflag`, `Assistantflag`) VALUES
-(1, 2, 1, 0);
+(1, 2, 1, 0),
+(1, 4, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -240,7 +241,8 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`RoleID`, `CapabilitiiesID`, `Name`, `Bio`) VALUES
 (1, 1, 'student', 'student'),
 (2, 2, 'instructor', 'instructor'),
-(3, 3, 'admin', 'admin');
+(3, 3, 'admin', 'admin'),
+(4, 2, 'TA', 'TA Bio');
 
 -- --------------------------------------------------------
 
@@ -300,9 +302,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `Name`, `Age`, `Mobile`, `Title`, `Suspended`) VALUES
-(1, 1, 'test', 'test', 'test@test.com', 'test', 20, 1017377002, 'student', 0),
-(2, 2, 'instructor', 'test', 'testing@testing.com', 'instructor', 30, 129932002, 'instructor', 0),
-(3, 3, 'admin', 'admin', 'admin@admin.com', 'admin', 40, 231299332, 'admin', 0);
+(1, 1, 'test', 'test', 'test@test.com', 'Al Pacino', 20, 1017377002, 'student', 0),
+(2, 2, 'instructor', 'test', 'testing@testing.com', 'Dr. Hannibal', 30, 129932002, 'instructor', 0),
+(3, 3, 'admin', 'admin', 'admin@admin.com', 'Don Corleone', 40, 231299332, 'admin', 0),
+(4, 4, 'ta', 'ta', 'mail@mail', 'Tom Hagen', 20, 1010203, 'Teaching Assistant', 0);
 
 --
 -- Indexes for dumped tables
@@ -443,7 +446,7 @@ ALTER TABLE `featurescategory`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `testcases`
@@ -455,7 +458,7 @@ ALTER TABLE `testcases`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
