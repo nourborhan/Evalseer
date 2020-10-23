@@ -153,11 +153,11 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 <!-- <option selected disabled>None selected</option>
                                 <option value="csc104">CSC 104</option>
                                 <option value="csc105">CSC 105</option> -->
-                                <?php $adminModel->readCoursesSelection();?>
+                                <?php $AdminView->readCoursesSelection();?>
                             </select>
                             <div class="panel-group" id="accordion">
                                 
-                            <?php $adminModel->readCourseDetalis();?>
+                            <?php $AdminView->readCourseDetalis();?>
 
                                 <!-- <div id="csc104" style="display: none;">
                                     <h5><strong>Course Title</strong></h5><span>Computer Progamming I</span>
@@ -309,10 +309,11 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                     <div id="list3" class="dropdown-check-list" tabindex="100">
                                         <span class="anchor">Assign Proffessors</span>
                                         <ul class="items">
-                                          <li><input type="checkbox" /> Dr. Hannibal </li>
+                                          <!-- <li><input type="checkbox" /> Dr. Hannibal </li>
                                           <li><input type="checkbox" /> Dr. No</li>
                                           <li><input type="checkbox" /> Dr. Strange </li>
-                                          <li><input type="checkbox" /> Dr. Zhivago </li>
+                                          <li><input type="checkbox" /> Dr. Zhivago </li> -->
+                                          <?php $AdminView->readinstructos_publishcourse(); ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -320,12 +321,13 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                     <div id="list4" class="dropdown-check-list" tabindex="100">
                                         <span class="anchor">Assign Teaching Assistants</span>
                                         <ul class="items">
-                                          <li><input type="checkbox" /> Jesse Pinkman </li>
+                                          <!-- <li><input type="checkbox" /> Jesse Pinkman </li>
                                           <li><input type="checkbox" /> Miss Moneypenny</li>
                                           <li><input type="checkbox" /> Gale Boetticher </li>
                                           <li><input type="checkbox" /> Al Neri </li>
                                           <li><input type="checkbox" /> Paulie Gualteri </li>
-                                          <li><input type="checkbox" /> Frank Pentangli </li>
+                                          <li><input type="checkbox" /> Frank Pentangli </li> -->
+                                          <?php $AdminView->readTAs_publishcourse(); ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -347,11 +349,9 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 <div class="panel-body">
                                     <form>
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">CSC 105</label>
-                                            <br>
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">CSC 104</label>
+                                         <?php $AdminView->readcourse__suspendsection(); ?>
+                                            <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">CSC 104</label> -->
                                             
 
                                         </div>

@@ -72,6 +72,46 @@ class Admin extends model {
         </div>';
         }
     }
+
+    function readinstructos_publishcourse()
+    {
+        $instructoslist = '';
+        $sql2="SELECT user.Name,user.Title FROM user INNER JOIN courseedducator ON courseedducator.UserID=user.UserID and courseedducator.Primaryeducatorflag=1 ";
+        $Result2 = mysqli_query($this->db->getConn(),$sql2);
+        while($row2=$Result2->fetch_assoc())
+        {
+            $instructoslist .= "<li><input type='checkbox' /> ".$row2["Name"]." </li>";
+            
+        }
+        echo ''.$instructoslist.'';
+    }
+
+    function readTAs_publishcourse()
+    {
+        $TAlist = '';
+        $sql2="SELECT user.Name,user.Title FROM user INNER JOIN courseedducator ON courseedducator.UserID=user.UserID and courseedducator.Assistantflag=1 ";
+        $Result2 = mysqli_query($this->db->getConn(),$sql2);
+        while($row2=$Result2->fetch_assoc())
+        {
+            $TAlist .= "<li><input type='checkbox' /> ".$row2["Name"]." </li>";
+            
+        }
+        echo ''.$TAlist.'';
+    }
+
+    function readcourse__suspendsection()
+    {
+        
+        $sql="SELECT Coursecode FROM course;";
+        $Result = mysqli_query($this->db->getConn(),$sql);
+        while($row=$Result->fetch_assoc())
+            {
+
+                echo '<input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">'.$row["Coursecode"].'</label>
+                <br>';
+            }
+    }
 }    
 
 ?>
