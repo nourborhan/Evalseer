@@ -54,7 +54,11 @@
 	<!-- END LOADER -->	
 	
 	<!-- Start header -->
-	<?php include_once("partials/header.php") ?>
+    <?php 
+        include_once("partials/header.php");
+    ?>
+    <?php session_start();
+    ?>
 	<!-- End header -->
 	
 	<div id="carouselExampleControls" class="carousel slide bs-slider box-slider" data-ride="carousel" data-pause="hover" data-interval="false" >
@@ -150,11 +154,11 @@
 
             <div class="blog-card spring-fever" style="position: relative;">
                 <div class="title-content">
-                  <h3><a href="#">Don Corleone</a></h3>
-                  <div class="intro">The Godfather</div>
+                  <h3 style="color:white;"><?php echo $_SESSION['Name'];?></h3>
+                  <div class="intro"><?php echo $_SESSION['Title']; ?></div>
                 </div>
                 <div class="card-info">
-                    Some Text
+                    <?php echo $_SESSION['Bio'];?>
                 </div>
                 <div class="utility-info">
                   <ul class="utility-list">
@@ -292,7 +296,7 @@
 									ipsum dolor sit amet, consectetur adipiscing elit.</p>
 							</div>
 						</div>
-						<div class="timeline__item">
+						<!-- <div class="timeline__item">
 							<div class="timeline__content img-bg-03">
 								<h2>Assignment 3</h2>
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
@@ -319,14 +323,14 @@
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
 									ipsum dolor sit amet, consectetur adipiscing elit.</p>
 							</div>
-						</div>
-						<div class="timeline__item">
+						</div> -->
+						<!-- <div class="timeline__item">
 							<div class="timeline__content img-bg-03">
 								<h2>Assignment 7</h2>
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
 									ipsum dolor sit amet, consectetur adipiscing elit.</p>
 							</div>
-						</div>
+						</div> -->
 						<div class="timeline__item">
 							<div class="timeline__content img-bg-04">
 								<h2>Assignment 8</h2>
@@ -658,7 +662,8 @@
 			forceVerticalMode: 700,
 			mode: 'horizontal',
 			verticalStartPosition: 'left',
-			visibleItems: 4
+            startIndex:0,
+            visibleItems: 4
 		});
 	</script>
 

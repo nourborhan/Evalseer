@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2020 at 05:17 PM
+-- Generation Time: Oct 23, 2020 at 10:22 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -45,14 +45,22 @@ CREATE TABLE `assignmentdetails` (
   `UserID` int(11) NOT NULL COMMENT 'Students ID',
   `CourseID` int(11) NOT NULL,
   `AssignmentID` int(11) NOT NULL,
-  `BaadgeID` int(11) NOT NULL,
-  `Grade` int(11) NOT NULL,
-  `Submissiondate` date NOT NULL,
-  `Modificationdate` date NOT NULL,
-  `Filepath` varchar(3000) NOT NULL,
-  `Feredback` text NOT NULL,
-  `Badgereceivedflag` tinyint(1) NOT NULL
+  `BaadgeID` int(11) DEFAULT NULL,
+  `Grade` int(11) DEFAULT NULL,
+  `Submissiondate` date DEFAULT NULL,
+  `Modificationdate` date DEFAULT NULL,
+  `Filepath` varchar(3000) DEFAULT NULL,
+  `Feedback` text DEFAULT NULL,
+  `Badgereceivedflag` tinyint(1) DEFAULT NULL,
+  `Submittedflag` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `assignmentdetails`
+--
+
+INSERT INTO `assignmentdetails` (`UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Filepath`, `Feedback`, `Badgereceivedflag`, `Submittedflag`) VALUES
+(1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -63,6 +71,7 @@ CREATE TABLE `assignmentdetails` (
 CREATE TABLE `assignments` (
   `AssignmentiD` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
+  `CourseID` int(11) NOT NULL,
   `FeaturelistID` int(11) NOT NULL,
   `Assignmentname` varchar(255) NOT NULL,
   `Assignmentdesc.` mediumtext NOT NULL,
@@ -80,8 +89,8 @@ CREATE TABLE `assignments` (
 -- Dumping data for table `assignments`
 --
 
-INSERT INTO `assignments` (`AssignmentiD`, `UserID`, `FeaturelistID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `NBofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`) VALUES
-(1, 2, 1, 'first assignment', 'use for loops', '2020-10-14', '2020-10-16', 5, 2, '2020-10-06', '2020-10-14', 'Automatic', 0);
+INSERT INTO `assignments` (`AssignmentiD`, `UserID`, `CourseID`, `FeaturelistID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `NBofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`) VALUES
+(1, 3, 1, 1, 'compile code', 'use for loops', '2020-10-06', '2020-10-08', 5, 2, '2020-10-02', '2020-10-06', 'Automatic', 0);
 
 -- --------------------------------------------------------
 
@@ -333,7 +342,8 @@ ALTER TABLE `assignmentdetails`
 ALTER TABLE `assignments`
   ADD PRIMARY KEY (`AssignmentiD`),
   ADD KEY `UserID` (`UserID`),
-  ADD KEY `FeaturelistID` (`FeaturelistID`);
+  ADD KEY `FeaturelistID` (`FeaturelistID`),
+  ADD KEY `CourseID` (`CourseID`);
 
 --
 -- Indexes for table `badges`
@@ -485,7 +495,8 @@ ALTER TABLE `assignmentdetails`
 --
 ALTER TABLE `assignments`
   ADD CONSTRAINT `assignments_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `assignments_ibfk_2` FOREIGN KEY (`FeaturelistID`) REFERENCES `featurescategory` (`FeaturescategoryID`);
+  ADD CONSTRAINT `assignments_ibfk_2` FOREIGN KEY (`FeaturelistID`) REFERENCES `featurescategory` (`FeaturescategoryID`),
+  ADD CONSTRAINT `assignments_ibfk_3` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`);
 
 --
 -- Constraints for table `course`

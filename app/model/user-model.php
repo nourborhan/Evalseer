@@ -20,7 +20,7 @@ class User extends model
         
         if ($count>0)
         {
-            $sql1="select * from user where Username='$username' and Password='$password' and Suspended='0'";
+            $sql1="SELECT user.*,role.Bio from user join role on user.RoleID=role.RoleID where user.Username='$username' and user.Password='$password' and user.Suspended='0'";
             $result1=mysqli_query($this->db->getConn(),$sql1);
             $count1=mysqli_num_rows($result1);
             if ($count1>0)
@@ -35,6 +35,8 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
+                    $_SESSION['Bio']=$row['Bio'];
+
                     header("Location:index.php");
                 }
                 if($row["Title"]==="instructor")
@@ -46,6 +48,7 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
+                    $_SESSION['Bio']=$row['Bio'];
                     header("Location:../Professor-Dashboard/Dashboard.php");
                 }
                 if($row["Title"]==="admin")
@@ -57,6 +60,7 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
+                    $_SESSION['Bio']=$row['Bio'];
                     header("Location:../admin-dashboard/index.php");
                 }
                 if($row["Title"]==="Teaching Assistant")
@@ -68,6 +72,7 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
+                    $_SESSION['Bio']=$row['Bio'];
                     header("Location:../Professor-Dashboard/Dashboard.php");
                 }
             }

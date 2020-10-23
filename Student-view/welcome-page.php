@@ -45,6 +45,7 @@
     
     $usermodel=new User();
     $usercontroller=new UserController($usermodel);
+    session_start();
 
     if(isset($_POST['login']))
     {
