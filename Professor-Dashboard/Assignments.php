@@ -14,6 +14,16 @@
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
+    <?php
+        require_once("../app/model/instructor-model.php");
+        require_once("../app/controller/instructor-controller.php");
+        require_once("../app/view/instructor-view.php");
+
+        $instructorModel = new Instructor();
+        $instructorController = new InstructorController($instructorModel);
+        $instructorView = new InstructorView($instructorController,$instructorModel);
+    ?>
+
 </head>
 
 <body>
@@ -84,9 +94,10 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                             <div class="panel-body">
                                 <label>Select Course:</label>
                                 <select style="margin-bottom:10px" name="courses" id="Course">
-                                    <option value="default" selected disabled>--None--</option>
+                                    <!-- <option value="default" selected disabled>--None--</option>
                                     <option value="CSC240">Algorithms I</option>
-                                    <option value="CSC250">Algorithms II</option>
+                                    <option value="CSC250">Algorithms II</option> -->
+                                    <?php $instructorView->readCoursesSelection(); ?>
                                 </select>
                                 <div id="Assignment-Panel" style="display: none;" class="row">
                                     <div class="col-md-12">
@@ -107,21 +118,56 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                                                 <input type="file" />
                                             </div>
                                             <!-- PDF instructions -->
+
+                                            <div class="form-group">
+                                                <label>Start Date</label>
+                                                <input type="date" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Cutoff Date</label>
+                                                <input type="date" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Total Grade</label>
+                                                <input type="number" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Number of Submissions Allowed</label>
+                                                <input type="number" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Grading Type</label>
+                                                <select style="margin-bottom:10px" name="courses" id="Course">
+                                                    <option value="auto">Automatic</option>
+                                                    <option value="hyb">Hybrid</option>
+                                                    <option value="man">Manual</option>
+                                                </select>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label>Grading Criteria</label>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" value="" />Criterion 1
+                                                        <input type="checkbox" value="" />Styling
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" value="" />Criterion 1
+                                                        <input type="checkbox" value="" />Compliation
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" value="" />Criterion 1
+                                                        <input type="checkbox" value="" />Comments
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" />Indentation
                                                     </label>
                                                 </div>
                                                 <!-- Grading Cirteria -->
@@ -161,52 +207,87 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                             <div class="panel-body">
                                 <select id="assignments-edit-div" style="margin-bottom:10px" name="select_projects" id="select_projects">
                                     <option selected disabled>Select Assignment</option>
-                                    <optgroup label="CSC 104">
-                                        <option value="">Assignmet 1</option>
+                                    <!-- <optgroup label="CSC 104">
+                                        <option value="">Assignment 1</option>
                                     </optgroup>
                                     <optgroup label="CSC 105">
                                         <option value="">Assignment 1</option>
                                         <option value="">Assignment 2</option>
-                                    </optgroup>
+                                    </optgroup> -->
+                                    <?php $instructorView->readAssignmentSelection();?>
                                 </select>
                                 <div style="display:none" id="edit-assignment">
-                                        <form role="form">
+                                    <!-- <form role="form">
                                             <div class="form-group">
                                                 <label>Assignment Title</label>
-                                                <input class="form-control" placeholder="Please enter title" value="Assignment 1" />
+                                                <input class="form-control" placeholder="Please enter title" />
                                             </div>
-                                            <!-- Assignment Title -->
                                             <div class="form-group">
                                                 <label>Assignment Description</label>
-                                                <textarea class="form-control" rows="3">Some to text to clarify the assigmnet requirments</textarea>
+                                                <textarea class="form-control" rows="3"></textarea>
                                             </div>
-                                            <!-- Assignment Description -->
+
                                             <div class="form-group">
                                                 <label>PDF Instructions (Optional)</label>
                                                 <input type="file" />
                                             </div>
-                                            <!-- PDF instructions -->
+                   
+
+                                            <div class="form-group">
+                                                <label>Start Date</label>
+                                                <input type="date" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Cutoff Date</label>
+                                                <input type="date" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Total Grade</label>
+                                                <input type="number" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Number of Submissions Allowed</label>
+                                                <input type="number" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Grading Type</label>
+                                                <select style="margin-bottom:10px" name="courses" id="Course">
+                                                    <option value="auto">Automatic</option>
+                                                    <option value="hyb">Hybrid</option>
+                                                    <option value="man">Manual</option>
+                                                </select>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label>Grading Criteria</label>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" checked value="" />Criterion 1
+                                                        <input type="checkbox" value="" />Styling
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" checked value="" />Criterion 1
+                                                        <input type="checkbox" value="" />Compliation
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" value="" />Criterion 1
+                                                        <input type="checkbox" value="" />Comments
                                                     </label>
                                                 </div>
-                                                <!-- Grading Cirteria -->
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" />Indentation
+                                                    </label>
+                                                </div>
+                                                
                                                 <div class="form-group">
                                                     <label>First Hint</label>
-                                                    <input class="form-control" placeholder="Mandatory" value="You can use the variable in a loop" />
+                                                    <input class="form-control" placeholder="Mandatory" />
 
                                                     <label>Second Hint</label>
                                                     <input class="form-control" placeholder="Optional" />
@@ -214,16 +295,17 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                                                     <label>Third Hint</label>
                                                     <input class="form-control" placeholder="Optional" />
                                                 </div>
-                                                <!-- Hints -->
+                                               
                                                 <div class="checkbox">
                                                     <label>
                                                         <input type="checkbox" value="" />Hide From Students
                                                     </label>
                                                 </div>
-                                                <button type="submit" class="btn btn-success">Announce
+                                                <button type="submit" class="btn btn-success">Save
                                                     Assignment</button>
                                             </div>
-                                        </form>
+                                    </form> -->
+                                    <?php $instructorView->readAssignments();?>
                                 </div>
                             </div>
                         </div>           
@@ -246,16 +328,18 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
 
     <script>
         $('#Course').change(function(){
-             let selection = $('#Course option:selected').val();
+            //  let selection = $('#Course option:selected').val();
 
-                if(selection == 'CSC240' || selection == 'CSC250')
-                {
+            //     if(selection == 'CSC240' || selection == 'CSC250')
+            //     {
                     $('#Assignment-Panel').css('display','block');
-                }
+                // }
             }); 
 
             $('#assignments-edit-div').change(function(){
              $('#edit-assignment').show();
+             let val =  $(this).val();
+             $('#' + val).css("display", "block").siblings().hide();
             }); 
     </script>
 
