@@ -1,6 +1,6 @@
 <?php
 
-require_once("app/model/model.php");
+require_once("../app/model/model.php");
 
 class User extends model
 {
@@ -46,7 +46,7 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
-                    header("Location:Professors-Dashboard/index.php");
+                    header("Location:../Professor-Dashboard/Dashboard.php");
                 }
                 if($row["Title"]==="admin")
                 {
@@ -57,7 +57,7 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
-                    header("Location:admin-dashboard/index.php");
+                    header("Location:../admin-dashboard/index.php");
                 }
                 if($row["Title"]==="Teaching Assistant")
                 {
@@ -68,12 +68,14 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
-                    header("Location:Professors-Dashboard/index.php");
+                    header("Location:../Professor-Dashboard/Dashboard.php");
                 }
             }
 
         }
     }
+
+    
 }
 
 ?> 

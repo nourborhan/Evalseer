@@ -36,7 +36,7 @@
             font-size: 16px;
           ">
                 Last access : 30 May 2014 &nbsp;
-                <a href="#" class="btn btn-danger square-btn-adjust">Logout</a>
+                <a href="../logout.php" class="btn btn-danger square-btn-adjust">Logout</a>
             </div>
         </nav>
         <!-- /. NAV TOP  -->

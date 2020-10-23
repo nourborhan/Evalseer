@@ -1,6 +1,6 @@
 <?php
 
-    putenv("PATH=C:\\xampp\\htdocs\\Evalseer\\Dev-Cpp\\MinGW64\\bin");
+    putenv("PATH=C:\\xampp\\htdocs\\Evalseer\\Student-view\\Dev-Cpp\\MinGW64\\bin");
 	$CC="g++";
 	$out="a.exe";
 	$code=$_POST["code"];

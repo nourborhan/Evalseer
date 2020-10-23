@@ -40,8 +40,8 @@
 
     <?php
     
-    require_once("app/model/user-model.php");
-    require_once("app/controller/user-controller.php");
+    require_once("../app/model/user-model.php");
+    require_once("../app/controller/user-controller.php");
     
     $usermodel=new User();
     $usercontroller=new UserController($usermodel);

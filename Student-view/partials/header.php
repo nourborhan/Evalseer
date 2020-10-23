@@ -33,7 +33,7 @@
 						<li class="nav-item" id="nav-contact"><a class="nav-link" href="contact.php">Contact</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a class="hover-btn-new log orange" href="#"><span>Logout</span></a></li>
+                        <li><a class="hover-btn-new log orange" href="../../logout.php"><span>Logout</span></a></li>
                     </ul>
 					
 				</div>
