@@ -16,6 +16,16 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
      <!-- TABLE STYLES-->
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+    <?php
+        require_once("../app/model/admin-model.php");
+        require_once("../app/controller/admin-controller.php");
+        require_once("../app/view/admin-view.php");
+
+        $adminModel = new Admin();
+        $AdminController = new AdminController($adminModel);
+        $AdminView = new AdminView($AdminController,$adminModel);
+    ?>
 </head>
 <body>
     <div id="wrapper">
@@ -75,9 +85,8 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                  <!-- /. ROW  -->
                  <hr />
                
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
-                        <!-- Advanced Tables -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Edit Instructors
@@ -123,14 +132,13 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                                 
                             </div>
                         </div>
-                        <!--End Advanced Tables -->
+
                     </div>
-                </div>
+                </div> -->
                     <!-- /. ROW  -->
 
                     <div class="row">
                         <div class="col-md-12">
-                            <!-- Advanced Tables -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     Add Instructors
@@ -140,46 +148,47 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                                     <form>
                                         <h3>Enter Name</h3>
                                         <select>
-                                            <option selected disabled>Select Prefix</option>
+                                            <option selected disabled>Select Role</option>
                                             <option value="">Doctor</option>
-                                            <option value="">Eng</option>
+                                            <option value="">Teaching Assistant</option>
                                         </select>
-                                        <input type="text" value="Instructor1">
+                                        <input type="text" placeholder="Enter Instructor Name">
                                         <h3>Enter Bio</h3>
                                         <textarea class="form-control" rows="5" id="comment"></textarea>
+                                        <h3>Enter Instructor Username</h3>
+                                        <input type="text" placeholder="Enter Instructor Username">
+                                        <h3>Enter Instructor Password</h3>
+                                        <input type="password" placeholder="Enter Instructor Password">
+                                        <h3>Enter Instructor Email</h3>
+                                        <input type="email" placeholder="Enter Instructor Email">
+                                        <h3>Enter Instructor Phone</h3>
+                                        <input type="phone" placeholder="Enter Instructor Phone">
+                                        <br>
+                                        <br>
                                         <button type="submit" style="margin-top: 10px;" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
                             </div>
-                            <!--End Advanced Tables -->
                         </div>
                     </div>
                         <!-- /. ROW  -->    
 
                         <div class="row">
                             <div class="col-md-12">
-                                <!-- Advanced Tables -->
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        Add Instructors
+                                        Suspend Instructors
                                     </div>
                                     <div class="panel-body">
                                         
                                         <form>
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                <label class="form-check-label" for="exampleCheck1">Instructor 1</label>
-                                                <br>
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                <label class="form-check-label" for="exampleCheck1">Instructor 2</label>
-                                                
-    
+                                                <?php $AdminView->readInstructors__suspendsection(); ?>
                                             </div>
                                             <button type="submit" class="btn btn-danger">Suspend Instructor</button>
                                         </form>
                                     </div>
                                 </div>
-                                <!--End Advanced Tables -->
                             </div>
                         </div>
                             <!-- /. ROW  -->       

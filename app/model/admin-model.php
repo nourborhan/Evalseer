@@ -112,6 +112,19 @@ class Admin extends model {
                 <br>';
             }
     }
+
+    function readInstructors__suspendsection()
+    {
+        $sql="SELECT Name FROM user WHERE Title='Teaching Assistant' OR Title='instructor' ";
+        $Result = mysqli_query($this->db->getConn(),$sql);
+        while($row=$Result->fetch_assoc())
+            {
+
+                echo '<input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">'.$row["Name"].'</label>
+                <br>';
+            }
+    }
 }    
 
 ?>

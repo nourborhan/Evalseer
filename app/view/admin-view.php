@@ -33,4 +33,9 @@ class AdminView extends View
     {
         $this->model->readcourse__suspendsection();
     }
+
+    public function readInstructors__suspendsection()
+    {
+        $this->model->readInstructors__suspendsection();
+    }
 }    
