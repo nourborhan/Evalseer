@@ -67,7 +67,18 @@
                 }
    </style>
 
-   
+
+    <?php
+        require_once("../app/model/admin-model.php");
+        require_once("../app/controller/admin-controller.php");
+        require_once("../app/view/admin-view.php");
+
+        $adminModel = new Admin();
+        $AdminController = new AdminController($adminModel);
+        $AdminView = new AdminView($AdminController,$adminModel);
+    ?>
+
+
 </head>
 <body>
     <div id="wrapper">
@@ -136,16 +147,19 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                         <div class="panel-heading">
                             Edit Course
                         </div>
+                        
                         <div class="panel-body">
                             <select name="courses" id="courses">
-                                <option selected disabled>None selected</option>
+                                <!-- <option selected disabled>None selected</option>
                                 <option value="csc104">CSC 104</option>
-                                <option value="csc105">CSC 105</option>
+                                <option value="csc105">CSC 105</option> -->
+                                <?php $adminModel->readCoursesSelection();?>
                             </select>
                             <div class="panel-group" id="accordion">
                                 
+                            <?php $adminModel->readCourseDetalis();?>
 
-                                <div id="csc104" style="display: none;">
+                                <!-- <div id="csc104" style="display: none;">
                                     <h5><strong>Course Title</strong></h5><span>Computer Progamming I</span>
                                     <h5><strong>Course Code</strong></h5><span>CSC 104</span>
                                     <h5><strong>Total Grade</strong></h5><span>100</span>
@@ -197,7 +211,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                     </div>
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit Course</button>
 
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
