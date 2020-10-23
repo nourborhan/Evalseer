@@ -6,7 +6,7 @@ class User extends model
 {
 
 
-    function construct()
+    function __construct()
     {
         $this->dbh=$this->connect();
     }
@@ -14,13 +14,13 @@ class User extends model
     function login($username,$password)
     {
 
-        $sql="select * from user where Username=$username";
+        $sql="select * from user where Username='$username'";
         $result=mysqli_query($this->db->getConn(),$sql);
         $count=mysqli_num_rows($result);
         
         if ($count>0)
         {
-            $sql1="sql * from user where Username=$username and Password=$password and Suspended=0";
+            $sql1="select * from user where Username='$username' and Password='$password' and Suspended='0'";
             $result1=mysqli_query($this->db->getConn(),$sql1);
             $count1=mysqli_num_rows($result1);
             if ($count1>0)
@@ -46,7 +46,7 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
-                    header("Location:/Professors-Dashboard/index.php");
+                    header("Location:Professors-Dashboard/index.php");
                 }
                 if($row["Title"]==="admin")
                 {
@@ -57,7 +57,7 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
-                    header("Location:/admin-dashboard/index.php");
+                    header("Location:admin-dashboard/index.php");
                 }
                 if($row["Title"]==="Teaching Assistant")
                 {
@@ -68,7 +68,7 @@ class User extends model
                     $_SESSION['Age']=$row['Age'];
                     $_SESSION['Mobile']=$row['Mobile'];
                     $_SESSION['Title']=$row['Title'];
-                    header("Location:index.php");
+                    header("Location:Professors-Dashboard/index.php");
                 }
             }
 
