@@ -38,6 +38,21 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <?php
+    
+    require_once("app/model/user-model.php");
+    require_once("app/controller/user-controller.php");
+    
+    $usermodel=new User();
+    $usercontroller=new UserController($usermodel);
+
+    if(isset($_POST['login']))
+    {
+        $usercontroller->login();
+    }
+
+    ?>
+
 <Title>Welcome Page</Title>
 
     </head>
@@ -71,21 +86,21 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="Login">
-                                <form role="form" class="form-horizontal">
+                                <form role="form" method="post" action="" class="form-horizontal">
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <input class="form-control" id="email1" placeholder="Name" type="text">
+                                            <input class="form-control" name="username" id="email1" placeholder="Username" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <input class="form-control" id="exampleInputPassword1" placeholder="Email" type="email">
+                                            <input class="form-control" name="password" id="exampleInputPassword1" placeholder="Password" type="text">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
-                                                Submit
+                                            <button type="submit" name="login" class="btn btn-light btn-radius btn-brd grd1">
+                                                Login
                                             </button>
                                             <a class="for-pwd" href="javascript:;" style="color: white;">Forgot your password?</a>
                                         </div>
