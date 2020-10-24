@@ -10,6 +10,7 @@ class Student extends User{
     protected $CourseAssignments=array();
     protected $AllCourses=array();
     protected $coursedetails;
+    protected $assignmentdetail;
     protected $courseinstructors=array();
     
     function __construct()
@@ -40,6 +41,30 @@ class Student extends User{
         }
 
     }
+
+    function getAssigndetails($id)
+    {
+        
+        $sql="SELECT * from assignments where AssignmentiD='$id'";
+        $result=mysqli_query($this->db->getConn(),$sql);
+        while($row=$result->fetch_assoc())
+        {
+            
+            $assingment=new Assignment();
+            $assingment->setCourseid($row['CourseID']);
+            $assingment->setAssignmentid($row['AssignmentiD']);
+            $assingment->setAssignmentgrade($row['Grade']);
+            $assingment->setAssignmenttimecreated($row['Timecreated']);
+            $assingment->setNbofsubmissions($row['NBofsubmissions']);
+            $assingment->setAssignmentdesc($row['Assignmentdesc.']);
+            $assingment->setAssignmentname($row['Assignmentname']);
+
+            $this->assignmentdetail=$assingment;
+            
+        }
+
+    }
+    
     function getCourseAssignments($userid,$courseid)
     {
         $sql="SELECT *,assignments.Grade as assignmentgrade , assignmentdetails.UserID as studentid FROM `assignmentdetails` join assignments on assignmentdetails.AssignmentID=assignments.AssignmentiD where assignmentdetails.UserID='$userid' and assignmentdetails.CourseID='$courseid' and assignmentdetails.Submittedflag='0'";
@@ -151,7 +176,15 @@ class Student extends User{
     
     
 
-   
+    
+
+    /**
+     * Get the value of assignmentdetail
+     */ 
+    public function getAssignmentdetail()
+    {
+        return $this->assignmentdetail;
+    }
 }
 
 ?>

@@ -15,6 +15,12 @@ class StudentController extends Controller{
       $userid=$_SESSION['ID'];
       $this->model->getCourseAssignments($userid,$_GET['id']);
     }
+    public function getAssignmentdetails()
+    {
+    
+      $this->model->getAssigndetails($_GET['id']);
+    }
+
     public function addtodropdown()
     {
     

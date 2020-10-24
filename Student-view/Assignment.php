@@ -59,12 +59,27 @@
 
    <!-- Start header -->
    <?php include_once("partials/header.php") ?>
+   <?php 
+    session_start();
+    require_once("../app/model/student-model.php");
+    require_once("../app/controller/student-controller.php");
+    require_once("../app/view/student-view.php");
+    
+    $studentmodel=new Student();
+    $studentcontroller=new StudentController($studentmodel);
+    $studentview=new StudentView($studentcontroller,$studentmodel);
+
+    $studentcontroller->getAssignmentdetails();
+    $assignment=$studentmodel->getAssignmentdetail();
+   
+    
+    ?>
 	<!-- End header -->
     
     <!-- Page First View -->
 	<div class="all-title-box" style="background: url(images/assignmentbanner.jpg)no-repeat;background-size: cover;background-position: center;min-height: 300px;">
 		<div class="container text-center">
-			<h1>Assignment Page</h1>
+			<h1><?php echo $assignment->getAssignmentname(); ?></h1>
 		</div>
     </div>
     
@@ -77,7 +92,7 @@
                 <div class="col-12 add-pad mx-auto">
                     <!-- Assignment Details div -->
                     <h2 class="font-weight-normal mb-3 ">Assignment Details</h2>
-                    <p class="text-justify"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod distinctio repellat consectetur ducimus placeat deleniti eius velit harum voluptatum omnis possimus modi, iusto impedit doloremque quos iste nisi recusandae cupiditate ab incidunt non quis ex. Itaque cum officiis optio accusamus delectus tempore a laudantium ex ea ducimus architecto provident beatae commodi eligendi blanditiis ullam laborum dicta laboriosam, molestias nam, natus deserunt deleniti? Ratione non, quam voluptatum deserunt possimus esse fugiat quis quasi. Excepturi ullam aspernatur sequi voluptatum temporibus harum iusto quas odit provident odio nemo aperiam magni reprehenderit totam eaque, amet laboriosam velit nulla, vel minima pariatur quod aut sit consectetur? Dignissimos illo ab excepturi id autem animi minus, numquam officiis ratione consequatur qui! Praesentium fugit, mollitia iste delectus exercitationem facilis iure ipsum veritatis dignissimos consequatur earum quaerat hic in sint voluptatibus? Autem nulla ratione voluptatum laborum perspiciatis iure nobis voluptatibus quam consectetur eveniet? Omnis eius commodi maiores tempora aliquam. </p>
+                    <p class="text-justify"> <?php echo $assignment->getAssignmentdesc(); ?> </p>
                 </div>
             </div>
             
