@@ -57,7 +57,19 @@
     <?php 
         include_once("partials/header.php");
     ?>
-    <?php session_start();
+    <?php 
+    session_start();
+    require_once("../app/model/student-model.php");
+    require_once("../app/controller/student-controller.php");
+    require_once("../app/view/student-view.php");
+    
+    $studentmodel=new Student();
+    $studentcontroller=new StudentController($studentmodel);
+    $studentview=new StudentView($studentcontroller,$studentmodel);
+
+    $studentcontroller->getAllAssignments();
+   
+
     ?>
 	<!-- End header -->
 	
@@ -282,62 +294,8 @@
 			<div class="timeline">
 				<div class="timeline__wrap">
 					<div class="timeline__items">
-						<div class="timeline__item">
-							<div class="timeline__content img-bg-01">
-								<h2>Assignment 1</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
-									ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div>
-						<div class="timeline__item">
-							<div class="timeline__content img-bg-02">
-								<h2>Assignment 2</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
-									ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div>
-						<!-- <div class="timeline__item">
-							<div class="timeline__content img-bg-03">
-								<h2>Assignment 3</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
-									ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div>
-						<div class="timeline__item">
-							<div class="timeline__content img-bg-04">
-								<h2>Assignment 4</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
-									ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div>
-						<div class="timeline__item">
-							<div class="timeline__content img-bg-01">
-								<h2>Assignment 5</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
-									ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div>
-						<div class="timeline__item">
-							<div class="timeline__content img-bg-02">
-								<h2>Assignment 6</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
-									ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div> -->
-						<!-- <div class="timeline__item">
-							<div class="timeline__content img-bg-03">
-								<h2>Assignment 7</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
-									ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div> -->
-						<div class="timeline__item">
-							<div class="timeline__content img-bg-04">
-								<h2>Assignment 8</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim neque condimentum lacus dapibus. Lorem
-									ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							</div>
-						</div>
+						
+						<?php  $studentview->output(); ?>
 					</div>
 				</div>
 			</div>
@@ -657,15 +615,7 @@
     <!-- ALL PLUGINS -->
     <script src="js/custom.js"></script>
 	<script src="js/timeline.min.js"></script>
-	<script>
-		timeline(document.querySelectorAll('.timeline'), {
-			forceVerticalMode: 700,
-			mode: 'horizontal',
-			verticalStartPosition: 'left',
-            startIndex:0,
-            visibleItems: 4
-		});
-	</script>
+	<?php $studentview->outputscriptinindex(); ?>
 
     
     <script>

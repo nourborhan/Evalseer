@@ -1,5 +1,16 @@
 
 
+<?php
+ require_once("../app/model/student-model.php");
+    require_once("../app/controller/student-controller.php");
+    require_once("../app/view/student-view.php");
+    
+    $studentmodel=new Student();
+    $studentcontroller=new StudentController($studentmodel);
+	$studentview=new StudentView($studentcontroller,$studentmodel); 
+
+	$studentcontroller->addtodropdown();
+	?>
 <header class="top-navbar">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
@@ -18,7 +29,7 @@
 						<li class="nav-item dropdown" id="nav-courses">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Courses </a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="course.php">CSC 105 </a>
+								<?php $studentview->dropdown();?>
 							</div>
 						</li>
 						<!-- <li class="nav-item dropdown">
