@@ -12,6 +12,7 @@ class Assignment{
     protected $nbofsubmissions;
     protected $assignmentdesc;
     protected $assignmentname;
+    protected $submitted;
 
    
 
@@ -173,6 +174,26 @@ class Assignment{
     public function setAssignmentname($assignmentname)
     {
         $this->assignmentname = $assignmentname;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of submitted
+     */ 
+    public function getSubmitted()
+    {
+        return $this->submitted;
+    }
+
+    /**
+     * Set the value of submitted
+     *
+     * @return  self
+     */ 
+    public function setSubmitted($submitted)
+    {
+        $this->submitted = $submitted;
 
         return $this;
     }

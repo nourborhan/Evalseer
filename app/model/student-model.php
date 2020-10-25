@@ -20,8 +20,8 @@ class Student extends User{
 
     function getAssignments($userid)
     {
-        
-        $sql="SELECT assignments.*,assignmentdetails.*,assignments.Grade as assignmentgrade , assignmentdetails.UserID as studentid FROM assignmentdetails join assignments on assignmentdetails.AssignmentID=assignments.AssignmentiD where assignmentdetails.UserID='$userid' and assignmentdetails.Submittedflag='0'";
+        // and assignmentdetails.Submittedflag='0'
+        $sql="SELECT assignments.*,assignmentdetails.*,assignments.Grade as assignmentgrade , assignmentdetails.UserID as studentid FROM assignmentdetails join assignments on assignmentdetails.AssignmentID=assignments.AssignmentiD where assignmentdetails.UserID='$userid' ";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {
@@ -35,6 +35,7 @@ class Student extends User{
             $assingment->setNbofsubmissions($row['NBofsubmissions']);
             $assingment->setAssignmentdesc($row['Assignmentdesc.']);
             $assingment->setAssignmentname($row['Assignmentname']);
+            $assingment->setSubmitted($row['Submittedflag']);
 
             array_push($this->AllAssignments,$assingment);
             
@@ -67,7 +68,7 @@ class Student extends User{
     
     function getCourseAssignments($userid,$courseid)
     {
-        $sql="SELECT *,assignments.Grade as assignmentgrade , assignmentdetails.UserID as studentid FROM `assignmentdetails` join assignments on assignmentdetails.AssignmentID=assignments.AssignmentiD where assignmentdetails.UserID='$userid' and assignmentdetails.CourseID='$courseid' and assignmentdetails.Submittedflag='0'";
+        $sql="SELECT *,assignments.Grade as assignmentgrade , assignmentdetails.UserID as studentid FROM `assignmentdetails` join assignments on assignmentdetails.AssignmentID=assignments.AssignmentiD where assignmentdetails.UserID='$userid' and assignmentdetails.CourseID='$courseid' ";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {
@@ -80,6 +81,7 @@ class Student extends User{
             $assingment->setNbofsubmissions($row['NBofsubmissions']);
             $assingment->setAssignmentdesc($row['Assignmentdesc.']);
             $assingment->setAssignmentname($row['Assignmentname']);
+            $assingment->setSubmitted($row['Submittedflag']);
 
             array_push($this->CourseAssignments,$assingment);
         }

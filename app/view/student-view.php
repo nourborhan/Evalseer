@@ -11,14 +11,28 @@ class StudentView extends View
 
         for($i=0;$i<count($var);$i++)
         {
-            echo        '<div class="timeline__item">
-                            <a href="Assignment.php?id='.$var[$i]->getAssignmentid().'">
-							<div class="timeline__content img-bg-02">
-								<h2>'.$var[$i]->getAssignmentname().'</h2>
-								<p>'.$var[$i]->getAssignmentdesc().'</p>
-                            </div>
-                            </a>
-						</div>';
+            if($var[$i]->getSubmitted()==0)
+            {
+                echo        '<div class="timeline__item">
+                                <a href="Assignment.php?id='.$var[$i]->getAssignmentid().'">
+                                
+                                <div class="timeline__content img-bg-02">
+                                    <h2>'.$var[$i]->getAssignmentname().'</h2>
+                                    <p>'.$var[$i]->getAssignmentdesc().'</p>
+                                </div>
+                                </a>
+                            </div>';
+            }
+            else
+            {
+                echo        '<div class="timeline__item">
+                                <div class="timeline__content img-bg-02">
+                                    <h2>'.$var[$i]->getAssignmentname().'</h2>
+                                    <p>'.$var[$i]->getAssignmentdesc().'</p>
+                                </div>
+                            </div>';
+
+            }
         }
         
     }
@@ -113,14 +127,28 @@ class StudentView extends View
 
         for($i=0;$i<count($var);$i++)
         {
-            echo        '<div class="timeline__item">
-                            <a href="Assignment.php?id='.$var[$i]->getAssignmentid().'">
-							<div class="timeline__content img-bg-02">
-								<h2>'.$var[$i]->getAssignmentname().'</h2>
-								<p>'.$var[$i]->getAssignmentdesc().'</p>
-                            </div>
-                            </a>
-						</div>';
+            if($var[$i]->getSubmitted()==0)
+            {
+                echo        '<div class="timeline__item">
+                                <a href="Assignment.php?id='.$var[$i]->getAssignmentid().'">
+                                
+                                <div class="timeline__content img-bg-02">
+                                    <h2>'.$var[$i]->getAssignmentname().'</h2>
+                                    <p>'.$var[$i]->getAssignmentdesc().'</p>
+                                </div>
+                                </a>
+                            </div>';
+            }
+            else
+            {
+                echo        '<div class="timeline__item">
+                                <div class="timeline__content img-bg-02">
+                                    <h2>'.$var[$i]->getAssignmentname().'</h2>
+                                    <p>'.$var[$i]->getAssignmentdesc().'</p>
+                                </div>
+                            </div>';
+
+            }
         }
     }
 
