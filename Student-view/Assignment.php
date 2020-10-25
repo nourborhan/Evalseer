@@ -231,9 +231,17 @@
                         <tbody>
                         <tr>
                             
+                            <?php  if($assignment->getSubmissiondate()==null && $assignment->getFilepath()==null )
+                                    {
+                                        echo "<td colspan='2'> No Submissions Yet</td>";
+                                    }
+                                    else
+                                    {
+                                        echo "<td>". $assignment->getSubmissiondate()."</td>
+                                            <td>". $assignment->getFilepath()."</td>";
+                                    }                     
+                           ?>
                             
-                            <td><?php echo $assignment->getSubmissiondate(); ?></td>
-                            <td><?php echo $assignment->getFilepath(); ?></td>
                         </tr>
                         
                         
