@@ -133,6 +133,21 @@ class Student extends User{
         }
     }
 
+    function SubmitAssignment($userid,$assingmentid,$date,$code)
+    {
+        $sql="UPDATE assignmentdetails
+            set Submissiondate='$date',Filepath='$code',Submittedflag='1'
+            where AssignmentID=$assingmentid and UserID=$userid";
+
+        $result=mysqli_query($this->db->getConn(),$sql);
+
+        if($result)
+        {
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+            </script><script> swal('Submitted Successfully','','success');</script>";
+        }
+    }
+
     /**
      * Get the value of AllAssignments
      */ 

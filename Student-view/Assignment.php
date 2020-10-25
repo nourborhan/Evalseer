@@ -60,7 +60,6 @@
    <!-- Start header -->
    <?php include_once("partials/header.php") ?>
    <?php 
-    // session_start();
     require_once("../app/model/student-model.php");
     require_once("../app/controller/student-controller.php");
     require_once("../app/view/student-view.php");
@@ -68,10 +67,18 @@
     $studentmodel=new Student();
     $studentcontroller=new StudentController($studentmodel);
     $studentview=new StudentView($studentcontroller,$studentmodel);
-
+    
     $studentcontroller->getAssignmentdetails();
     $assignment=$studentmodel->getAssignmentdetail();
-   
+    
+    
+    session_start();
+	if(isset($_POST['Submitcode']))
+	{	
+        
+		$studentcontroller->submitAssignment();
+
+	}
     
     ?>
 	<!-- End header -->
@@ -177,22 +184,32 @@
                             <input type="file" class="form-control-file" id="assignment-upload" name="assignment">
                         </div> -->
 
-                        <form>
-                        <br><br>
+                        
 
                         <label for="ta">Write Your Code</label>
                         <textarea required class="lined" name="code" rows="10" cols="145" id="code"></textarea><br><br>
                         <label for="in">Enter Your Input</label>
                         <textarea class="form-control" name="input" rows="10" cols="50"></textarea><br><br>
-                        <input type="submit" id="st" class="btn btn-success" value="Run Code"><br><br><br>
+                        <div class="row ml-2">
+                            <input type="submit" id="st" class="btn btn-success mr-2" name="runcode" value="Run Code">
+                            
+                            
 
 
 
 
-                        <!-- <input type="submit" class="btn btn-primary float-right mt-4" name="subbmit-assignment" value="Submit Assignment"> -->
+                            <!-- <input type="submit" class="btn btn-primary float-right mt-4" name="subbmit-assignment" value="Submit Assignment"> -->
 
                     </form>
-
+                            <form action="" method="post">
+                                <input type="submit"  class="btn btn-success ml-2" name="Submitcode" value="Submit Code">
+                                <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
+                                <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
+                                <input type="hidden" name="code" id="assignmentcode" value="">
+                                
+                            </form>
+                        </div>
+                        <br><br><br>
                     <label for="out">Output</label>
                     <textarea readonly id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
                 </div>
@@ -268,7 +285,7 @@
             //wait for page load to initialize script
             $(document).ready(function(){
                 //listen for form submission
-                $('form').on('submit', function(e){
+                $('#form').on('submit', function(e){
                 //prevent form from submitting and leaving page
                 e.preventDefault();
 
@@ -287,6 +304,14 @@
                     });
                 });
             });
+        </script>
+
+        <script>
+            $("#code").keyup(function(){
+                let text=$("#code").val();
+                $("#assignmentcode").val(text);
+               
+            })
         </script>
 
         <script type="text/javascript">

@@ -31,6 +31,16 @@ class StudentController extends Controller{
     
       $this->model->getcourseinfo($_GET['id']);
     }
+    public function submitAssignment()
+    {
+      $userid=$_POST['userid'];
+      $assignmentid=$_POST['assignmentid'];
+      $code=$_POST['code'];
+      $date=date("Y-m-d");
+      
+
+      $this->model->SubmitAssignment($userid,$assignmentid,$date,$code);
+    }
     public function getinstructors()
     {
     
