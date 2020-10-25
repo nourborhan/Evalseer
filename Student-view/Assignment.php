@@ -112,7 +112,7 @@
                     <h2 class="font-weight-normal mb-3 ">Assignment Details</h2>
                     <p class="text-justify"> <?php echo $assignment->getAssignmentdesc(); ?> <br><br> 
                     
-                    Assignment Grade : <?php echo $assignment->getAssignmentgrade(); ?>
+                    Assignment Grade : <?php echo $assignment->getAssignmentgrade();?> Marks
                     </p>
                 </div>
             </div>
