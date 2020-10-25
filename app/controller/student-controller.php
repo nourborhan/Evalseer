@@ -37,9 +37,9 @@ class StudentController extends Controller{
       $assignmentid=$_POST['assignmentid'];
       $code=$_POST['code'];
       $date=date("Y-m-d");
-      
+      $grade=$_COOKIE["compilinggrade"];
 
-      $this->model->SubmitAssignment($userid,$assignmentid,$date,$code);
+      $this->model->SubmitAssignment($userid,$assignmentid,$date,$code,$grade);
     }
     public function getinstructors()
     {

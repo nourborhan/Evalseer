@@ -45,7 +45,7 @@ class Student extends User{
     function getAssigndetails($id)
     {
         
-        $sql="select * , assignments.Grade as assignmentgrade from assignments  join assignmentdetails on assignments.AssignmentiD=assignmentdetails.AssignmentID WHERE assignmentdetails.AssignmentID='$id'";
+        $sql="select * , assignments.Grade as assignmentgrade,assignmentdetails.Grade as submittedgrade from assignments  join assignmentdetails on assignments.AssignmentiD=assignmentdetails.AssignmentID WHERE assignmentdetails.AssignmentID='$id'";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {
@@ -60,6 +60,7 @@ class Student extends User{
             $assingment->setAssignmentname($row['Assignmentname']);
             $assingment->setFilepath($row['Filepath']);
             $assingment->setSubmissiondate($row['Submissiondate']);
+            $assingment->setGrade($row['submittedgrade']);
             
 
             $this->assignmentdetail=$assingment;
@@ -137,10 +138,10 @@ class Student extends User{
         }
     }
 
-    function SubmitAssignment($userid,$assingmentid,$date,$code)
+    function SubmitAssignment($userid,$assingmentid,$date,$code,$grade)
     {
         $sql="UPDATE assignmentdetails
-            set Submissiondate='$date',Filepath='$code',Submittedflag='0'
+            set Submissiondate='$date',Filepath='$code',Submittedflag='0',Grade='$grade'
             where AssignmentID=$assingmentid and UserID=$userid";
 
         $result=mysqli_query($this->db->getConn(),$sql);

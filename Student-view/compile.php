@@ -1,7 +1,7 @@
 
 
 <?php
-
+session_start();
 	// $languageID=$_POST["language"];
 	
         error_reporting(0);

@@ -69,16 +69,27 @@
     $studentview=new StudentView($studentcontroller,$studentmodel);
     
     $studentcontroller->getAssignmentdetails();
-    $assignment=$studentmodel->getAssignmentdetail();
     
     
     session_start();
 	if(isset($_POST['Submitcode']))
-	{	
-        
-		$studentcontroller->submitAssignment();
-
+	{
+        if($_POST["code"]=="")
+        {
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+            </script><script> swal('Please Write Your Code','','error');</script>";
+        }
+        else if($_COOKIE["compilinggrade"]=="")
+        {
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+            </script><script> swal('Please Run Your Code','','error');</script>";
+        }
+        else
+        {
+        $studentcontroller->submitAssignment();
+        }
 	}
+    $assignment=$studentmodel->getAssignmentdetail();
     
     ?>
 	<!-- End header -->
@@ -101,7 +112,7 @@
                     <h2 class="font-weight-normal mb-3 ">Assignment Details</h2>
                     <p class="text-justify"> <?php echo $assignment->getAssignmentdesc(); ?> <br><br> 
                     
-                    Assignment Grade : <?php echo $assignment->getAssignmentgrade(); ?>%
+                    Assignment Grade : <?php echo $assignment->getAssignmentgrade(); ?>
                     </p>
                 </div>
             </div>
@@ -116,8 +127,6 @@
                         <li class="mb-4"> <img src="images/coin.png" width="60" height='35' class="mr-3">Loot Coins</li>
                         <li class="mb-4"> <img src="images/points.png" width="60" height='60' class="mr-3">Earn Points</li>
                         <li class="mb-4"> <img src="images/exp.png" width="60" height='60' class="mr-3">Gain Experience</li>
-                        <li class="mb-4">Reward 4</li>
-                        <li class="mb-4">Reward 5</li>
                     </ul>
                 </div>
             
@@ -181,6 +190,7 @@
 
                 <div class="col-12 add-pad mx-auto">
                     <h2 class="font-weight-normal mb-3 ">Submit Your Assignment</h2>
+                    <h6>Click Run Code Then Submit Assignment</h6>
                     <form action="compile.php" id="form" name="f2" method="POST" >
 
                         <!-- <div class="form-group">
@@ -188,11 +198,12 @@
                         </div> -->
 
                         
-
+                        <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
+                        <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
                         <label for="ta">Write Your Code</label>
                         <textarea required class="lined" name="code" rows="10" cols="145" id="code"></textarea><br><br>
                         <label for="in">Enter Your Input</label>
-                        <textarea class="form-control" name="input" rows="10" cols="50"></textarea><br><br>
+                        <textarea class="form-control" name="input" rows="2" cols="50"></textarea><br><br>
                         <div class="row ml-2">
                             <input type="submit" id="st" class="btn btn-success mr-2" name="runcode" value="Run Code">
                             
@@ -204,17 +215,18 @@
                             <!-- <input type="submit" class="btn btn-primary float-right mt-4" name="subbmit-assignment" value="Submit Assignment"> -->
 
                     </form>
-                            <form action="" method="post">
-                                <input type="submit"  class="btn btn-success ml-2" name="Submitcode" value="Submit Code">
+                            
+                        </div>
+                        <br><br><br>
+                    <label for="out">Output</label>
+                    <textarea readonly id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
+                    <form class="mb-4" action="" method="post">
+                                <input type="submit" style="display: none" id="Submit_assinment_btn"  class="btn btn-success ml-2" name="Submitcode" value="Submit Code">
                                 <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
                                 <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
                                 <input type="hidden" name="code" id="assignmentcode" value="">
                                 
                             </form>
-                        </div>
-                        <br><br><br>
-                    <label for="out">Output</label>
-                    <textarea readonly id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
                 </div>
 
                 <div class="row mx-auto" style="width:98%"> 
@@ -225,20 +237,27 @@
                             
                             <th scope="col">Submitted Date</th>
                             <th scope="col">Submitted Code</th>
+                            <th scope="col">Submitted Grade</th>
                         
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             
-                            <?php  if($assignment->getSubmissiondate()==null && $assignment->getFilepath()==null )
-                                    {
-                                        echo "<td colspan='2'> No Submissions Yet</td>";
+                            <?php  
+                                    $studentcontroller->getAssignmentdetails();  
+                                    $assignment=$studentmodel->getAssignmentdetail();
+                                    if($assignment->getSubmissiondate()==null && $assignment->getFilepath()==null )
+                                    {   
+                                        echo "<td colspan='3'> No Submissions Yet</td>";
                                     }
                                     else
                                     {
                                         echo "<td>". $assignment->getSubmissiondate()."</td>
-                                            <td>". $assignment->getFilepath()."</td>";
+                                            <td>". $assignment->getFilepath()."</td>
+                                            <td>" .$assignment->getGrade()."%</td>
+                                            "
+                                            ;
                                     }                     
                            ?>
                             
@@ -337,6 +356,7 @@
 
                             // locate the div with #result and fill it with returned data from process.php
                             $('#outputdiv').html(result);
+                            $('#Submit_assinment_btn').show();
                         }
                     });
                 });

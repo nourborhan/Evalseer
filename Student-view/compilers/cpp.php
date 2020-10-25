@@ -1,5 +1,5 @@
 <?php
-
+	session_start();
     putenv("PATH=C:\\xampp\\htdocs\\Evalseer\\Student-view\\Dev-Cpp\\MinGW64\\bin");
 	$CC="g++";
 	$out="a.exe";
@@ -38,6 +38,9 @@
 			$output=shell_exec($out);
 		}
 		echo "$output";
+		$grade = 100;
+		setcookie("compilinggrade", $grade); 
+		// $_SESSION["compilinggrade"] = $grade;
    }
 	else if(!strpos($error,"error"))
 	{
@@ -52,11 +55,16 @@
 			$output=shell_exec($out);
 		}
 		echo "$output";
+		$grade = 100;
+		setcookie("compilinggrade", $grade); 
 		            
 	}
 	else
 	{
 		echo "<pre>$error</pre>";
+		$grade = 0;
+		setcookie("compilinggrade", $grade); 
+
 	}
 	exec("del $filename_code");
 	exec("del *.o");
