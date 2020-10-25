@@ -45,7 +45,7 @@ class Student extends User{
     function getAssigndetails($id)
     {
         
-        $sql="select * from assignments  join assignmentdetails on assignments.AssignmentiD=assignmentdetails.AssignmentID WHERE assignmentdetails.AssignmentID='$id'";
+        $sql="select * , assignments.Grade as assignmentgrade from assignments  join assignmentdetails on assignments.AssignmentiD=assignmentdetails.AssignmentID WHERE assignmentdetails.AssignmentID='$id'";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {
@@ -53,7 +53,7 @@ class Student extends User{
             $assingment=new Assignment();
             $assingment->setCourseid($row['CourseID']);
             $assingment->setAssignmentid($row['AssignmentiD']);
-            $assingment->setAssignmentgrade($row['Grade']);
+            $assingment->setAssignmentgrade($row['assignmentgrade']);
             $assingment->setAssignmenttimecreated($row['Timecreated']);
             $assingment->setNbofsubmissions($row['NBofsubmissions']);
             $assingment->setAssignmentdesc($row['Assignmentdesc.']);
