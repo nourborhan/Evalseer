@@ -216,6 +216,32 @@
                     <label for="out">Output</label>
                     <textarea readonly id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
                 </div>
+
+                <div class="row mx-auto" style="width:98%"> 
+                <div class="table-responsive">
+                    <table class="table table-hover table-dark "style="margin-bottom: 0px;">
+                        <thead>
+                        <tr>
+                            
+                            <th scope="col">Submitted Date</th>
+                            <th scope="col">Submitted Code</th>
+                        
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            
+                            
+                            <td><?php echo $assignment->getSubmissiondate(); ?></td>
+                            <td><?php echo $assignment->getFilepath(); ?></td>
+                        </tr>
+                        
+                        
+                        </tbody>
+                    </table>
+                    </div>
+            </div><!-- end row -->
+
             
             </div>
 

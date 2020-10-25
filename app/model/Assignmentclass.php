@@ -12,6 +12,8 @@ class Assignment{
     protected $nbofsubmissions;
     protected $assignmentdesc;
     protected $assignmentname;
+    protected $filepath;
+    protected $submissiondate;
     protected $submitted;
 
    
@@ -194,6 +196,46 @@ class Assignment{
     public function setSubmitted($submitted)
     {
         $this->submitted = $submitted;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of filepath
+     */ 
+    public function getFilepath()
+    {
+        return $this->filepath;
+    }
+
+    /**
+     * Set the value of filepath
+     *
+     * @return  self
+     */ 
+    public function setFilepath($filepath)
+    {
+        $this->filepath = $filepath;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of submissiondate
+     */ 
+    public function getSubmissiondate()
+    {
+        return $this->submissiondate;
+    }
+
+    /**
+     * Set the value of submissiondate
+     *
+     * @return  self
+     */ 
+    public function setSubmissiondate($submissiondate)
+    {
+        $this->submissiondate = $submissiondate;
 
         return $this;
     }

@@ -18,6 +18,7 @@ class StudentView extends View
                                 
                                 <div class="timeline__content img-bg-02">
                                     <h2>'.$var[$i]->getAssignmentname().'</h2>
+                                    <p>Grade: '.$var[$i]->getAssignmentgrade().'%</p>
                                     <p>'.$var[$i]->getAssignmentdesc().'</p>
                                 </div>
                                 </a>
@@ -26,10 +27,13 @@ class StudentView extends View
             else
             {
                 echo        '<div class="timeline__item">
+                                
                                 <div class="timeline__content img-bg-02">
                                     <h2>'.$var[$i]->getAssignmentname().'</h2>
+                                    <p>Grade: '.$var[$i]->getAssignmentgrade().'</p><br>
                                     <p>'.$var[$i]->getAssignmentdesc().'</p>
                                 </div>
+                      
                             </div>';
 
             }
@@ -134,6 +138,7 @@ class StudentView extends View
                                 
                                 <div class="timeline__content img-bg-02">
                                     <h2>'.$var[$i]->getAssignmentname().'</h2>
+                                    <p>Grade: '.$var[$i]->getAssignmentgrade().'%</p>
                                     <p>'.$var[$i]->getAssignmentdesc().'</p>
                                 </div>
                                 </a>
@@ -142,13 +147,16 @@ class StudentView extends View
             else
             {
                 echo        '<div class="timeline__item">
+                                
                                 <div class="timeline__content img-bg-02">
                                     <h2>'.$var[$i]->getAssignmentname().'</h2>
+                                    <p>Grade: '.$var[$i]->getAssignmentgrade().'</p><br>
                                     <p>'.$var[$i]->getAssignmentdesc().'</p>
                                 </div>
+                      
                             </div>';
 
-            }
+            }   
         }
     }
 
