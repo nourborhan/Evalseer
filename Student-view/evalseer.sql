@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2020 at 10:22 PM
+-- Generation Time: Oct 27, 2020 at 08:28 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -60,7 +60,7 @@ CREATE TABLE `assignmentdetails` (
 --
 
 INSERT INTO `assignmentdetails` (`UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Filepath`, `Feedback`, `Badgereceivedflag`, `Submittedflag`) VALUES
-(1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+(1, 1, 1, NULL, 100, '2020-10-27', NULL, '#include <iostream>\r\n\r\nint main() {\r\n    std::cout << \"Hello World!\";\r\n    return 0;\r\n}', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -90,7 +90,7 @@ CREATE TABLE `assignments` (
 --
 
 INSERT INTO `assignments` (`AssignmentiD`, `UserID`, `CourseID`, `FeaturelistID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `NBofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`) VALUES
-(1, 3, 1, 1, 'compile code', 'use for loops', '2020-10-06', '2020-10-08', 5, 2, '2020-10-02', '2020-10-06', 'Automatic', 0);
+(1, 3, 1, 1, 'Your First C++ Program', '\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero. Fusce non facilisis nisi. Vivamus rutrum varius dui, ac ornare tortor gravida varius. Phasellus pulvinar rutrum ullamcorper. Donec eu nunc magna. Sed rhoncus quam in odio consectetur, eu ullamcorper arcu rutrum. Cras quis diam maximus, ultricies dui quis, tristique orci. Ut auctor felis nec ipsum lacinia aliquam. Vivamus eget pretium erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed porttitor, ipsum non tincidunt consectetur, odio eros dignissim augue, id congue dolor urna sed enim. Nulla malesuada aliquet pretium.\r\n\r\nSed dictum vehicula ultrices. Pellentesque placerat sed felis sit amet porta. Aenean tristique, arcu ac malesuada sollicitudin, nulla metus varius tortor, et tristique quam odio ac tellus. Donec pellentesque blandit nunc sed lobortis. Nam id elit facilisis mauris tempor varius. Curabitur pellentesque volutpat mauris, vitae posuere sem luctus a. Aliquam posuere metus maximus ipsum vestibulum interdum. Donec congue vel augue sed placerat. Proin eu nibh eu ex pulvinar euismod. ', '2020-10-06', '2020-10-08', 5, 2, '2020-10-02', '2020-10-06', 'Automatic', 0);
 
 -- --------------------------------------------------------
 
@@ -165,7 +165,7 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`CourseID`, `UserID`, `Coursecode`, `Name`, `Description`, `Grade`, `Gradetopass`, `Startdate`, `Enddate`, `Active`, `Timeceated`, `Timemodified`, `Suspended`) VALUES
-(1, 3, 'csc105', 'computer science 105', 'test', 100, 50, '2020-10-04', '2020-10-31', 1, '2020-09-01', '2020-10-14', 0);
+(1, 3, 'csc105', 'Computer Science 105', '\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero. Fusce non facilisis nisi. Vivamus rutrum varius dui, ac ornare tortor gravida varius. Phasellus pulvinar rutrum ullamcorper. Donec eu nunc magna. Sed rhoncus quam in odio consectetur, eu ullamcorper arcu rutrum. Cras quis diam maximus, ultricies dui quis, tristique orci. Ut auctor felis nec ipsum lacinia aliquam. Vivamus eget pretium erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed porttitor, ipsum non tincidunt consectetur, odio eros dignissim augue, id congue dolor urna sed enim. Nulla malesuada aliquet pretium.\r\n\r\nSed dictum vehicula ultrices. Pellentesque placerat sed felis sit amet porta. Aenean tristique, arcu ac malesuada sollicitudin, nulla metus varius tortor, et tristique quam odio ac tellus. Donec pellentesque blandit nunc sed lobortis. Nam id elit facilisis mauris tempor varius. Curabitur pellentesque volutpat mauris, vitae posuere sem luctus a. Aliquam posuere metus maximus ipsum vestibulum interdum. Donec congue vel augue sed placerat. Proin eu nibh eu ex pulvinar euismod. ', 100, 50, '2020-10-04', '2020-10-31', 1, '2020-09-01', '2020-10-14', 0);
 
 -- --------------------------------------------------------
 
@@ -228,7 +228,7 @@ CREATE TABLE `featurescategory` (
 --
 
 INSERT INTO `featurescategory` (`FeaturescategoryID`, `featuresID`, `Name`, `Description`, `suspended`) VALUES
-(1, 1, 'compiling', 'used for loop', 0);
+(1, 1, 'styling', 'check for styling', 0);
 
 -- --------------------------------------------------------
 
@@ -248,10 +248,10 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`RoleID`, `CapabilitiiesID`, `Name`, `Bio`) VALUES
-(1, 1, 'student', 'student'),
-(2, 2, 'instructor', 'instructor'),
-(3, 3, 'admin', 'admin'),
-(4, 2, 'TA', 'TA Bio');
+(1, 1, 'student', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero.'),
+(2, 2, 'instructor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero.'),
+(3, 3, 'admin', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero.'),
+(4, 2, 'TA', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero.');
 
 -- --------------------------------------------------------
 
@@ -311,7 +311,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `Name`, `Age`, `Mobile`, `Title`, `Suspended`) VALUES
-(1, 1, 'test', 'test', 'test@test.com', 'Al Pacino', 20, 1017377002, 'student', 0),
+(1, 1, 'test', 'test', 'test@test.com', 'Marlon Brando', 20, 1017377002, 'student', 0),
 (2, 2, 'instructor', 'test', 'testing@testing.com', 'Dr. Hannibal', 30, 129932002, 'instructor', 0),
 (3, 3, 'admin', 'admin', 'admin@admin.com', 'Don Corleone', 40, 231299332, 'admin', 0),
 (4, 4, 'ta', 'ta', 'mail@mail', 'Tom Hagen', 20, 1010203, 'Teaching Assistant', 0);
