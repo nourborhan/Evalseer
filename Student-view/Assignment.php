@@ -90,6 +90,8 @@
         }
 	}
     $assignment=$studentmodel->getAssignmentdetail();
+
+    
     
     ?>
 	<!-- End header -->
@@ -191,6 +193,14 @@
                 <div class="col-12 add-pad mx-auto">
                     <h2 class="font-weight-normal mb-3 ">Submit Your Assignment</h2>
                     <h6>Click Run Code Then Submit Assignment</h6>
+
+                    <form action="" method="post" enctype="multipart/form-data">
+                        Select image to upload:
+                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <input type="submit" value="Upload Image" name="uploadfile">
+                    </form>
+
+
                     <form action="compile.php" id="form" name="f2" method="POST" >
 
                         <!-- <div class="form-group">
@@ -386,6 +396,34 @@
 
 
         </script>
+
+        <?php
+        if(isset($_POST['uploadfile']))
+        {
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.   ";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+    
+            $myfile = fopen("uploads/hello.cpp", "r") or die("Unable to open file!");
+            $filedata = fread($myfile,filesize("uploads/hello.cpp"));
+            echo $filedata;
+            echo '
+            <script>
+            document.getElementById("code").innerHTML = "'.$filedata.'";
+        
+            </script>
+            ';
+            fclose($myfile);   
+    
+        }
+        ?>
 </body>
 
 
