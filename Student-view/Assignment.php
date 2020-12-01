@@ -94,6 +94,40 @@
     
     
     ?>
+
+        <?php
+        if(isset($_POST['uploadfile']))
+        {
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.   ";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+    
+            $myfile = fopen("uploads/hello.cpp", "r") or die("Unable to open file!");
+            $filedata = fread($myfile,filesize("uploads/hello.cpp"));
+            echo $filedata;
+            // Create a new DOM Document 
+            // $dom = new DOMDocument('1.0', 'iso-8859-1'); 
+            
+            // // Enable validate on parse 
+            // $dom->validateOnParse = true; 
+            // $dom->getElementById('code')->textContent = $filedata;
+            // echo '
+            // <script>
+            // document.getElementById("code").innerHTML = "'.$filedata.'";
+        
+            // </script>
+            // ';
+            fclose($myfile);   
+    
+        }
+        ?>
 	<!-- End header -->
     
     <!-- Page First View -->
@@ -211,7 +245,7 @@
                         <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
                         <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
                         <label for="ta">Write Your Code</label>
-                        <textarea required class="lined" name="code" rows="10" cols="145" id="code"></textarea><br><br>
+                        <textarea required class="lined" name="code" rows="10" cols="145" id="code"><?php echo $filedata ?></textarea><br><br>
                         <label for="in">Enter Your Input</label>
                         <textarea class="form-control" name="input" rows="2" cols="50"></textarea><br><br>
                         <div class="row ml-2">
@@ -397,33 +431,7 @@
 
         </script>
 
-        <?php
-        if(isset($_POST['uploadfile']))
-        {
-            $target_dir = "uploads/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.   ";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-    
-            $myfile = fopen("uploads/hello.cpp", "r") or die("Unable to open file!");
-            $filedata = fread($myfile,filesize("uploads/hello.cpp"));
-            echo $filedata;
-            echo '
-            <script>
-            document.getElementById("code").innerHTML = "'.$filedata.'";
         
-            </script>
-            ';
-            fclose($myfile);   
-    
-        }
-        ?>
 </body>
 
 
