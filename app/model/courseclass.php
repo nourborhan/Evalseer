@@ -16,7 +16,10 @@ class Course{
     protected $intructortitle;
     protected $doctorflag;
     protected $taflag;
-
+    protected $coursegrade;
+    protected $gradetopass;
+    public $assignedinstructorsnames = array();
+    public $assignedTAssnames = array();
    
 
    
@@ -259,6 +262,46 @@ class Course{
     public function setInstructortitle($intructortitle)
     {
         $this->intructortitle = $intructortitle;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of coursegrade
+     */ 
+    public function getCoursegrade()
+    {
+        return $this->coursegrade;
+    }
+
+    /**
+     * Set the value of coursegrade
+     *
+     * @return  self
+     */ 
+    public function setCoursegrade($coursegrade)
+    {
+        $this->coursegrade = $coursegrade;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of gradetopass
+     */ 
+    public function getGradetopass()
+    {
+        return $this->gradetopass;
+    }
+
+    /**
+     * Set the value of gradetopass
+     *
+     * @return  self
+     */ 
+    public function setGradetopass($gradetopass)
+    {
+        $this->gradetopass = $gradetopass;
 
         return $this;
     }
