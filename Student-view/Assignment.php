@@ -96,36 +96,56 @@
     ?>
 
         <?php
+        $filedata="";
         if(isset($_POST['uploadfile']))
         {
             $target_dir = "uploads/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.   ";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-    
-            $myfile = fopen("uploads/hello.cpp", "r") or die("Unable to open file!");
-            $filedata = fread($myfile,filesize("uploads/hello.cpp"));
-            echo $filedata;
-            // Create a new DOM Document 
-            // $dom = new DOMDocument('1.0', 'iso-8859-1'); 
             
-            // // Enable validate on parse 
-            // $dom->validateOnParse = true; 
-            // $dom->getElementById('code')->textContent = $filedata;
-            // echo '
-            // <script>
-            // document.getElementById("code").innerHTML = "'.$filedata.'";
+            
+            $ext = pathinfo($_FILES["fileToUpload"]['name'], PATHINFO_EXTENSION);
+            
+            if($ext=="cpp")
+            {
+                $target_file = $target_dir . $_SESSION['ID']. " - ".$_GET['id'].".".$ext;
+                $uploadOk = 1;
+                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         
-            // </script>
-            // ';
-            fclose($myfile);   
-    
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+                    <script> swal('File Uploaded Successfuly','Please click on submit file to finish submitting','success');
+                    </script>
+                    ";
+                } else {
+                    echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+                    <script> swal('File Failed To Upload','','error');</script>
+                    ";
+                }
+        
+                $myfile = fopen("uploads/".$_SESSION['ID']. " - ".$_GET['id'].".".$ext, "r") or die("Unable to open file!");
+                $filedata = fread($myfile,filesize("uploads/".$_SESSION['ID']. " - ".$_GET['id'].".".$ext));
+                
+
+
+                // Create a new DOM Document 
+                // $dom = new DOMDocument('1.0', 'iso-8859-1'); 
+                
+                // // Enable validate on parse 
+                // $dom->validateOnParse = true; 
+                // $dom->getElementById('code')->textContent = $filedata;
+                // echo '
+                // <script>
+                // document.getElementById("code").innerHTML = "'.$filedata.'";
+            
+                // </script>
+                // ';
+                fclose($myfile);   
+            }
+            else
+            {
+                echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+                <script> swal('File Failed To Upload','Please enter a file with extenstion .cpp ','error');</script>
+                    ";
+            }
         }
         ?>
 	<!-- End header -->
@@ -230,12 +250,12 @@
 
                     <form action="" method="post" enctype="multipart/form-data">
                         Select image to upload:
-                        <input type="file" name="fileToUpload" id="fileToUpload">
-                        <input type="submit" value="Upload Image" name="uploadfile">
+                        <input type="file" name="fileToUpload"  id="fileToUpload" accept=".cpp">
+                        <input type="submit" value="Upload File" class="btn" name="uploadfile">
                     </form>
 
 
-                    <form action="compile.php" id="form" name="f2" method="POST" >
+                    <form  action="compile.php" id="form" name="f2" method="POST" >
 
                         <!-- <div class="form-group">
                             <input type="file" class="form-control-file" id="assignment-upload" name="assignment">
@@ -244,12 +264,13 @@
                         
                         <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
                         <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
-                        <label for="ta">Write Your Code</label>
-                        <textarea required class="lined" name="code" rows="10" cols="145" id="code"><?php echo $filedata ?></textarea><br><br>
-                        <label for="in">Enter Your Input</label>
-                        <textarea class="form-control" name="input" rows="2" cols="50"></textarea><br><br>
-                        <div class="row ml-2">
-                            <input type="submit" id="st" class="btn btn-success mr-2" name="runcode" value="Run Code">
+                        <label style="display:none" for="ta">Write Your Code</label>
+                        <textarea  name="code" rows="10" cols="145" id="code"><?php echo $filedata;?>
+                        </textarea>
+                        <label style="display:none" for="in">Enter Your Input</label>
+                        <textarea style="display:none" class="form-control" name="input" rows="2" cols="50"></textarea>
+                        <div  class="row ml-2">
+                            <input  type="submit" id="st" class="btn btn-success mr-2" name="runcode" value="Run Code">
                             
                             
 
@@ -261,14 +282,14 @@
                     </form>
                             
                         </div>
-                        <br><br><br>
-                    <label for="out">Output</label>
+                    
+                    <label style="display:none" for="out">Output</label>
                     <textarea readonly id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
                     <form class="mb-4" action="" method="post">
                                 <input type="submit" style="display: none" id="Submit_assinment_btn"  class="btn btn-success ml-2" name="Submitcode" value="Submit Code">
                                 <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
                                 <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
-                                <input type="hidden" name="code" id="assignmentcode" value="">
+                                <input type="hidden" name="code" id="assignmentcode" value="<?php echo $filedata;?>">
                                 
                             </form>
                 </div>
@@ -373,18 +394,55 @@
 
     <script>
 
-	$(document).ready(function(){
+	// $('#outputdiv').ready(function(){
 
-		$('#nav-courses').addClass("active");
-        $("#code").linedtextarea();
-	})
+	// 	let valueofcode=$('#code').val();
+    //     if(valueofcode!="")
+    //     {
+    //         // $('#st').click();
+    //     }
+	// })
+
+        // document.onreadystatechange = function () {
+        // if (document.readyState == 'complete') {
+        //    $('#st').click();   
+        // }
+        
 
 	</script>
 
         <script>
+            document.addEventListener('readystatechange', event => {
+                if (event.target.readyState === 'complete') {
+
+                    // setInterval(() => {
+
+                        
+                        
+                    // }, 5000);
+
+                    let valueofcode=$("#code").val();
+
+                        valueofcode=valueofcode.replace(/\s/g,'');
+                        
+                    
+
+                        if(valueofcode!="")
+                        {
+                            
+                            $('#st').click();
+                        }
+
+                    
+                    
+                    
+                }
+            });
             //wait for page load to initialize script
             $(document).ready(function(){
                 //listen for form submission
+                
+                
                 $('#form').on('submit', function(e){
                 //prevent form from submitting and leaving page
                 e.preventDefault();
@@ -400,10 +458,13 @@
 
                             // locate the div with #result and fill it with returned data from process.php
                             $('#outputdiv').html(result);
+                            
                             $('#Submit_assinment_btn').show();
                         }
                     });
                 });
+
+                
             });
         </script>
 
@@ -431,8 +492,7 @@
 
         </script>
 
-        
-</body>
+        <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'> </script></body>
 
 
 </html>
