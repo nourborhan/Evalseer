@@ -58,8 +58,12 @@
 	<!-- END LOADER -->	
 
    <!-- Start header -->
-   <?php include_once("partials/header.php") ?>
-   <?php 
+   <?php  ?>
+   <?php
+    
+    session_start();
+
+    include_once("partials/header.php");
     require_once("../app/model/student-model.php");
     require_once("../app/controller/student-controller.php");
     require_once("../app/view/student-view.php");
@@ -71,7 +75,6 @@
     $studentcontroller->getAssignmentdetails();
     
     
-    session_start();
 	if(isset($_POST['Submitcode']))
 	{
         if($_POST["assignmentcode"]=="")

@@ -23,8 +23,9 @@ class StudentController extends Controller{
 
     public function addtodropdown()
     {
-    
-      $this->model->addtodropdown();
+  
+      $userid=$_SESSION['ID'];
+      $this->model->addtodropdown($userid);
     }
     public function getCoursedetails()
     {
