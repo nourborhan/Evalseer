@@ -15,6 +15,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
     <?php
+        session_start();
         require_once("../app/model/instructor-model.php");
         require_once("../app/controller/instructor-controller.php");
         require_once("../app/view/instructor-view.php");

@@ -20,7 +20,7 @@ class Course{
     protected $gradetopass;
     public $assignedinstructorsnames = array();
     public $assignedTAssnames = array();
-   
+    public $assignments = array();
 
    
 

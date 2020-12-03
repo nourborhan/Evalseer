@@ -16,6 +16,8 @@ class Assignment{
     protected $submissiondate;
     protected $submitted;
     protected $grade;
+    protected $assignmentstartdate;
+    protected $assignmentcutoffdate;
 
    
     
@@ -259,6 +261,46 @@ class Assignment{
     public function getGrade()
     {
         return $this->grade;
+    }
+
+    /**
+     * Get the value of assignmentstartdate
+     */ 
+    public function getAssignmentstartdate()
+    {
+        return $this->assignmentstartdate;
+    }
+
+    /**
+     * Set the value of assignmentstartdate
+     *
+     * @return  self
+     */ 
+    public function setAssignmentstartdate($assignmentstartdate)
+    {
+        $this->assignmentstartdate = $assignmentstartdate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of assignmentcutoffdate
+     */ 
+    public function getAssignmentcutoffdate()
+    {
+        return $this->assignmentcutoffdate;
+    }
+
+    /**
+     * Set the value of assignmentcutoffdate
+     *
+     * @return  self
+     */ 
+    public function setAssignmentcutoffdate($assignmentcutoffdate)
+    {
+        $this->assignmentcutoffdate = $assignmentcutoffdate;
+
+        return $this;
     }
 }
 
