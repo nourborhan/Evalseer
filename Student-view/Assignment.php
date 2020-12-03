@@ -74,7 +74,7 @@
     session_start();
 	if(isset($_POST['Submitcode']))
 	{
-        if($_POST["code"]=="")
+        if($_POST["assignmentcode"]=="")
         {
             echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
             </script><script> swal('Please Write Your Code','','error');</script>";
@@ -265,11 +265,11 @@
                         <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
                         <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
                         <label style="display:none" for="ta">Write Your Code</label>
-                        <textarea  name="code" rows="10" cols="145" id="code"><?php echo $filedata;?>
+                        <textarea style="display:none"  name="code" rows="10" cols="145" id="code"><?php echo htmlspecialchars($filedata,ENT_QUOTES);?>
                         </textarea>
                         <label style="display:none" for="in">Enter Your Input</label>
                         <textarea style="display:none" class="form-control" name="input" rows="2" cols="50"></textarea>
-                        <div  class="row ml-2">
+                        <div style="display:none"  class="row ml-2">
                             <input  type="submit" id="st" class="btn btn-success mr-2" name="runcode" value="Run Code">
                             
                             
@@ -284,12 +284,12 @@
                         </div>
                     
                     <label style="display:none" for="out">Output</label>
-                    <textarea readonly id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
+                    <textarea style="display:none" readonly id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
                     <form class="mb-4" action="" method="post">
                                 <input type="submit" style="display: none" id="Submit_assinment_btn"  class="btn btn-success ml-2" name="Submitcode" value="Submit Code">
                                 <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
                                 <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
-                                <input type="hidden" name="code" id="assignmentcode" value="<?php echo $filedata;?>">
+                                <input type="hidden" name="assignmentcode" id="assignmentcode" value="<?php echo htmlspecialchars($filedata,ENT_QUOTES);?>">
                                 
                             </form>
                 </div>
