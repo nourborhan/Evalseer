@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2020 at 08:28 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.12
+-- Generation Time: Dec 01, 2020 at 07:10 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -38,47 +37,20 @@ CREATE TABLE `assignedtestcases` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assignmentdetails`
---
-
-CREATE TABLE `assignmentdetails` (
-  `UserID` int(11) NOT NULL COMMENT 'Students ID',
-  `CourseID` int(11) NOT NULL,
-  `AssignmentID` int(11) NOT NULL,
-  `BaadgeID` int(11) DEFAULT NULL,
-  `Grade` int(11) DEFAULT NULL,
-  `Submissiondate` date DEFAULT NULL,
-  `Modificationdate` date DEFAULT NULL,
-  `Filepath` varchar(3000) DEFAULT NULL,
-  `Feedback` text DEFAULT NULL,
-  `Badgereceivedflag` tinyint(1) DEFAULT NULL,
-  `Submittedflag` tinyint(4) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `assignmentdetails`
---
-
-INSERT INTO `assignmentdetails` (`UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Filepath`, `Feedback`, `Badgereceivedflag`, `Submittedflag`) VALUES
-(1, 1, 1, NULL, 100, '2020-10-27', NULL, '#include <iostream>\r\n\r\nint main() {\r\n    std::cout << \"Hello World!\";\r\n    return 0;\r\n}', NULL, NULL, 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `assignments`
 --
 
 CREATE TABLE `assignments` (
-  `AssignmentiD` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
+  `AssignmentID` int(11) NOT NULL,
+  `EducatorID` int(11) NOT NULL,
   `CourseID` int(11) NOT NULL,
-  `FeaturelistID` int(11) NOT NULL,
+  `GradingcriteriaID` int(11) NOT NULL,
   `Assignmentname` varchar(255) NOT NULL,
   `Assignmentdesc.` mediumtext NOT NULL,
   `Startdate` date NOT NULL,
   `Cutoffdate` date NOT NULL,
   `Grade` int(11) NOT NULL,
-  `NBofsubmissions` int(11) NOT NULL,
+  `Numberofsubmissions` int(11) NOT NULL,
   `Timecreated` date NOT NULL,
   `timemodified` date NOT NULL,
   `Gradingtype` set('Automatic','Hybrid','Manual') NOT NULL,
@@ -89,7 +61,7 @@ CREATE TABLE `assignments` (
 -- Dumping data for table `assignments`
 --
 
-INSERT INTO `assignments` (`AssignmentiD`, `UserID`, `CourseID`, `FeaturelistID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `NBofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`) VALUES
+INSERT INTO `assignments` (`AssignmentID`, `EducatorID`, `CourseID`, `GradingcriteriaID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `Numberofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`) VALUES
 (1, 3, 1, 1, 'Your First C++ Program', '\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero. Fusce non facilisis nisi. Vivamus rutrum varius dui, ac ornare tortor gravida varius. Phasellus pulvinar rutrum ullamcorper. Donec eu nunc magna. Sed rhoncus quam in odio consectetur, eu ullamcorper arcu rutrum. Cras quis diam maximus, ultricies dui quis, tristique orci. Ut auctor felis nec ipsum lacinia aliquam. Vivamus eget pretium erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed porttitor, ipsum non tincidunt consectetur, odio eros dignissim augue, id congue dolor urna sed enim. Nulla malesuada aliquet pretium.\r\n\r\nSed dictum vehicula ultrices. Pellentesque placerat sed felis sit amet porta. Aenean tristique, arcu ac malesuada sollicitudin, nulla metus varius tortor, et tristique quam odio ac tellus. Donec pellentesque blandit nunc sed lobortis. Nam id elit facilisis mauris tempor varius. Curabitur pellentesque volutpat mauris, vitae posuere sem luctus a. Aliquam posuere metus maximus ipsum vestibulum interdum. Donec congue vel augue sed placerat. Proin eu nibh eu ex pulvinar euismod. ', '2020-10-06', '2020-10-08', 5, 2, '2020-10-02', '2020-10-06', 'Automatic', 0);
 
 -- --------------------------------------------------------
@@ -100,8 +72,8 @@ INSERT INTO `assignments` (`AssignmentiD`, `UserID`, `CourseID`, `FeaturelistID`
 
 CREATE TABLE `badges` (
   `BadgesID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
-  `BadgeName` varchar(255) NOT NULL,
+  `CreatorID` int(11) NOT NULL,
+  `Badgename` varchar(255) NOT NULL,
   `Badgedescription` mediumtext NOT NULL,
   `Imagepath` text NOT NULL,
   `Suspended` tinyint(1) NOT NULL
@@ -165,7 +137,7 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`CourseID`, `UserID`, `Coursecode`, `Name`, `Description`, `Grade`, `Gradetopass`, `Startdate`, `Enddate`, `Active`, `Timeceated`, `Timemodified`, `Suspended`) VALUES
-(1, 3, 'csc105', 'Computer Science 105', '\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero. Fusce non facilisis nisi. Vivamus rutrum varius dui, ac ornare tortor gravida varius. Phasellus pulvinar rutrum ullamcorper. Donec eu nunc magna. Sed rhoncus quam in odio consectetur, eu ullamcorper arcu rutrum. Cras quis diam maximus, ultricies dui quis, tristique orci. Ut auctor felis nec ipsum lacinia aliquam. Vivamus eget pretium erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed porttitor, ipsum non tincidunt consectetur, odio eros dignissim augue, id congue dolor urna sed enim. Nulla malesuada aliquet pretium.\r\n\r\nSed dictum vehicula ultrices. Pellentesque placerat sed felis sit amet porta. Aenean tristique, arcu ac malesuada sollicitudin, nulla metus varius tortor, et tristique quam odio ac tellus. Donec pellentesque blandit nunc sed lobortis. Nam id elit facilisis mauris tempor varius. Curabitur pellentesque volutpat mauris, vitae posuere sem luctus a. Aliquam posuere metus maximus ipsum vestibulum interdum. Donec congue vel augue sed placerat. Proin eu nibh eu ex pulvinar euismod. ', 100, 50, '2020-10-04', '2020-10-31', 1, '2020-09-01', '2020-10-14', 0);
+(1, 3, 'csc105', 'Computer Science 105', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero. Fusce non facilisis nisi. Vivamus rutrum varius dui, ac ornare tortor gravida varius. Phasellus pulvinar rutrum ullamcorper. Donec eu nunc magna. Sed rhoncus quam in odio consectetur, eu ullamcorper arcu rutrum. Cras quis diam maximus, ultricies dui quis, tristique orci. Ut auctor felis nec ipsum lacinia aliquam. Vivamus eget pretium erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed porttitor, ipsum non tincidunt consectetur, odio eros dignissim augue, id congue dolor urna sed enim. Nulla malesuada aliquet pretium.\r\n\r\nSed dictum vehicula ultrices. Pellentesque placerat sed felis sit amet porta. Aenean tristique, arcu ac malesuada sollicitudin, nulla metus varius tortor, et tristique quam odio ac tellus. Donec pellentesque blandit nunc sed lobortis. Nam id elit facilisis mauris tempor varius. Curabitur pellentesque volutpat mauris, vitae posuere sem luctus a. Aliquam posuere metus maximus ipsum vestibulum interdum. Donec congue vel augue sed placerat. Proin eu nibh eu ex pulvinar euismod. ', 100, 50, '2020-10-04', '2020-10-31', 1, '2020-09-01', '2020-10-14', 0);
 
 -- --------------------------------------------------------
 
@@ -191,44 +163,31 @@ INSERT INTO `courseedducator` (`CourseID`, `UserID`, `Primaryeducatorflag`, `Ass
 -- --------------------------------------------------------
 
 --
--- Table structure for table `features`
+-- Table structure for table `gradingcriteria`
 --
 
-CREATE TABLE `features` (
+CREATE TABLE `gradingcriteria` (
   `FeaturesID` int(11) NOT NULL,
+  `AssignmentsID` int(11) NOT NULL,
+  `Test_cases_ID` int(11) NOT NULL,
   `Compiling` tinyint(1) NOT NULL,
+  `Compiling_weight` int(11) NOT NULL,
   `Sytling` tinyint(1) NOT NULL,
+  `Styling_weight` int(11) NOT NULL,
   `Comments` tinyint(1) NOT NULL,
-  `Indentations` tinyint(1) NOT NULL
+  `Comments_weight` int(11) NOT NULL,
+  `Indentations` tinyint(1) NOT NULL,
+  `Indentation_weight` int(11) NOT NULL,
+  `Logic` tinyint(1) NOT NULL,
+  `Logic_weight` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `features`
+-- Dumping data for table `gradingcriteria`
 --
 
-INSERT INTO `features` (`FeaturesID`, `Compiling`, `Sytling`, `Comments`, `Indentations`) VALUES
-(1, 1, 1, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `featurescategory`
---
-
-CREATE TABLE `featurescategory` (
-  `FeaturescategoryID` int(11) NOT NULL,
-  `featuresID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Description` text NOT NULL,
-  `suspended` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `featurescategory`
---
-
-INSERT INTO `featurescategory` (`FeaturescategoryID`, `featuresID`, `Name`, `Description`, `suspended`) VALUES
-(1, 1, 'styling', 'check for styling', 0);
+INSERT INTO `gradingcriteria` (`FeaturesID`, `AssignmentsID`, `Test_cases_ID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Comments`, `Comments_weight`, `Indentations`, `Indentation_weight`, `Logic`, `Logic_weight`) VALUES
+(1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -239,19 +198,18 @@ INSERT INTO `featurescategory` (`FeaturescategoryID`, `featuresID`, `Name`, `Des
 CREATE TABLE `role` (
   `RoleID` int(11) NOT NULL,
   `CapabilitiiesID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Bio` text NOT NULL
+  `Name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`RoleID`, `CapabilitiiesID`, `Name`, `Bio`) VALUES
-(1, 1, 'student', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero.'),
-(2, 2, 'instructor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero.'),
-(3, 3, 'admin', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero.'),
-(4, 2, 'TA', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero.');
+INSERT INTO `role` (`RoleID`, `CapabilitiiesID`, `Name`) VALUES
+(1, 1, 'student'),
+(2, 2, 'instructor'),
+(3, 3, 'admin'),
+(4, 2, 'TA');
 
 -- --------------------------------------------------------
 
@@ -260,7 +218,7 @@ INSERT INTO `role` (`RoleID`, `CapabilitiiesID`, `Name`, `Bio`) VALUES
 --
 
 CREATE TABLE `studentsenrolled` (
-  `UserID` int(11) NOT NULL,
+  `StudentID` int(11) NOT NULL,
   `CourseID` int(11) NOT NULL,
   `StduentGrade` int(11) NOT NULL,
   `Rank` int(11) NOT NULL
@@ -270,8 +228,35 @@ CREATE TABLE `studentsenrolled` (
 -- Dumping data for table `studentsenrolled`
 --
 
-INSERT INTO `studentsenrolled` (`UserID`, `CourseID`, `StduentGrade`, `Rank`) VALUES
+INSERT INTO `studentsenrolled` (`StudentID`, `CourseID`, `StduentGrade`, `Rank`) VALUES
 (1, 1, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `submissions`
+--
+
+CREATE TABLE `submissions` (
+  `UserID` int(11) NOT NULL COMMENT 'Students ID',
+  `CourseID` int(11) NOT NULL,
+  `AssignmentID` int(11) NOT NULL,
+  `BaadgeID` int(11) DEFAULT NULL,
+  `Grade` int(11) DEFAULT NULL,
+  `Submissiondate` date DEFAULT NULL,
+  `Modificationdate` date DEFAULT NULL,
+  `Code_submitted` varchar(3000) DEFAULT NULL,
+  `Feedback` text DEFAULT NULL,
+  `Badgereceivedflag` tinyint(1) DEFAULT NULL,
+  `Submittedflag` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `submissions`
+--
+
+INSERT INTO `submissions` (`UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Code_submitted`, `Feedback`, `Badgereceivedflag`, `Submittedflag`) VALUES
+(1, 1, 1, NULL, 100, '2020-10-27', NULL, '#include <iostream>\r\n\r\nint main() {\r\n    std::cout << \"Hello World!\";\r\n    return 0;\r\n}', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -281,9 +266,10 @@ INSERT INTO `studentsenrolled` (`UserID`, `CourseID`, `StduentGrade`, `Rank`) VA
 
 CREATE TABLE `testcases` (
   `TcasesID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Description` text NOT NULL,
-  `Filepath` varchar(255) NOT NULL,
+  `Testcasename` varchar(255) NOT NULL,
+  `testcasedescription` text NOT NULL,
+  `testcasefilepath` varchar(255) NOT NULL,
+  `Pass` tinyint(1) NOT NULL,
   `Suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -303,6 +289,8 @@ CREATE TABLE `user` (
   `Age` int(11) NOT NULL,
   `Mobile` int(11) NOT NULL,
   `Title` varchar(255) NOT NULL,
+  `Rank` varchar(100) NOT NULL,
+  `Bio` text NOT NULL,
   `Suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -310,11 +298,11 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `Name`, `Age`, `Mobile`, `Title`, `Suspended`) VALUES
-(1, 1, 'test', 'test', 'test@test.com', 'Marlon Brando', 20, 1017377002, 'student', 0),
-(2, 2, 'instructor', 'test', 'testing@testing.com', 'Dr. Hannibal', 30, 129932002, 'instructor', 0),
-(3, 3, 'admin', 'admin', 'admin@admin.com', 'Don Corleone', 40, 231299332, 'admin', 0),
-(4, 4, 'ta', 'ta', 'mail@mail', 'Tom Hagen', 20, 1010203, 'Teaching Assistant', 0);
+INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `Name`, `Age`, `Mobile`, `Title`, `Rank`, `Bio`, `Suspended`) VALUES
+(1, 1, 'test', 'test', 'test@test.com', 'Marlon Brando', 20, 1017377002, 'student', '', '', 0),
+(2, 2, 'instructor', 'test', 'testing@testing.com', 'Dr. Hannibal', 30, 129932002, 'instructor', '', '', 0),
+(3, 3, 'admin', 'admin', 'admin@admin.com', 'Don Corleone', 40, 231299332, 'admin', '', '', 0),
+(4, 4, 'ta', 'ta', 'mail@mail', 'Tom Hagen', 20, 1010203, 'Teaching Assistant', '', '', 0);
 
 --
 -- Indexes for dumped tables
@@ -328,21 +316,12 @@ ALTER TABLE `assignedtestcases`
   ADD KEY `AssignmentsID` (`AssignmentsID`);
 
 --
--- Indexes for table `assignmentdetails`
---
-ALTER TABLE `assignmentdetails`
-  ADD KEY `UserID` (`UserID`),
-  ADD KEY `CourseID` (`CourseID`),
-  ADD KEY `AssignmentID` (`AssignmentID`),
-  ADD KEY `BaadgeID` (`BaadgeID`);
-
---
 -- Indexes for table `assignments`
 --
 ALTER TABLE `assignments`
-  ADD PRIMARY KEY (`AssignmentiD`),
-  ADD KEY `UserID` (`UserID`),
-  ADD KEY `FeaturelistID` (`FeaturelistID`),
+  ADD PRIMARY KEY (`AssignmentID`),
+  ADD KEY `UserID` (`EducatorID`),
+  ADD KEY `FeaturelistID` (`GradingcriteriaID`),
   ADD KEY `CourseID` (`CourseID`);
 
 --
@@ -350,7 +329,7 @@ ALTER TABLE `assignments`
 --
 ALTER TABLE `badges`
   ADD PRIMARY KEY (`BadgesID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD KEY `UserID` (`CreatorID`);
 
 --
 -- Indexes for table `capabilities`
@@ -373,17 +352,12 @@ ALTER TABLE `courseedducator`
   ADD KEY `CourseID` (`CourseID`);
 
 --
--- Indexes for table `features`
+-- Indexes for table `gradingcriteria`
 --
-ALTER TABLE `features`
-  ADD PRIMARY KEY (`FeaturesID`);
-
---
--- Indexes for table `featurescategory`
---
-ALTER TABLE `featurescategory`
-  ADD PRIMARY KEY (`FeaturescategoryID`),
-  ADD KEY `featuresID` (`featuresID`);
+ALTER TABLE `gradingcriteria`
+  ADD PRIMARY KEY (`FeaturesID`),
+  ADD KEY `Test_cases_ID` (`Test_cases_ID`),
+  ADD KEY `AssignmentsID` (`AssignmentsID`);
 
 --
 -- Indexes for table `role`
@@ -396,8 +370,17 @@ ALTER TABLE `role`
 -- Indexes for table `studentsenrolled`
 --
 ALTER TABLE `studentsenrolled`
-  ADD KEY `UserID` (`UserID`),
+  ADD KEY `UserID` (`StudentID`),
   ADD KEY `CourseID` (`CourseID`);
+
+--
+-- Indexes for table `submissions`
+--
+ALTER TABLE `submissions`
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `CourseID` (`CourseID`),
+  ADD KEY `AssignmentID` (`AssignmentID`),
+  ADD KEY `BaadgeID` (`BaadgeID`);
 
 --
 -- Indexes for table `testcases`
@@ -420,7 +403,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `AssignmentiD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `badges`
@@ -441,16 +424,10 @@ ALTER TABLE `course`
   MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `features`
+-- AUTO_INCREMENT for table `gradingcriteria`
 --
-ALTER TABLE `features`
+ALTER TABLE `gradingcriteria`
   MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `featurescategory`
---
-ALTER TABLE `featurescategory`
-  MODIFY `FeaturescategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -482,21 +459,11 @@ ALTER TABLE `assignedtestcases`
   ADD CONSTRAINT `assignedtestcases_ibfk_2` FOREIGN KEY (`AssignmentsID`) REFERENCES `assignments` (`AssignmentiD`);
 
 --
--- Constraints for table `assignmentdetails`
---
-ALTER TABLE `assignmentdetails`
-  ADD CONSTRAINT `assignmentdetails_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `assignmentdetails_ibfk_2` FOREIGN KEY (`AssignmentID`) REFERENCES `assignments` (`AssignmentiD`),
-  ADD CONSTRAINT `assignmentdetails_ibfk_3` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`),
-  ADD CONSTRAINT `assignmentdetails_ibfk_4` FOREIGN KEY (`BaadgeID`) REFERENCES `badges` (`BadgesID`);
-
---
 -- Constraints for table `assignments`
 --
 ALTER TABLE `assignments`
-  ADD CONSTRAINT `assignments_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `assignments_ibfk_2` FOREIGN KEY (`FeaturelistID`) REFERENCES `featurescategory` (`FeaturescategoryID`),
-  ADD CONSTRAINT `assignments_ibfk_3` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`);
+  ADD CONSTRAINT `assignments_ibfk_2` FOREIGN KEY (`GradingCriteriaID`) REFERENCES `gradingcriteria` (`FeaturesID`),
+  ADD CONSTRAINT `assignments_ibfk_3` FOREIGN KEY (`EducatorID`) REFERENCES `user` (`UserID`);
 
 --
 -- Constraints for table `course`
@@ -512,12 +479,6 @@ ALTER TABLE `courseedducator`
   ADD CONSTRAINT `courseedducator_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
--- Constraints for table `featurescategory`
---
-ALTER TABLE `featurescategory`
-  ADD CONSTRAINT `featurescategory_ibfk_1` FOREIGN KEY (`featuresID`) REFERENCES `features` (`FeaturesID`);
-
---
 -- Constraints for table `role`
 --
 ALTER TABLE `role`
@@ -527,8 +488,17 @@ ALTER TABLE `role`
 -- Constraints for table `studentsenrolled`
 --
 ALTER TABLE `studentsenrolled`
-  ADD CONSTRAINT `studentsenrolled_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `studentsenrolled_ibfk_2` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`);
+  ADD CONSTRAINT `studentsenrolled_ibfk_2` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`),
+  ADD CONSTRAINT `studentsenrolled_ibfk_3` FOREIGN KEY (`StudentID`) REFERENCES `user` (`UserID`);
+
+--
+-- Constraints for table `submissions`
+--
+ALTER TABLE `submissions`
+  ADD CONSTRAINT `submissions_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
+  ADD CONSTRAINT `submissions_ibfk_2` FOREIGN KEY (`AssignmentID`) REFERENCES `assignments` (`AssignmentiD`),
+  ADD CONSTRAINT `submissions_ibfk_3` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`),
+  ADD CONSTRAINT `submissions_ibfk_4` FOREIGN KEY (`BaadgeID`) REFERENCES `badges` (`BadgesID`);
 
 --
 -- Constraints for table `user`
