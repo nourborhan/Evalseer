@@ -35,13 +35,13 @@ class Instructor extends model {
             {
                 // $assignmentsname .="<option value='".$row2["AssignmentiD"]."'>".$row2["Assignmentname"]."</option>";
                 $assignment = new Assignment;
-                $assignment->setAssignmentid($row2["AssignmentiD"]);
+                $assignment->setAssignmentid($row2["AssignmentID"]);
                 $assignment->setAssignmentname($row2["Assignmentname"]);
                 $assignment->setAssignmentdesc($row2["Assignmentdesc."]);
                 $assignment->setAssignmentstartdate($row2["Startdate"]);
                 $assignment->setAssignmentcutoffdate($row2["Cutoffdate"]);
                 $assignment->setAssignmentgrade($row2["Grade"]);
-                $assignment->setNbofsubmissions($row2["NBofsubmissions"]);
+                $assignment->setNbofsubmissions($row2["Numberofsubmissions"]);
                 
                 array_push($this->courses[$i]->assignments,$assignment);
             }
