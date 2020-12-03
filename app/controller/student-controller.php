@@ -23,8 +23,9 @@ class StudentController extends Controller{
 
     public function addtodropdown()
     {
-    
-      $this->model->addtodropdown();
+  
+      $userid=$_SESSION['ID'];
+      $this->model->addtodropdown($userid);
     }
     public function getCoursedetails()
     {
@@ -35,7 +36,7 @@ class StudentController extends Controller{
     {
       $userid=$_POST['userid'];
       $assignmentid=$_POST['assignmentid'];
-      $code=$_POST['code'];
+      $code=$_POST['assignmentcode'];
       $date=date("Y-m-d");
       $grade=$_COOKIE["compilinggrade"];
 

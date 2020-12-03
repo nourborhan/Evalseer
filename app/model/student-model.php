@@ -21,7 +21,7 @@ class Student extends User{
     function getAssignments($userid)
     {
         // and assignmentdetails.Submittedflag='0'
-        $sql="SELECT assignments.*,assignmentdetails.*,assignments.Grade as assignmentgrade , assignmentdetails.UserID as studentid FROM assignmentdetails join assignments on assignmentdetails.AssignmentID=assignments.AssignmentiD where assignmentdetails.UserID='$userid' ";
+        $sql="SELECT assignments.*,submissions.*,assignments.Grade as assignmentgrade , submissions.UserID as studentid FROM submissions join assignments on submissions.AssignmentID=assignments.AssignmentiD where submissions.UserID='$userid' ";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {
@@ -31,7 +31,7 @@ class Student extends User{
             $assingment->setAssignmentid($row['AssignmentID']);
             $assingment->setAssignmentgrade($row['assignmentgrade']);
             $assingment->setAssignmenttimecreated($row['Timecreated']);
-            $assingment->setNbofsubmissions($row['NBofsubmissions']);
+            $assingment->setNbofsubmissions($row['Numberofsubmissions']);
             $assingment->setAssignmentdesc($row['Assignmentdesc.']);
             $assingment->setAssignmentname($row['Assignmentname']);
             $assingment->setSubmitted($row['Submittedflag']);
@@ -45,25 +45,26 @@ class Student extends User{
     function getAssigndetails($id)
     {
         
-        $sql="select * , assignments.Grade as assignmentgrade,assignmentdetails.Grade as submittedgrade from assignments  join assignmentdetails on assignments.AssignmentiD=assignmentdetails.AssignmentID WHERE assignmentdetails.AssignmentID='$id'";
+        $sql="select * , assignments.Grade as assignmentgrade,submissions.Grade as submittedgrade from assignments  join submissions on assignments.AssignmentID=submissions.AssignmentID WHERE submissions.AssignmentID='$id'";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {
 
             $assingment=new Assignment();
             $assingment->setCourseid($row['CourseID']);
-            $assingment->setAssignmentid($row['AssignmentiD']);
+            $assingment->setAssignmentid($row['AssignmentID']);
             $assingment->setAssignmentgrade($row['assignmentgrade']);
             $assingment->setAssignmenttimecreated($row['Timecreated']);
-            $assingment->setNbofsubmissions($row['NBofsubmissions']);
+            $assingment->setNbofsubmissions($row['Numberofsubmissions']);
             $assingment->setAssignmentdesc($row['Assignmentdesc.']);
             $assingment->setAssignmentname($row['Assignmentname']);
-            $assingment->setFilepath($row['Filepath']);
+            $assingment->setFilepath($row['Code_submitted']);
             $assingment->setSubmissiondate($row['Submissiondate']);
             $assingment->setGrade($row['submittedgrade']);
             
 
             $this->assignmentdetail=$assingment;
+
             
         }
 
@@ -71,7 +72,7 @@ class Student extends User{
     
     function getCourseAssignments($userid,$courseid)
     {
-        $sql="SELECT *,assignments.Grade as assignmentgrade , assignmentdetails.UserID as studentid FROM `assignmentdetails` join assignments on assignmentdetails.AssignmentID=assignments.AssignmentiD where assignmentdetails.UserID='$userid' and assignmentdetails.CourseID='$courseid' ";
+        $sql="SELECT *,assignments.Grade as assignmentgrade , submissions.UserID as studentid FROM `submissions` join assignments on submissions.AssignmentID=assignments.AssignmentiD where submissions.UserID='$userid' and submissions.CourseID='$courseid' ";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {
@@ -81,7 +82,7 @@ class Student extends User{
             $assingment->setAssignmentid($row['AssignmentID']);
             $assingment->setAssignmentgrade($row['assignmentgrade']);
             $assingment->setAssignmenttimecreated($row['Timecreated']);
-            $assingment->setNbofsubmissions($row['NBofsubmissions']);
+            $assingment->setNbofsubmissions($row['Numberofsubmissions']);
             $assingment->setAssignmentdesc($row['Assignmentdesc.']);
             $assingment->setAssignmentname($row['Assignmentname']);
             $assingment->setSubmitted($row['Submittedflag']);
@@ -124,9 +125,9 @@ class Student extends User{
     }
 
 
-    function addtodropdown()
+    function addtodropdown($id)
     {
-        $sql="SELECT * from course";
+        $sql="SELECT * from course join studentsenrolled on studentsenrolled.CourseID=course.CourseID where StudentID=$id";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {
@@ -140,8 +141,8 @@ class Student extends User{
 
     function SubmitAssignment($userid,$assingmentid,$date,$code,$grade)
     {
-        $sql="UPDATE assignmentdetails
-            set Submissiondate='$date',Filepath='$code',Submittedflag='0',Grade='$grade'
+        $sql="UPDATE submissions
+            set Submissiondate='$date',Code_submitted='$code',Submittedflag='0',Grade='$grade'
             where AssignmentID=$assingmentid and UserID=$userid";
 
         $result=mysqli_query($this->db->getConn(),$sql);

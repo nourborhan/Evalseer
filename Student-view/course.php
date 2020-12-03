@@ -52,7 +52,7 @@
 	<!-- END LOADER -->	
 
     <!-- Start header -->
-	<?php include_once("partials/header.php") ?>
+
 	<!-- End header -->
 	<?php 
 	
@@ -60,7 +60,7 @@
     require_once("../app/controller/student-controller.php");
     require_once("../app/view/student-view.php");
 	session_start();
-    
+    include_once("partials/header.php") ;
     $studentmodel=new Student();
     $studentcontroller=new StudentController($studentmodel);
 	$studentview=new StudentView($studentcontroller,$studentmodel); 

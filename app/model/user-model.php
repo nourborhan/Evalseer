@@ -20,7 +20,7 @@ class User extends model
         
         if ($count>0)
         {
-            $sql1="SELECT user.*,role.Bio from user join role on user.RoleID=role.RoleID where user.Username='$username' and user.Password='$password' and user.Suspended='0'";
+            $sql1="SELECT user.* from user join role on user.RoleID=role.RoleID where user.Username='$username' and user.Password='$password' and user.Suspended='0'";
             $result1=mysqli_query($this->db->getConn(),$sql1);
             $count1=mysqli_num_rows($result1);
             if ($count1>0)
