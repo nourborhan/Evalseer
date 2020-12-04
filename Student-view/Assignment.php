@@ -109,7 +109,7 @@
             
             if($ext=="cpp")
             {
-                $target_file = $target_dir . $_SESSION['ID']. " - ".$_GET['id'].".".$ext;
+                $target_file = $target_dir . $_SESSION['ID']. "-".$_GET['id'].".".$ext;
                 $uploadOk = 1;
                 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         
@@ -124,8 +124,8 @@
                     ";
                 }
         
-                $myfile = fopen("uploads/".$_SESSION['ID']. " - ".$_GET['id'].".".$ext, "r") or die("Unable to open file!");
-                $filedata = fread($myfile,filesize("uploads/".$_SESSION['ID']. " - ".$_GET['id'].".".$ext));
+                $myfile = fopen("uploads/".$_SESSION['ID']. "-".$_GET['id'].".".$ext, "r") or die("Unable to open file!");
+                $filedata = fread($myfile,filesize("uploads/".$_SESSION['ID']. "-".$_GET['id'].".".$ext));
                 
 
 
@@ -142,6 +142,35 @@
                 // </script>
                 // ';
                 fclose($myfile);   
+
+                // cpplint ".$_SESSION['ID']."-".$_GET['id'].".".$ext."
+                // cd uploads && cpplint ".$_SESSION['ID']."-".$_GET['id'].".".$ext."
+                putenv('PATH=' . $_SERVER['PATH']);
+                $styleout = array();
+
+                $stylecheck=shell_exec("cd uploads && cpplint ".$_SESSION['ID']."-".$_GET['id'].".".$ext."");
+
+
+                var_dump($stylecheck);
+                
+                // $command1="cd uploads && cpplint ".$_SESSION['ID']."-".$_GET['id'].".".$ext."";
+
+                // $stylecheck= shell_exec($command1);
+                // echo $stylecheck;
+
+
+                // $stylecheck= system($command1,$stylecheckarroutput);
+                // var_dump($stylecheck);
+                // for ($i=0;$i<count($stylecheckarroutput);$i++)
+                // {
+                // echo "=========================================================================";
+                // echo "<pre>".$stylecheckarroutput[$i]."</pre>";
+                // }
+                
+                // echo "<script> alert(".$stylecheck."); </script>";
+                
+
+                
             }
             else
             {
