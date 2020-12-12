@@ -24,6 +24,7 @@
         $instructorController = new InstructorController($instructorModel);
         $instructorView = new InstructorView($instructorController,$instructorModel);
     ?>
+    
 
 </head>
 
@@ -103,7 +104,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                                 <div id="Assignment-Panel" style="display: none;" class="row">
                                     <div class="col-md-12">
 
-                                        <form role="form">
+                                        <form method="dialog" role="form">
                                             <div class="form-group">
                                                 <label>Assignment Title</label>
                                                 <input class="form-control" placeholder="Please enter title" />
@@ -142,36 +143,42 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
 
                                             <div class="form-group">
                                                 <label>Grading Type</label>
-                                                <select style="margin-bottom:10px" name="courses" id="Course">
+                                                <select style="margin-bottom:10px">
                                                     <option value="auto">Automatic</option>
                                                     <option value="hyb">Hybrid</option>
                                                     <option value="man">Manual</option>
                                                 </select>
                                             </div>
-
+                                             <!-- Grading Cirteria -->
                                             <div class="form-group">
                                                 <label>Grading Criteria</label>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" value="" />Styling
+                                                        <input type="checkbox" value="" />Style with weight
+                                                        <input type="number" max="100" min="0" style="width: 8%;" value="0" /> %
+                                                    </label>
+                                                </div>
+                                                
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" />Compliation with weight
+                                                        <input type="number" max="100" min="0" style="width: 8%;" value="0" /> %
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" value="" />Compliation
+                                                        <input type="checkbox" value="" />Syntax with weight
+                                                        <input type="number" max="100" min="0" style="width: 8%;" value="0" /> %
                                                     </label>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" value="" />Comments
+                                                        <input type="checkbox" value="" />Logic with weight
+                                                        <input type="number" max="100" min="0" style="width: 8%;" value="0" /> %
                                                     </label>
                                                 </div>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="" />Indentation
-                                                    </label>
-                                                </div>
-                                                <!-- Grading Cirteria -->
+                                               
+                                               <!-- Hints -->
                                                 <div class="form-group">
                                                     <label>First Hint</label>
                                                     <input class="form-control" placeholder="Mandatory" />
@@ -182,11 +189,22 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                                                     <label>Third Hint</label>
                                                     <input class="form-control" placeholder="Optional" />
                                                 </div>
-                                                <!-- Hints -->
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox" value="" />Hide From Students
-                                                    </label>
+
+                                                <div class="form-group">
+                                                    <label>Test Cases</label>
+                                                    <button id="btn1" type="button" class="btn btn-primary">Add Test Case</button>
+                                                    <div id="test-cases"></div>
+                                                    
+                                                </div>
+                                                
+                                                <hr>
+                                                <div class="form-group">
+                                                    <label>Other Options</label>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" value="" />Hide From Students
+                                                        </label>
+                                                    </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Announce
                                                     Assignment</button>
@@ -342,6 +360,44 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
              let val =  $(this).val();
              $('#' + val).css("display", "block").siblings().hide();
             }); 
+    </script>
+
+    <script>
+        
+
+        var testcasenum =1;
+        $("#btn1").click(function(){
+            var div="<div id='testcase"+testcasenum+"'> \
+                <br>\
+                <hr>\
+                <div class='form-group'>\
+                    <label>Test Case "+testcasenum+"</label>\
+                    <div id='testcase"+testcasenum+"inputs'>\
+                        Enter An Input <input type='text'> \
+                        <button type='button' id='testcase"+testcasenum+"inputsbtn'  class='btn btn-primary'>Add Another input</button>\
+                    </div>\
+                    <br><br>\
+                    Enter Expected Ouput <input type='text'> \
+                </div>\
+                <br>\
+                <button type='button'  class='btn btn-danger removeDiv'>Remove Test Case</button>\
+            </div>";
+
+
+            $('#test-cases').append(div);
+
+            $('#'+"testcase"+testcasenum+"inputsbtn").click('click',function(){
+                    console.log("another input added");
+                    // $('#'+'testcase'+testcasenum+'inputs').append('Enter An Input <input type="text">');
+                    $(this).parent().append('<br><br>Enter An Input <input type="text">');
+                });
+            $('.removeDiv').on('click', function() {
+                $(this).parent().remove();
+            });
+            testcasenum = testcasenum+1;
+        });
+
+
     </script>
 
 </body>
