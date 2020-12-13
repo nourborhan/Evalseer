@@ -1,8 +1,9 @@
 <?php
+require_once("../app/model/model.php");
 
 
 
-class Assignment{
+class Assignment extends model{
 
     protected $studentid;
     protected $courseid;
@@ -18,7 +19,25 @@ class Assignment{
     protected $grade;
     protected $assignmentstartdate;
     protected $assignmentcutoffdate;
+    protected $inputvars=array();
+    protected $expectedoutput=array();
 
+    function __construct()
+    {
+        $this->dbh=$this->connect();
+    }
+    
+    function gettestcase($id)
+    {
+
+        $sql="select * from test_case where AssignmentsID='$id'";
+        $result=mysqli_query($this->db->getConn(),$sql);
+        while($row=$result->fetch_assoc())
+        {
+            array_push($this->inputvars,$row['Input_variable']);
+            array_push($this->expectedoutput,$row['Expected_output']);
+        }
+    }
    
     
    
@@ -299,6 +318,60 @@ class Assignment{
     public function setAssignmentcutoffdate($assignmentcutoffdate)
     {
         $this->assignmentcutoffdate = $assignmentcutoffdate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of expectedoutput
+     */ 
+    public function getExpectedoutput()
+    {
+        return $this->expectedoutput;
+    }
+
+    /**
+     * Set the value of expectedoutput
+     *
+     * @return  self
+     */ 
+    
+
+    /**
+     * Get the value of inputvars
+     */ 
+    public function getInputvars()
+    {
+        return $this->inputvars;
+    }
+
+    /**
+     * Set the value of inputvars
+     *
+     * @return  self
+     */ 
+  
+
+    /**
+     * Set the value of inputvars
+     *
+     * @return  self
+     */ 
+    public function setInputvars($inputvars)
+    {
+        $this->inputvars = $inputvars;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of expectedoutput
+     *
+     * @return  self
+     */ 
+    public function setExpectedoutput($expectedoutput)
+    {
+        $this->expectedoutput = $expectedoutput;
 
         return $this;
     }

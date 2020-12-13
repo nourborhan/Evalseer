@@ -68,8 +68,8 @@
 		setcookie("compilinggrade", $grade); 
 
 	}
-	// exec("del $filename_code");
-	// exec("del *.o");
-	// exec("del *.txt");
-	// exec("del $executable");
+	exec("del $filename_code");
+	exec("del *.o");
+	exec("del *.txt");
+	exec("del $executable");
 ?>

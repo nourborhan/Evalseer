@@ -40,6 +40,34 @@ class StudentController extends Controller{
       $date=date("Y-m-d");
       $grade=$_COOKIE["compilinggrade"];
 
+      $actualoutput=trim($_POST['expectedoutput']);
+
+
+
+      $actualoutputarray=explode(" ",$actualoutput);
+
+
+      foreach($actualoutputarray as $value){
+
+        
+        }
+
+
+      $expectedoutputfromdb=(string)$_POST['expectedoutputfromdb'];
+
+      
+
+      echo $expectedoutputfromdb."<br>" . "                  " . gettype($expectedoutputfromdb) ;
+      if (in_array($expectedoutputfromdb,$actualoutputarray,false))
+      {
+        echo "text case found and passed";
+      }
+      else
+      {
+        echo in_array($expectedoutputfromdb,$actualoutputarray);
+        echo "text case fel shala7at";
+      }
+
       $this->model->SubmitAssignment($userid,$assignmentid,$date,$code,$grade);
     }
     public function getinstructors()

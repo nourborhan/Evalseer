@@ -67,6 +67,12 @@
     require_once("../app/model/student-model.php");
     require_once("../app/controller/student-controller.php");
     require_once("../app/view/student-view.php");
+    // require_once("../app/view/assignmentclass.php");
+
+    $assignmentclass=new assignment();
+    $assignmentclass->gettestcase($_GET['id']);
+    $inputarray=$assignmentclass->getInputvars();
+    $outputarray=$assignmentclass->getExpectedoutput();
     
     $studentmodel=new Student();
     $studentcontroller=new StudentController($studentmodel);
@@ -300,7 +306,7 @@
                         <textarea style="display:none"  name="code" rows="10" cols="145" id="code"><?php echo htmlspecialchars($filedata,ENT_QUOTES);?>
                         </textarea>
                         <label style="display:none" for="in">Enter Your Input</label>
-                        <textarea style="display:none" class="form-control" name="input" rows="2" cols="50"></textarea>
+                        <textarea style="display:none" class="form-control" name="input" id="inputtext" rows="2" cols="50"></textarea>
                         <div style="display:none"  class="row ml-2">
                             <input  type="submit" id="st" class="btn btn-success mr-2" name="runcode" value="Run Code">
                             
@@ -321,6 +327,8 @@
                                 <input type="submit" style="display: none" id="Submit_assinment_btn"  class="btn btn-success ml-2" name="Submitcode" value="Submit Code">
                                 <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
                                 <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
+                                <textarea type="hidden" style="display:none;" name="expectedoutput" id="expectedoutput" ></textarea>
+                                <textarea type="hidden" style="display:none;" name="expectedoutputfromdb" id="dboutput"></textarea>
                                 <input type="hidden" name="assignmentcode" id="assignmentcode" value="<?php echo htmlspecialchars($filedata,ENT_QUOTES);?>">
                                 
                             </form>
@@ -402,6 +410,18 @@
             </div><!-- end row -->
         </div><!-- end container -->
     </div><!-- end section -->
+    <textarea id="inputvariablstests"  ><?php
+            for($i=0;$i<count($inputarray);$i++)
+            {
+                echo $inputarray[$i]."~!";
+            }?>
+     </textarea>
+    <textarea id="outputsarrayofdivs"  ><?php
+            for($i=0;$i<count($outputarray);$i++)
+            {
+                echo $outputarray[$i]."~!";
+            }?>
+     </textarea>
 
     <?php include_once('partials/footer.php') ?> 
 
@@ -447,23 +467,38 @@
             document.addEventListener('readystatechange', event => {
                 if (event.target.readyState === 'complete') {
 
-                    // setInterval(() => {
 
-                        
-                        
-                    // }, 5000);
+                    let stringofinput=$("#inputvariablstests").val();
+                    let stringofoutputs=$("#outputsarrayofdivs").val();
 
                     let valueofcode=$("#code").val();
 
-                        valueofcode=valueofcode.replace(/\s/g,'');
-                        
+                    let splitofinp=stringofinput.split("~!");
+                    // let splitofoutput=$stringofoutputs.split("~!");
+
+                    console.log("splitofinp[0]");
+                    console.log(splitofinp[0]);
+                    $("#inputtext").html(splitofinp[0]);
+                    // $("#dboutput").html(splitofoutput[0]);
+
                     
 
-                        if(valueofcode!="")
+
+                    valueofcode=valueofcode.replace(/\s/g,'');
+                    
+                
+
+                    if(valueofcode!="")
+                    {
+                        for(let i=0;i<splitofinp.length;i++)
                         {
-                            
                             $('#st').click();
+                            splitofinp.shift();
+                            $("#inputtext").html(splitofinp[0]);
+                            console.log('value of rerun is '+i);
                         }
+                        
+                    }
 
                     
                     
@@ -490,6 +525,7 @@
 
                             // locate the div with #result and fill it with returned data from process.php
                             $('#outputdiv').html(result);
+                            $('#expectedoutput').html(result);
                             
                             $('#Submit_assinment_btn').show();
                         }
