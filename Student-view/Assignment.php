@@ -322,13 +322,15 @@
                         </div>
                     
                     <label style="display:none" for="out">Output</label>
-                    <textarea style="display:none" readonly id='outputdiv' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
                     <form class="mb-4" action="" method="post">
                                 <input type="submit" style="display: none" id="Submit_assinment_btn"  class="btn btn-success ml-2" name="Submitcode" value="Submit Code">
                                 <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
                                 <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
-                                <textarea type="hidden" style="display:none;" name="expectedoutput" id="expectedoutput" ></textarea>
-                                <textarea type="hidden" style="display:none;" name="expectedoutputfromdb" id="dboutput"></textarea>
+                                <textarea type="hidden" style="" name="actualoutput" id="actualoutput" ></textarea>
+                                <textarea type="hidden" style="display:none;" name="expectedoutput" id="dboutput"><?php for($i=0;$i<count($outputarray);$i++)
+                                                                                                                                {
+                                                                                                                                    echo $outputarray[$i]."~!";
+                                                                                                                                }?></textarea>
                                 <input type="hidden" name="assignmentcode" id="assignmentcode" value="<?php echo htmlspecialchars($filedata,ENT_QUOTES);?>">
                                 
                             </form>
@@ -410,18 +412,13 @@
             </div><!-- end row -->
         </div><!-- end container -->
     </div><!-- end section -->
-    <textarea id="inputvariablstests"  ><?php
+    <textarea style="display:none;" id="inputvariablstests"  ><?php
             for($i=0;$i<count($inputarray);$i++)
             {
                 echo $inputarray[$i]."~!";
             }?>
      </textarea>
-    <textarea id="outputsarrayofdivs"  ><?php
-            for($i=0;$i<count($outputarray);$i++)
-            {
-                echo $outputarray[$i]."~!";
-            }?>
-     </textarea>
+
 
     <?php include_once('partials/footer.php') ?> 
 
@@ -469,17 +466,15 @@
 
 
                     let stringofinput=$("#inputvariablstests").val();
-                    let stringofoutputs=$("#outputsarrayofdivs").val();
+
 
                     let valueofcode=$("#code").val();
 
                     let splitofinp=stringofinput.split("~!");
-                    // let splitofoutput=$stringofoutputs.split("~!");
+ 
 
-                    console.log("splitofinp[0]");
-                    console.log(splitofinp[0]);
                     $("#inputtext").html(splitofinp[0]);
-                    // $("#dboutput").html(splitofoutput[0]);
+
 
                     
 
@@ -490,12 +485,16 @@
 
                     if(valueofcode!="")
                     {
-                        for(let i=0;i<splitofinp.length;i++)
+                        
+                        let counter=splitofinp.length;
+                        splitofinp.shift();
+                        for(let i=0;i<counter-1;i++)
                         {
                             $('#st').click();
-                            splitofinp.shift();
+                            console.log(splitofinp[0]);
                             $("#inputtext").html(splitofinp[0]);
-                            console.log('value of rerun is '+i);
+                            splitofinp.shift();
+                           
                         }
                         
                     }
@@ -524,9 +523,16 @@
                         success: function(result) { // data is the var which holds the output of your process.php
 
                             // locate the div with #result and fill it with returned data from process.php
-                            $('#outputdiv').html(result);
-                            $('#expectedoutput').html(result);
-                            
+                            let actualoutputval;
+                            if ($('#actualoutput').val()=="")
+                            {
+                                actualoutputval=result;
+                            }
+                            else
+                            {
+                                actualoutputval=$("#actualoutput").val()+"~!"+result;
+                            }
+                            $('#actualoutput').html(actualoutputval);
                             $('#Submit_assinment_btn').show();
                         }
                     });

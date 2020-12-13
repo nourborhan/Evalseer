@@ -40,32 +40,30 @@ class StudentController extends Controller{
       $date=date("Y-m-d");
       $grade=$_COOKIE["compilinggrade"];
 
-      $actualoutput=trim($_POST['expectedoutput']);
+      $actualoutput=trim($_POST['actualoutput']);
+
+      $actualoutputarray=explode("~!",$actualoutput);
 
 
+      $expectedoutput=trim($_POST['expectedoutput']);
 
-      $actualoutputarray=explode(" ",$actualoutput);
-
-
-      foreach($actualoutputarray as $value){
-
-        
-        }
-
-
-      $expectedoutputfromdb=(string)$_POST['expectedoutputfromdb'];
+      $expectedoutputarray=explode("~!",$expectedoutput);
 
       
-
-      echo $expectedoutputfromdb."<br>" . "                  " . gettype($expectedoutputfromdb) ;
-      if (in_array($expectedoutputfromdb,$actualoutputarray,false))
+      for($i=0;$i<count($actualoutputarray);$i++)
       {
-        echo "text case found and passed";
-      }
-      else
-      {
-        echo in_array($expectedoutputfromdb,$actualoutputarray);
-        echo "text case fel shala7at";
+        $actualoutputarray[$i]=trim($actualoutputarray[$i]);        
+        $splittedactual=explode(" ",$actualoutputarray[$i]);
+   
+        
+        if(in_array($expectedoutputarray[$i],$splittedactual))
+        {
+          echo "test case passed<br>";
+        }
+        else
+        {
+          echo "test case failed<br>";
+        }
       }
 
       $this->model->SubmitAssignment($userid,$assignmentid,$date,$code,$grade);
