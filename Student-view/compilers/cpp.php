@@ -36,6 +36,7 @@
 		{
 			$out=$out." < ".$filename_in;
 			$output=shell_exec($out);
+			$output=str_replace("~"," ",$output);
 		}
 		echo "$output";
 		$grade = 100;
@@ -53,6 +54,7 @@
 		{
 			$out=$out." < ".$filename_in;
 			$output=shell_exec($out);
+			$output=str_replace("~"," ",$output);
 		}
 		echo "$output";
 		$grade = 100;
@@ -66,8 +68,8 @@
 		setcookie("compilinggrade", $grade); 
 
 	}
-	exec("del $filename_code");
-	exec("del *.o");
-	exec("del *.txt");
-	exec("del $executable");
+	// exec("del $filename_code");
+	// exec("del *.o");
+	// exec("del *.txt");
+	// exec("del $executable");
 ?>
