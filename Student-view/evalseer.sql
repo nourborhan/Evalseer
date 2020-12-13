@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2020 at 07:10 PM
+-- Generation Time: Dec 13, 2020 at 06:17 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -20,19 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `evalseer`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `assignedtestcases`
---
-
-CREATE TABLE `assignedtestcases` (
-  `TcasesID` int(11) NOT NULL,
-  `AssignmentsID` int(11) NOT NULL,
-  `Checked` tinyint(1) NOT NULL,
-  `successful` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -109,6 +96,18 @@ INSERT INTO `capabilities` (`CapabilitiesID`, `Viewcourses`, `Enrollcourses`, `C
 (1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0),
 (2, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1),
 (3, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `check_testcase`
+--
+
+CREATE TABLE `check_testcase` (
+  `StudentID` int(11) NOT NULL,
+  `TestcaseID` int(11) NOT NULL,
+  `passed` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -261,16 +260,14 @@ INSERT INTO `submissions` (`UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Gr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `testcases`
+-- Table structure for table `test_case`
 --
 
-CREATE TABLE `testcases` (
+CREATE TABLE `test_case` (
   `TcasesID` int(11) NOT NULL,
-  `Testcasename` varchar(255) NOT NULL,
-  `testcasedescription` text NOT NULL,
-  `testcasefilepath` varchar(255) NOT NULL,
-  `Pass` tinyint(1) NOT NULL,
-  `Suspended` tinyint(1) NOT NULL
+  `AssignmentsID` int(11) NOT NULL,
+  `Input_variable` text NOT NULL,
+  `Expected_output` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -309,13 +306,6 @@ INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `Name`,
 --
 
 --
--- Indexes for table `assignedtestcases`
---
-ALTER TABLE `assignedtestcases`
-  ADD KEY `TcasesID` (`TcasesID`),
-  ADD KEY `AssignmentsID` (`AssignmentsID`);
-
---
 -- Indexes for table `assignments`
 --
 ALTER TABLE `assignments`
@@ -336,6 +326,13 @@ ALTER TABLE `badges`
 --
 ALTER TABLE `capabilities`
   ADD PRIMARY KEY (`CapabilitiesID`);
+
+--
+-- Indexes for table `check_testcase`
+--
+ALTER TABLE `check_testcase`
+  ADD KEY `TestcaseID` (`TestcaseID`),
+  ADD KEY `StudentID` (`StudentID`);
 
 --
 -- Indexes for table `course`
@@ -383,10 +380,11 @@ ALTER TABLE `submissions`
   ADD KEY `BaadgeID` (`BaadgeID`);
 
 --
--- Indexes for table `testcases`
+-- Indexes for table `test_case`
 --
-ALTER TABLE `testcases`
-  ADD PRIMARY KEY (`TcasesID`);
+ALTER TABLE `test_case`
+  ADD PRIMARY KEY (`TcasesID`),
+  ADD KEY `AssignmentsID` (`AssignmentsID`);
 
 --
 -- Indexes for table `user`
@@ -436,9 +434,9 @@ ALTER TABLE `role`
   MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `testcases`
+-- AUTO_INCREMENT for table `test_case`
 --
-ALTER TABLE `testcases`
+ALTER TABLE `test_case`
   MODIFY `TcasesID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -452,18 +450,18 @@ ALTER TABLE `user`
 --
 
 --
--- Constraints for table `assignedtestcases`
---
-ALTER TABLE `assignedtestcases`
-  ADD CONSTRAINT `assignedtestcases_ibfk_1` FOREIGN KEY (`TcasesID`) REFERENCES `testcases` (`TcasesID`),
-  ADD CONSTRAINT `assignedtestcases_ibfk_2` FOREIGN KEY (`AssignmentsID`) REFERENCES `assignments` (`AssignmentiD`);
-
---
 -- Constraints for table `assignments`
 --
 ALTER TABLE `assignments`
-  ADD CONSTRAINT `assignments_ibfk_2` FOREIGN KEY (`GradingCriteriaID`) REFERENCES `gradingcriteria` (`FeaturesID`),
+  ADD CONSTRAINT `assignments_ibfk_2` FOREIGN KEY (`GradingcriteriaID`) REFERENCES `gradingcriteria` (`FeaturesID`),
   ADD CONSTRAINT `assignments_ibfk_3` FOREIGN KEY (`EducatorID`) REFERENCES `user` (`UserID`);
+
+--
+-- Constraints for table `check_testcase`
+--
+ALTER TABLE `check_testcase`
+  ADD CONSTRAINT `check_testcase_ibfk_1` FOREIGN KEY (`TestcaseID`) REFERENCES `test_case` (`TcasesID`),
+  ADD CONSTRAINT `check_testcase_ibfk_2` FOREIGN KEY (`StudentID`) REFERENCES `user` (`UserID`);
 
 --
 -- Constraints for table `course`
@@ -496,9 +494,15 @@ ALTER TABLE `studentsenrolled`
 --
 ALTER TABLE `submissions`
   ADD CONSTRAINT `submissions_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `submissions_ibfk_2` FOREIGN KEY (`AssignmentID`) REFERENCES `assignments` (`AssignmentiD`),
+  ADD CONSTRAINT `submissions_ibfk_2` FOREIGN KEY (`AssignmentID`) REFERENCES `assignments` (`AssignmentID`),
   ADD CONSTRAINT `submissions_ibfk_3` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`),
   ADD CONSTRAINT `submissions_ibfk_4` FOREIGN KEY (`BaadgeID`) REFERENCES `badges` (`BadgesID`);
+
+--
+-- Constraints for table `test_case`
+--
+ALTER TABLE `test_case`
+  ADD CONSTRAINT `test_case_ibfk_2` FOREIGN KEY (`AssignmentsID`) REFERENCES `assignments` (`AssignmentID`);
 
 --
 -- Constraints for table `user`

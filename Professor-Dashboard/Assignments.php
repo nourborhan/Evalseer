@@ -392,6 +392,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                     $(this).parent().append('<br><br>Enter An Input <input type="text">');
                 });
             $('.removeDiv').on('click', function() {
+                console.log($(this).parent().attr('id'));
                 $(this).parent().remove();
             });
             testcasenum = testcasenum+1;
