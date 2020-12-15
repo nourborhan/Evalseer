@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2020 at 06:17 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Generation Time: Dec 15, 2020 at 07:59 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -173,10 +174,8 @@ CREATE TABLE `gradingcriteria` (
   `Compiling_weight` int(11) NOT NULL,
   `Sytling` tinyint(1) NOT NULL,
   `Styling_weight` int(11) NOT NULL,
-  `Comments` tinyint(1) NOT NULL,
-  `Comments_weight` int(11) NOT NULL,
-  `Indentations` tinyint(1) NOT NULL,
-  `Indentation_weight` int(11) NOT NULL,
+  `Syntax` tinyint(1) NOT NULL,
+  `Syntax_weight` int(11) NOT NULL,
   `Logic` tinyint(1) NOT NULL,
   `Logic_weight` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -185,8 +184,8 @@ CREATE TABLE `gradingcriteria` (
 -- Dumping data for table `gradingcriteria`
 --
 
-INSERT INTO `gradingcriteria` (`FeaturesID`, `AssignmentsID`, `Test_cases_ID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Comments`, `Comments_weight`, `Indentations`, `Indentation_weight`, `Logic`, `Logic_weight`) VALUES
-(1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0);
+INSERT INTO `gradingcriteria` (`FeaturesID`, `AssignmentsID`, `Test_cases_ID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) VALUES
+(1, 1, 0, 1, 50, 1, 0, 0, 0, 1, 50);
 
 -- --------------------------------------------------------
 
@@ -247,15 +246,19 @@ CREATE TABLE `submissions` (
   `Code_submitted` varchar(3000) DEFAULT NULL,
   `Feedback` text DEFAULT NULL,
   `Badgereceivedflag` tinyint(1) DEFAULT NULL,
-  `Submittedflag` tinyint(4) NOT NULL DEFAULT 0
+  `Submittedflag` tinyint(4) NOT NULL DEFAULT 0,
+  `Compiling_Grade` int(11) DEFAULT NULL,
+  `Syntax_Grade` int(11) DEFAULT NULL,
+  `Logic_Grade` int(11) DEFAULT NULL,
+  `Style_Grade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `submissions`
 --
 
-INSERT INTO `submissions` (`UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Code_submitted`, `Feedback`, `Badgereceivedflag`, `Submittedflag`) VALUES
-(1, 1, 1, NULL, 100, '2020-10-27', NULL, '#include <iostream>\r\n\r\nint main() {\r\n    std::cout << \"Hello World!\";\r\n    return 0;\r\n}', NULL, NULL, 0);
+INSERT INTO `submissions` (`UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Code_submitted`, `Feedback`, `Badgereceivedflag`, `Submittedflag`, `Compiling_Grade`, `Syntax_Grade`, `Logic_Grade`, `Style_Grade`) VALUES
+(1, 1, 1, NULL, 4, '2020-12-15', NULL, '#include <iostream>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int firstNumber, secondNumber, sumOfTwoNumbers;\r\n    \r\n    cout << \"Enter two integers: \";\r\n    cin >> firstNumber >> secondNumber;\r\n\r\n    // sum of two numbers in stored in variable sumOfTwoNumbers\r\n    sumOfTwoNumbers = firstNumber + secondNumber;\r\n\r\n    // Prints sum \r\n    cout << firstNumber << \" + \" <<  secondNumber << \" = \" << sumOfTwoNumbers;     \r\n\r\n    return 0;\r\n}', NULL, NULL, 0, 50, 0, 38, 0);
 
 -- --------------------------------------------------------
 
@@ -269,6 +272,16 @@ CREATE TABLE `test_case` (
   `Input_variable` text NOT NULL,
   `Expected_output` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `test_case`
+--
+
+INSERT INTO `test_case` (`TcasesID`, `AssignmentsID`, `Input_variable`, `Expected_output`) VALUES
+(1, 1, '2 2', '4'),
+(2, 1, '5 5', '10'),
+(3, 1, '10 10', '20'),
+(4, 1, '20 20', '99999');
 
 -- --------------------------------------------------------
 
@@ -437,7 +450,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `test_case`
 --
 ALTER TABLE `test_case`
-  MODIFY `TcasesID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TcasesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`

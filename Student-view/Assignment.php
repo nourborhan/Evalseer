@@ -71,15 +71,26 @@
 
     $assignmentclass=new assignment();
     $assignmentclass->gettestcase($_GET['id']);
+    $assignmentclass->getgrades($_GET['id']);
     $inputarray=$assignmentclass->getInputvars();
     $outputarray=$assignmentclass->getExpectedoutput();
+
+    $compilingweight=$assignmentclass->getCompilingweight();
+    $syntaxweight=$assignmentclass->getSyntaxweight();
+    $logicweight=$assignmentclass->getLogicweight();
+    $styleweight=$assignmentclass->getStyleweight();
     
+
+
     $studentmodel=new Student();
     $studentcontroller=new StudentController($studentmodel);
     $studentview=new StudentView($studentcontroller,$studentmodel);
     
     $studentcontroller->getAssignmentdetails();
     
+    $assignment=$studentmodel->getAssignmentdetail();
+    
+    $assignmentgrade=$assignment->getAssignmentgrade();
     
 	if(isset($_POST['Submitcode']))
 	{
@@ -95,10 +106,9 @@
         }
         else
         {
-        $studentcontroller->submitAssignment();
+        $studentcontroller->submitAssignment($compilingweight,$syntaxweight,$logicweight,$styleweight,$assignmentgrade);
         }
 	}
-    $assignment=$studentmodel->getAssignmentdetail();
 
     
     
@@ -312,7 +322,7 @@
                             
                             
 
-
+                            
 
 
                             <!-- <input type="submit" class="btn btn-primary float-right mt-4" name="subbmit-assignment" value="Submit Assignment"> -->
@@ -321,12 +331,18 @@
                             
                         </div>
                     
+
+                        
                     <label style="display:none" for="out">Output</label>
                     <form class="mb-4" action="" method="post">
+                                <div id="pac-loader" class="col-12 col-lg-8 mx-auto mt-4 " style="display:none;flex-direction:column;align-items: center;">
+                                    <img src="images/pac-loader.gif">
+                                    <h3 class='font-weight-bold'>Processing assignment</h3>
+                                </div>
                                 <input type="submit" style="display: none" id="Submit_assinment_btn"  class="btn btn-success ml-2" name="Submitcode" value="Submit Code">
                                 <input type="hidden" name="assignmentid" value="<?php echo $_GET['id']?>">
                                 <input type="hidden" name="userid" value="<?php echo $_SESSION['ID']?>">
-                                <textarea type="hidden" style="" name="actualoutput" id="actualoutput" ></textarea>
+                                <textarea type="hidden" style="display:none;" name="actualoutput" id="actualoutput" ></textarea>
                                 <textarea type="hidden" style="display:none;" name="expectedoutput" id="dboutput"><?php for($i=0;$i<count($outputarray);$i++)
                                                                                                                                 {
                                                                                                                                     echo $outputarray[$i]."~!";
@@ -362,7 +378,7 @@
                                     {
                                         echo "<td>". $assignment->getSubmissiondate()."</td>
                                             <td>". $assignment->getFilepath()."</td>
-                                            <td>" .$assignment->getGrade()."%</td>
+                                            <td>" .$assignment->getGrade()."</td>
                                             "
                                             ;
                                     }                     
@@ -488,6 +504,7 @@
                         
                         let counter=splitofinp.length;
                         splitofinp.shift();
+                        $("#pac-loader").attr('style','display:flex;flex-direction:column;align-items: center;');
                         for(let i=0;i<counter-1;i++)
                         {
                             $('#st').click();
@@ -496,6 +513,12 @@
                             splitofinp.shift();
                            
                         }
+
+                        setTimeout(() => {
+                            $("#pac-loader").attr('style','display:none');
+                            $('#Submit_assinment_btn').show();
+                        }, 10000);
+                        
                         
                     }
 
@@ -533,7 +556,7 @@
                                 actualoutputval=$("#actualoutput").val()+"~!"+result;
                             }
                             $('#actualoutput').html(actualoutputval);
-                            $('#Submit_assinment_btn').show();
+                           
                         }
                     });
                 });

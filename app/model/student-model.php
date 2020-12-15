@@ -139,10 +139,10 @@ class Student extends User{
         }
     }
 
-    function SubmitAssignment($userid,$assingmentid,$date,$code,$grade)
+    function SubmitAssignment($userid,$assingmentid,$date,$code,$totalgrade,$compilinggrade,$LogicGrade,$StyleGrade,$SyntaxGrade)
     {
         $sql="UPDATE submissions
-            set Submissiondate='$date',Code_submitted='$code',Submittedflag='0',Grade='$grade'
+            set Submissiondate='$date',Code_submitted='$code',Submittedflag='0',Grade=$totalgrade,Compiling_Grade=$compilinggrade,Syntax_Grade=$SyntaxGrade,Logic_Grade=$LogicGrade,Style_Grade=$StyleGrade
             where AssignmentID=$assingmentid and UserID=$userid";
 
         $result=mysqli_query($this->db->getConn(),$sql);

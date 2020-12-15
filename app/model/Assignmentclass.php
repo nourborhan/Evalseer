@@ -21,6 +21,11 @@ class Assignment extends model{
     protected $assignmentcutoffdate;
     protected $inputvars=array();
     protected $expectedoutput=array();
+    protected $compilingweight;
+    protected $syntaxweight;
+    protected $logicweight;
+    protected $styleweight;
+
 
     function __construct()
     {
@@ -38,6 +43,20 @@ class Assignment extends model{
             array_push($this->expectedoutput,$row['Expected_output']);
         }
     }
+
+    function getgrades($id)
+    {
+        $sql="select * from gradingcriteria where AssignmentsID='$id'";
+        $result=mysqli_query($this->db->getConn(),$sql);
+        while($row=$result->fetch_assoc())
+        {
+            $this->compilingweight=$row['Compiling_weight'];
+            $this->syntaxweight=$row['Syntax_weight'];
+            $this->logicweight=$row['Logic_weight'];
+            $this->styleweight=$row['Styling_weight'];
+        }
+    }
+
    
     
    
@@ -372,6 +391,86 @@ class Assignment extends model{
     public function setExpectedoutput($expectedoutput)
     {
         $this->expectedoutput = $expectedoutput;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of styleweight
+     */ 
+    public function getStyleweight()
+    {
+        return $this->styleweight;
+    }
+
+    /**
+     * Set the value of styleweight
+     *
+     * @return  self
+     */ 
+    public function setStyleweight($styleweight)
+    {
+        $this->styleweight = $styleweight;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of logicweight
+     */ 
+    public function getLogicweight()
+    {
+        return $this->logicweight;
+    }
+
+    /**
+     * Set the value of logicweight
+     *
+     * @return  self
+     */ 
+    public function setLogicweight($logicweight)
+    {
+        $this->logicweight = $logicweight;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of syntaxweight
+     */ 
+    public function getSyntaxweight()
+    {
+        return $this->syntaxweight;
+    }
+
+    /**
+     * Set the value of syntaxweight
+     *
+     * @return  self
+     */ 
+    public function setSyntaxweight($syntaxweight)
+    {
+        $this->syntaxweight = $syntaxweight;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of compilingweight
+     */ 
+    public function getCompilingweight()
+    {
+        return $this->compilingweight;
+    }
+
+    /**
+     * Set the value of compilingweight
+     *
+     * @return  self
+     */ 
+    public function setCompilingweight($compilingweight)
+    {
+        $this->compilingweight = $compilingweight;
 
         return $this;
     }
