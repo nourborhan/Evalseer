@@ -13,7 +13,8 @@ class InstructorView extends View
         echo '<option selected disabled>None selected</option>';
         for($i=0;$i<count($this->model->courses);$i++)
         {
-            echo '<option value="'.$this->model->courses[$i]->getCoursecode().'">'.$this->model->courses[$i]->getCoursename().'</option>';
+            echo '<option value="'.$this->model->courses[$i]->getCourseid().'">'.$this->model->courses[$i]->getCoursename().'</option>';
+            
         }
     }
 

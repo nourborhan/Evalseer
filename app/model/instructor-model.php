@@ -48,5 +48,28 @@ class Instructor extends model {
         }
     }
 
+    function addAssignment($creatorid,$courseid,$assignmenttitle,$assignmentdesc,$assignmentstartdate,$assignmentcutoffdate
+    ,$assignmenttotalgrade,$assignmentnb,$assignmenttype,$assignmentstyleweight,$assignmentcompileweight,$assignmentsyntaxweight,
+    $assignmentlogicweight,$ishidden)
+    {
+
+        $sql="INSERT INTO `assignments` (`EducatorID`, `CourseID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `Numberofsubmissions`, `Gradingtype`, `Suspended`, `Hidden`) 
+        VALUES ('$creatorid','$courseid','$assignmenttitle','$assignmentdesc','$assignmentstartdate','$assignmentcutoffdate'
+        ,'$assignmenttotalgrade','$assignmentnb','$assignmenttype','0','$ishidden');"; 
+
+        $result=mysqli_query($this->db->getConn(),$sql);
+
+        if($result)
+        {
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+            </script><script> swal('Submitted Successfully','','success');</script>";
+        }
+        else
+        {
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+            </script><script> swal('Error Adding Assignmet','','error');</script>";
+        }
+    }
+
     
 }
