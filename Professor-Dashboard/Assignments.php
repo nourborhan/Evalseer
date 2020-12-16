@@ -26,7 +26,7 @@
 
         if(isset($_POST['addassignment']))
         {
-            $instructorController->addAssignment();
+            $instructorController->addAssignment_mainDetails();
             
         }
     ?>

@@ -44,13 +44,54 @@ class Instructor extends model {
                 $assignment->setNbofsubmissions($row2["Numberofsubmissions"]);
                 
                 array_push($this->courses[$i]->assignments,$assignment);
+                
             }
         }
     }
 
-    function addAssignment($creatorid,$courseid,$assignmenttitle,$assignmentdesc,$assignmentstartdate,$assignmentcutoffdate
-    ,$assignmenttotalgrade,$assignmentnb,$assignmenttype,$assignmentstyleweight,$assignmentcompileweight,$assignmentsyntaxweight,
-    $assignmentlogicweight,$ishidden)
+    function addAssignment_gradingCriteria($syntaxweight,$logicweight,$styleweight,$complieweight){
+        $sql="SELECT MAX(AssignmentID) as wantedid FROM assignments;";
+        $Result = mysqli_query($this->db->getConn(),$sql);
+        $row =$Result->fetch_assoc();
+        $wantedAssignmentID = $row["wantedid"];
+
+        $sql2 = "INSERT INTO `gradingcriteria` (`AssignmentsID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) 
+        VALUES ('$wantedAssignmentID', '1', '$complieweight', '1', '$styleweight', '1', '$syntaxweight', '1', '$logicweight');";
+        $result=mysqli_query($this->db->getConn(),$sql2);
+
+        if($result)
+        {
+            
+
+            $sql2="SELECT * From gradingcriteria WHERE AssignmentsID='$wantedAssignmentID';";
+            $Result2 = mysqli_query($this->db->getConn(),$sql2);
+            $row = $Result2->fetch_assoc();
+            $wantedFeaturesID = $row["FeaturesID"];
+
+
+            $sql="UPDATE `assignments` SET `GradingcriteriaID` = '$wantedFeaturesID' WHERE `assignments`.`AssignmentID` = '$wantedAssignmentID';";
+            $Result = mysqli_query($this->db->getConn(),$sql);
+
+            if($Result)
+            {
+                echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+                </script><script> swal('Submitted Successfully','','success');</script>";
+            }
+            else
+            {
+                echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+                </script><script> swal('Error Adding Assignmet','','error');</script>";
+            }
+
+        }
+        else{
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+            </script><script> swal('Error Adding Assignmet','','error');</script>";
+        }
+    }
+
+    function addAssignment_mainDetails($creatorid,$courseid,$assignmenttitle,$assignmentdesc,$assignmentstartdate,$assignmentcutoffdate
+    ,$assignmenttotalgrade,$assignmentnb,$assignmenttype,$ishidden,$syntaxweight,$logicweight,$styleweight,$complieweight)
     {
 
         $sql="INSERT INTO `assignments` (`EducatorID`, `CourseID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `Numberofsubmissions`, `Gradingtype`, `Suspended`, `Hidden`) 
@@ -61,8 +102,7 @@ class Instructor extends model {
 
         if($result)
         {
-            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
-            </script><script> swal('Submitted Successfully','','success');</script>";
+            $this->addAssignment_gradingCriteria($syntaxweight,$logicweight,$styleweight,$complieweight);
         }
         else
         {

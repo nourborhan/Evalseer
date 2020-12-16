@@ -4,7 +4,7 @@
 
 class InstructorController extends Controller{
 
-  function addAssignment(){
+  function addAssignment_mainDetails(){
 
     $creatorid = $_SESSION["ID"];
     $courseid = $_POST["selectedcourse"];
@@ -30,9 +30,8 @@ class InstructorController extends Controller{
     }
 
 
-    $this->model->addAssignment($creatorid,$courseid,$assignmenttitle,$assignmentdesc,$assignmentstartdate,$assignmentcutoffdate
-    ,$assignmenttotalgrade,$assignmentnb,$assignmenttype,$assignmentstyleweight,$assignmentcompileweight,$assignmentsyntaxweight,
-    $assignmentlogicweight,$ishidden);
+    $this->model->addAssignment_mainDetails($creatorid,$courseid,$assignmenttitle,$assignmentdesc,$assignmentstartdate,$assignmentcutoffdate
+    ,$assignmenttotalgrade,$assignmentnb,$assignmenttype,$ishidden,$assignmentsyntaxweight,$assignmentlogicweight,$assignmentstyleweight,$assignmentcompileweight);
   
 
   }
