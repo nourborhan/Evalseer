@@ -74,6 +74,8 @@ class Instructor extends model {
 
             if($Result)
             {
+
+                //should adding test cases mechinanism here
                 echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
                 </script><script> swal('Submitted Successfully','','success');</script>";
             }

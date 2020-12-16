@@ -15,6 +15,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
     <?php
+        error_reporting(0);
         session_start();
         require_once("../app/model/instructor-model.php");
         require_once("../app/controller/instructor-controller.php");
@@ -270,19 +271,22 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
     <script>
         
 
-        var testcasenum =1;
+        let testcasenum =0;
         $("#btn1").click(function(){
+            let inputnum=1;
+            testcasenum = testcasenum+1;
+            console.log("test case added");
             var div="<div id='testcase"+testcasenum+"'> \
                 <br>\
                 <hr>\
                 <div class='form-group'>\
                     <label>Test Case "+testcasenum+"</label>\
                     <div id='testcase"+testcasenum+"inputs'>\
-                        Enter An Input <input type='text'> \
+                        Enter An Input <input id='testcase"+testcasenum+"inputsinputnum"+inputnum+"' type='text'> \
                         <button type='button' id='testcase"+testcasenum+"inputsbtn'  class='btn btn-primary'>Add Another input</button>\
                     </div>\
                     <br><br>\
-                    Enter Expected Ouput <input type='text'> \
+                    Enter Expected Ouput <input id='testcase"+testcasenum+"expectedoutput' type='text'> \
                 </div>\
                 <br>\
                 <button type='button'  class='btn btn-danger removeDiv'>Remove Test Case</button>\
@@ -292,15 +296,13 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
             $('#test-cases').append(div);
 
             $('#'+"testcase"+testcasenum+"inputsbtn").click('click',function(){
-                    console.log("another input added");
-                    // $('#'+'testcase'+testcasenum+'inputs').append('Enter An Input <input type="text">');
-                    $(this).parent().append('<br><br>Enter An Input <input type="text">');
+                    $currenttestcase = $(this).parent().attr('id');
+                    inputnum = inputnum+1;
+                    $(this).parent().append('<br><br>Enter An Input <input id="'+$currenttestcase+'inputnum'+inputnum+'" type="text">');
                 });
             $('.removeDiv').on('click', function() {
-                console.log($(this).parent().attr('id'));
                 $(this).parent().remove();
             });
-            testcasenum = testcasenum+1;
         });
 
 

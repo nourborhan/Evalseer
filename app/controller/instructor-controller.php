@@ -21,12 +21,18 @@ class InstructorController extends Controller{
     $assignmentlogicweight = $_POST["assignment-logic-weight"];
     $ishidden;
     $assignmenthideflag = $_POST["assignment-hide-flag"];
-    if($assignmenthideflag == 'checked')
+    if(isset($_POST['assignment-hide-flag']))
     {
-      $ishidden = 'True';
-    }
-    else{
-      $ishidden = 'False';
+      if($assignmenthideflag == 'checked')
+      {
+        $ishidden = 'True';
+      }
+      else{
+        $ishidden = 'False';
+      }
+   }
+   else{
+    $ishidden = 'False';
     }
 
 

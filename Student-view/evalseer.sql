@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2020 at 07:59 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.3
+-- Generation Time: Dec 16, 2020 at 09:03 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -32,25 +32,26 @@ CREATE TABLE `assignments` (
   `AssignmentID` int(11) NOT NULL,
   `EducatorID` int(11) NOT NULL,
   `CourseID` int(11) NOT NULL,
-  `GradingcriteriaID` int(11) NOT NULL,
+  `GradingcriteriaID` int(11) DEFAULT NULL,
   `Assignmentname` varchar(255) NOT NULL,
-  `Assignmentdesc.` mediumtext NOT NULL,
-  `Startdate` date NOT NULL,
-  `Cutoffdate` date NOT NULL,
+  `Assignmentdesc.` mediumtext DEFAULT NULL,
+  `Startdate` text NOT NULL,
+  `Cutoffdate` text NOT NULL,
   `Grade` int(11) NOT NULL,
   `Numberofsubmissions` int(11) NOT NULL,
-  `Timecreated` date NOT NULL,
-  `timemodified` date NOT NULL,
+  `Timecreated` date DEFAULT NULL,
+  `timemodified` date DEFAULT NULL,
   `Gradingtype` set('Automatic','Hybrid','Manual') NOT NULL,
-  `Suspended` tinyint(1) NOT NULL
+  `Suspended` tinyint(1) NOT NULL,
+  `Hidden` set('True','False') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `assignments`
 --
 
-INSERT INTO `assignments` (`AssignmentID`, `EducatorID`, `CourseID`, `GradingcriteriaID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `Numberofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`) VALUES
-(1, 3, 1, 1, 'Your First C++ Program', '\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero. Fusce non facilisis nisi. Vivamus rutrum varius dui, ac ornare tortor gravida varius. Phasellus pulvinar rutrum ullamcorper. Donec eu nunc magna. Sed rhoncus quam in odio consectetur, eu ullamcorper arcu rutrum. Cras quis diam maximus, ultricies dui quis, tristique orci. Ut auctor felis nec ipsum lacinia aliquam. Vivamus eget pretium erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed porttitor, ipsum non tincidunt consectetur, odio eros dignissim augue, id congue dolor urna sed enim. Nulla malesuada aliquet pretium.\r\n\r\nSed dictum vehicula ultrices. Pellentesque placerat sed felis sit amet porta. Aenean tristique, arcu ac malesuada sollicitudin, nulla metus varius tortor, et tristique quam odio ac tellus. Donec pellentesque blandit nunc sed lobortis. Nam id elit facilisis mauris tempor varius. Curabitur pellentesque volutpat mauris, vitae posuere sem luctus a. Aliquam posuere metus maximus ipsum vestibulum interdum. Donec congue vel augue sed placerat. Proin eu nibh eu ex pulvinar euismod. ', '2020-10-06', '2020-10-08', 5, 2, '2020-10-02', '2020-10-06', 'Automatic', 0);
+INSERT INTO `assignments` (`AssignmentID`, `EducatorID`, `CourseID`, `GradingcriteriaID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `Numberofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`, `Hidden`) VALUES
+(1, 2, 1, 1, 'Your First C++ Program', '\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero. Fusce non facilisis nisi. Vivamus rutrum varius dui, ac ornare tortor gravida varius. Phasellus pulvinar rutrum ullamcorper. Donec eu nunc magna. Sed rhoncus quam in odio consectetur, eu ullamcorper arcu rutrum. Cras quis diam maximus, ultricies dui quis, tristique orci. Ut auctor felis nec ipsum lacinia aliquam. Vivamus eget pretium erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed porttitor, ipsum non tincidunt consectetur, odio eros dignissim augue, id congue dolor urna sed enim. Nulla malesuada aliquet pretium.\r\n\r\nSed dictum vehicula ultrices. Pellentesque placerat sed felis sit amet porta. Aenean tristique, arcu ac malesuada sollicitudin, nulla metus varius tortor, et tristique quam odio ac tellus. Donec pellentesque blandit nunc sed lobortis. Nam id elit facilisis mauris tempor varius. Curabitur pellentesque volutpat mauris, vitae posuere sem luctus a. Aliquam posuere metus maximus ipsum vestibulum interdum. Donec congue vel augue sed placerat. Proin eu nibh eu ex pulvinar euismod. ', '2020-10-06', '2020-10-08', 5, 2, '2020-10-02', '2020-10-06', 'Automatic', 0, 'False');
 
 -- --------------------------------------------------------
 
@@ -169,7 +170,6 @@ INSERT INTO `courseedducator` (`CourseID`, `UserID`, `Primaryeducatorflag`, `Ass
 CREATE TABLE `gradingcriteria` (
   `FeaturesID` int(11) NOT NULL,
   `AssignmentsID` int(11) NOT NULL,
-  `Test_cases_ID` int(11) NOT NULL,
   `Compiling` tinyint(1) NOT NULL,
   `Compiling_weight` int(11) NOT NULL,
   `Sytling` tinyint(1) NOT NULL,
@@ -184,8 +184,8 @@ CREATE TABLE `gradingcriteria` (
 -- Dumping data for table `gradingcriteria`
 --
 
-INSERT INTO `gradingcriteria` (`FeaturesID`, `AssignmentsID`, `Test_cases_ID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) VALUES
-(1, 1, 0, 1, 50, 1, 0, 0, 0, 1, 50);
+INSERT INTO `gradingcriteria` (`FeaturesID`, `AssignmentsID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) VALUES
+(1, 1, 1, 50, 1, 0, 0, 0, 1, 50);
 
 -- --------------------------------------------------------
 
@@ -366,7 +366,6 @@ ALTER TABLE `courseedducator`
 --
 ALTER TABLE `gradingcriteria`
   ADD PRIMARY KEY (`FeaturesID`),
-  ADD KEY `Test_cases_ID` (`Test_cases_ID`),
   ADD KEY `AssignmentsID` (`AssignmentsID`);
 
 --
@@ -414,7 +413,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `badges`
@@ -438,7 +437,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `gradingcriteria`
 --
 ALTER TABLE `gradingcriteria`
-  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `role`
