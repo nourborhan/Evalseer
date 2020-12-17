@@ -50,9 +50,11 @@ class Instructor extends model {
     }
 
     function addAssignment_gradingCriteria($syntaxweight,$logicweight,$styleweight,$complieweight){
-        $sql="SELECT MAX(AssignmentID) as wantedid FROM assignments;";
+
+        $sql="SELECT MAX(AssignmentID) as wantedid , CourseID FROM assignments;";
         $Result = mysqli_query($this->db->getConn(),$sql);
         $row =$Result->fetch_assoc();
+        $wantedcourseid=$row['CourseID'];
         $wantedAssignmentID = $row["wantedid"];
 
         $sql2 = "INSERT INTO `gradingcriteria` (`AssignmentsID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) 
@@ -118,7 +120,6 @@ class Instructor extends model {
                     }
 
                     //here the test cases can be counted by the size of outputsarray
-                    $Result3;
                     for($i=0;$i<count($outputsarray);$i++)
                     {
                         // echo $outputsarray[$i];
@@ -126,12 +127,21 @@ class Instructor extends model {
 
                         $sql3="insert into test_case (AssignmentsID,Input_variable,Expected_output) values('$wantedAssignmentID','$inputsarray[$i]','$outputsarray[$i]')";
                         $Result3 = mysqli_query($this->db->getConn(),$sql3);
-                    }
 
-                    if($Result3)
-                    {
-                        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
-                        </script><script> swal('Submitted Successfully','','success');</script>";
+                        if($Result3)
+                        {
+                            if($i===(count($outputsarray)-1))
+                            {
+                                $this->addAssignment_addtostudents($wantedAssignmentID,$wantedcourseid);
+                            }
+                        }
+                        else
+                        {
+                            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+                            </script><script> swal('Error Adding Assignmet','','error');</script>"; 
+                        }
+                        
+
                     }
                 }
                 else
@@ -141,6 +151,7 @@ class Instructor extends model {
 
 
 
+                
             }
             else
             {
@@ -152,6 +163,41 @@ class Instructor extends model {
         else{
             echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
             </script><script> swal('Error Adding Assignmet','','error');</script>";
+        }
+    }
+
+
+    function addAssignment_addtostudents($wantedid,$courseid)
+    {
+        $studentsidarr=array();
+        $sql4="select * from studentsenrolled where CourseID=$courseid";
+        $Result4 = mysqli_query($this->db->getConn(),$sql4);
+        while($row4=$Result4->fetch_assoc())
+        {
+            array_push($studentsidarr,$row4['StudentID']);
+        }
+
+        for ($i=0;$i<count($studentsidarr);$i++)
+        {
+            $sql5="Insert into submissions (UserID,CourseID,AssignmentID) values ($studentsidarr[$i],$courseid,$wantedid)";
+            $Result5=mysqli_query($this->db->getConn(),$sql5);
+
+            if($Result5)
+            {
+                if ($i===(count($studentsidarr)-1))
+                {
+                
+                        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+                    </script><script> swal('Submitted Successfully','','success');</script>";
+                    
+                    
+                }
+            }
+            else
+            {
+                echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+            </script><script> swal('Error Adding Assignmet','','error');</script>";
+            }
         }
     }
 
