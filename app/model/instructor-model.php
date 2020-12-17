@@ -85,15 +85,31 @@ class Instructor extends model {
 
                     foreach ($_POST['outputsArray'] as $element) 
                     { 
-                        echo $element." "; 
+                        // echo $element." "; 
                         array_push($outputsarray,$element);
                         
+                    }
+
+                    $testcasenumbers=$_POST['testcasenumberarray'];
+
+                    $splittestcases=explode(',',$testcasenumbers);
+
+                    
+                    for ($i=0;$i<count($splittestcases);$i++)
+                    {
+                        echo "splitnumbers".$splittestcases[$i]."<br>";
+
+                        foreach($_POST[trim($splittestcases[$i])+'inputnum'] as $inputelement)
+                        {
+                            echo "input".$inputelement."<br>";
+                        }
+
                     }
 
                     //here the test cases can be counted by the size of outputsarray
                     for($i=0;$i<count($outputsarray);$i++)
                     {
-                        echo $outputsarray[$i];
+                        // echo $outputsarray[$i];
                         //the insert sql statement in test cases table should be here
                     }
                 }

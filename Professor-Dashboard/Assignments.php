@@ -193,7 +193,7 @@
                                                     <label>Test Cases</label>
                                                     <button id="btn1" type="button" class="btn btn-primary">Add Test Case</button>
                                                     <div id="test-cases"></div>
-                                                    <input type="text" placeholder="hiddenfield" id="hiddenfield">
+                                                    <input type="text" placeholder="hiddenfield" name="testcasenumberarray" id="hiddenfield">
                                                     
                                                 </div>
                                                 
@@ -285,7 +285,7 @@
                 <div class='form-group'>\
                     <label>Test Case "+testcasenum+"</label>\
                     <div id='testcase"+testcasenum+"inputs'>\
-                        Enter An Input <input id='testcase"+testcasenum+"inputsinputnum"+inputnum+"' name='testcase"+testcasenum+"inputsinputnum[]' type='text'> \
+                        Enter An Input <input id='testcase"+testcasenum+"inputsinputnum"+inputnum+"' name='"+testcasenum+"inputnum[]' type='text'> \
                         <button type='button' id='testcase"+testcasenum+"inputsbtn'  class='btn btn-primary'>Add Another input</button>\
                     </div>\
                     <br><br>\
