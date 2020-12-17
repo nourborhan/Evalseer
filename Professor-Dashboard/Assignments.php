@@ -276,6 +276,7 @@
             let inputnum=1;
             testcasenum = testcasenum+1;
             arrayoftestcasenums.push(testcasenum);
+            
             document.getElementById("hiddenfield").setAttribute('value', arrayoftestcasenums);
             console.log("test case added");
             var div="<div tsid='"+testcasenum+"' id='testcase"+testcasenum+"'> \
@@ -306,9 +307,14 @@
 
             $('#'+"removeDiv"+testcasenum+"").on('click', function() {
                 let testcasetoberemoved = $(this).parent().attr('tsid');
-                console.log(testcasetoberemoved);
-                console.log("remove clicked");
-                const index = arrayoftestcasenums.indexOf(testcasetoberemoved);
+
+                let numbervalue=parseInt(testcasetoberemoved);
+                // console.log(testcasetoberemoved);
+                // console.log("remove clicked");
+                // console.log("array of test numbs "+arrayoftestcasenums);
+                const index =arrayoftestcasenums.indexOf(numbervalue);
+                // console.log('console of index');
+                // console.log(index);
                 // doesnt want to remove
                 if (index > -1) {
                 arrayoftestcasenums.splice(index, 1);
