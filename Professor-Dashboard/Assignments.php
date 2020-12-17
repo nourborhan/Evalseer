@@ -47,10 +47,8 @@
                 </button>
                 <a class="navbar-brand" href="Dashboard.php">EvalSeer</a>
             </div>
-            <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" class="btn btn-danger square-btn-adjust">Logout</a>
+            <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;"> 
+                Last access : 30 May 2014 &nbsp; <a href="../logout.php" class="btn btn-danger square-btn-adjust">Logout</a>
             </div>
         </nav>
         <!-- /. NAV TOP  -->
@@ -191,10 +189,11 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
                                                 </div>
 
                                                 <!-- Test Cases Growable Div -->
-                                                <div class="form-group">
+                                                <div id="testcasesparent" class="form-group">
                                                     <label>Test Cases</label>
                                                     <button id="btn1" type="button" class="btn btn-primary">Add Test Case</button>
                                                     <div id="test-cases"></div>
+                                                    <input type="text" placeholder="hiddenfield" id="hiddenfield">
                                                     
                                                 </div>
                                                 
@@ -270,26 +269,29 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
 
     <script>
         
+        let arrayoftestcasenums = [];
 
         let testcasenum =0;
         $("#btn1").click(function(){
             let inputnum=1;
             testcasenum = testcasenum+1;
+            arrayoftestcasenums.push(testcasenum);
+            document.getElementById("hiddenfield").setAttribute('value', arrayoftestcasenums);
             console.log("test case added");
-            var div="<div id='testcase"+testcasenum+"'> \
+            var div="<div tsid='"+testcasenum+"' id='testcase"+testcasenum+"'> \
                 <br>\
                 <hr>\
                 <div class='form-group'>\
                     <label>Test Case "+testcasenum+"</label>\
                     <div id='testcase"+testcasenum+"inputs'>\
-                        Enter An Input <input id='testcase"+testcasenum+"inputsinputnum"+inputnum+"' type='text'> \
+                        Enter An Input <input id='testcase"+testcasenum+"inputsinputnum"+inputnum+"' name='testcase"+testcasenum+"inputsinputnum[]' type='text'> \
                         <button type='button' id='testcase"+testcasenum+"inputsbtn'  class='btn btn-primary'>Add Another input</button>\
                     </div>\
                     <br><br>\
-                    Enter Expected Ouput <input id='testcase"+testcasenum+"expectedoutput' type='text'> \
+                    Enter Expected Ouput <input id='testcase"+testcasenum+"expectedoutput' name='outputsArray[]' type='text'> \
                 </div>\
                 <br>\
-                <button type='button'  class='btn btn-danger removeDiv'>Remove Test Case</button>\
+                <button type='button'  class='btn btn-danger removeDiv' id='removeDiv"+testcasenum+"'>Remove Test Case</button>\
             </div>";
 
 
@@ -298,15 +300,50 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="../logout.php" clas
             $('#'+"testcase"+testcasenum+"inputsbtn").click('click',function(){
                     $currenttestcase = $(this).parent().attr('id');
                     inputnum = inputnum+1;
-                    $(this).parent().append('<br><br>Enter An Input <input id="'+$currenttestcase+'inputnum'+inputnum+'" type="text">');
+                    $(this).parent().append('<br><br>Enter An Input <input id="'+$currenttestcase+'inputnum'+inputnum+'" name="'+$currenttestcase+'inputnum[]" type="text">');
                 });
-            $('.removeDiv').on('click', function() {
+
+
+            $('#'+"removeDiv"+testcasenum+"").on('click', function() {
+                let testcasetoberemoved = $(this).parent().attr('tsid');
+                console.log(testcasetoberemoved);
+                console.log("remove clicked");
+                const index = arrayoftestcasenums.indexOf(testcasetoberemoved);
+                // doesnt want to remove
+                if (index > -1) {
+                arrayoftestcasenums.splice(index, 1);
+                }
+                console.log("array after remov clicked");
+                console.log(arrayoftestcasenums);
+                document.getElementById("hiddenfield").setAttribute('value', arrayoftestcasenums);
                 $(this).parent().remove();
             });
+
+
         });
 
 
     </script>
+
+    <!-- <script>
+        const array = [];
+        test = 1;
+        test2=2;
+        test3=3;
+        array.push(test);
+        array.push(test2);
+        array.push(test3);
+
+        console.log(array);
+
+        const index = array.indexOf(test2);
+        if (index > -1) {
+        array.splice(index, 1);
+        }
+
+        // array = [2, 9]
+        console.log(array); 
+    </script> -->
 
 </body>
 

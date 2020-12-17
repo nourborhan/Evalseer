@@ -76,6 +76,34 @@ class Instructor extends model {
             {
 
                 //should adding test cases mechinanism here
+
+                
+                if($_POST['outputsArray'])
+                {
+                    //outputs array
+                    $outputsarray = array();
+
+                    foreach ($_POST['outputsArray'] as $element) 
+                    { 
+                        echo $element." "; 
+                        array_push($outputsarray,$element);
+                        
+                    }
+
+                    //here the test cases can be counted by the size of outputsarray
+                    for($i=0;$i<count($outputsarray);$i++)
+                    {
+                        echo $outputsarray[$i];
+                        //the insert sql statement in test cases table should be here
+                    }
+                }
+                else
+                {
+                    echo "no test case for this assignment";
+                }   
+
+
+
                 echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
                 </script><script> swal('Submitted Successfully','','success');</script>";
             }
