@@ -94,23 +94,44 @@ class Instructor extends model {
 
                     $splittestcases=explode(',',$testcasenumbers);
 
-                    
+
+                    $inputsarray=array();
+
                     for ($i=0;$i<count($splittestcases);$i++)
                     {
-                        echo "splitnumbers".$splittestcases[$i]."<br>";
+                       $inputs="";
 
-                        foreach($_POST[trim($splittestcases[$i])+'inputnum'] as $inputelement)
+                        foreach($_POST[trim($splittestcases[$i]).'inputnum'] as $inputelement)
                         {
-                            echo "input".$inputelement."<br>";
+                            if($inputs==="")
+                            {
+                                $inputs=$inputelement;
+                            }
+                            else
+                            {
+                                $inputs=$inputs." ".$inputelement;
+                            }
                         }
+
+                        array_push($inputsarray,$inputs);
 
                     }
 
                     //here the test cases can be counted by the size of outputsarray
+                    $Result3;
                     for($i=0;$i<count($outputsarray);$i++)
                     {
                         // echo $outputsarray[$i];
                         //the insert sql statement in test cases table should be here
+
+                        $sql3="insert into test_case (AssignmentsID,Input_variable,Expected_output) values('$wantedAssignmentID','$inputsarray[$i]','$outputsarray[$i]')";
+                        $Result3 = mysqli_query($this->db->getConn(),$sql3);
+                    }
+
+                    if($Result3)
+                    {
+                        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+                        </script><script> swal('Submitted Successfully','','success');</script>";
                     }
                 }
                 else
@@ -120,8 +141,6 @@ class Instructor extends model {
 
 
 
-                echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
-                </script><script> swal('Submitted Successfully','','success');</script>";
             }
             else
             {

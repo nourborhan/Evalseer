@@ -284,7 +284,7 @@
                 <hr>\
                 <div class='form-group'>\
                     <label>Test Case "+testcasenum+"</label>\
-                    <div id='testcase"+testcasenum+"inputs'>\
+                    <div tsid='"+testcasenum+"' id='testcase"+testcasenum+"inputs'>\
                         Enter An Input <input id='testcase"+testcasenum+"inputsinputnum"+inputnum+"' name='"+testcasenum+"inputnum[]' type='text'> \
                         <button type='button' id='testcase"+testcasenum+"inputsbtn'  class='btn btn-primary'>Add Another input</button>\
                     </div>\
@@ -299,9 +299,10 @@
             $('#test-cases').append(div);
 
             $('#'+"testcase"+testcasenum+"inputsbtn").click('click',function(){
-                    $currenttestcase = $(this).parent().attr('id');
+                    let currenttestcase = $(this).parent().attr('id');
+                    let testnumber = $(this).parent().attr('tsid');
                     inputnum = inputnum+1;
-                    $(this).parent().append('<br><br>Enter An Input <input id="'+$currenttestcase+'inputnum'+inputnum+'" name="'+$currenttestcase+'inputnum[]" type="text">');
+                    $(this).parent().append('<br><br>Enter An Input <input id="'+currenttestcase+'inputnum'+inputnum+'" name="'+testnumber+'inputnum[]" type="text">');
                 });
 
 
