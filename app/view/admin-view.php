@@ -147,7 +147,7 @@ class AdminView extends View
         $instructoslist = '';
         for($i=0;$i<count($this->model->allintructorsnames);$i++)
         {
-            $instructoslist .= "<li><input type='checkbox' /> ".$this->model->allintructorsnames[$i]." </li>";
+            $instructoslist .= "<li><input name='ins[]' value='".$this->model->allintructorsids[$i]."' type='checkbox' /> ".$this->model->allintructorsnames[$i]." </li>";
         }
         echo $instructoslist;
     }
@@ -157,9 +157,9 @@ class AdminView extends View
         $this->model->readTAs_publishcourse();
 
         $TAlist = '';
-        for($i=0;$i<count($this->model->allintructorsnames);$i++)
+        for($i=0;$i<count($this->model->allTAsnames);$i++)
         {
-            $TAlist .= "<li><input type='checkbox' /> ".$this->model->allTAsnames[$i]." </li>";
+            $TAlist .= "<li><input name='tas[]' value='".$this->model->allTAsids[$i]."' type='checkbox' /> ".$this->model->allTAsnames[$i]." </li>";
         }
         echo $TAlist;
     }
@@ -168,7 +168,7 @@ class AdminView extends View
     {
         // $this->model->readcourse__suspendsection();
 
-        for($i=0;$i<count($this->model->allintructorsnames);$i++)
+        for($i=0;$i<count($this->model->allcoursescodes);$i++)
         {
             echo '<input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">'.$this->model->allcoursescodes[$i].'</label>

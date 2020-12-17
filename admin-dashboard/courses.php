@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-      <meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
 	<!-- BOOTSTRAP STYLES-->
@@ -12,6 +12,8 @@
     <link href="assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+   
 
    <style>
                     .dropdown-check-list {
@@ -69,6 +71,7 @@
 
 
     <?php
+        session_start();
         require_once("../app/model/admin-model.php");
         require_once("../app/controller/admin-controller.php");
         require_once("../app/view/admin-view.php");
@@ -76,6 +79,12 @@
         $adminModel = new Admin();
         $AdminController = new AdminController($adminModel);
         $AdminView = new AdminView($AdminController,$adminModel);
+
+        if(isset($_POST["addCourse"])){
+
+            $AdminController->PublishCourse();
+
+        }
     ?>
 
 
@@ -170,27 +179,39 @@
                             Add Course
                         </div>
                         <div class="panel-body">
-                            <form>
+                            <form method="post">
                                 <div class="form-group">
                                   <label for="exampleInputEmail1">Course Title</label>
-                                  <input type="text" class="form-control" placeholder="Enter Course Title">
+                                  <input type="text" class="form-control" name="courseTitle" placeholder="Enter Course Title">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Course Code</label>
-                                    <input type="text" class="form-control" placeholder="Enter Course Code">
+                                    <input type="text" class="form-control" name="courseCode" placeholder="Enter Course Code">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Course Total Grade</label>
+                                    <input type="number" class="form-control" min="0" max="100" name="courseTotalGrade" placeholder="Enter Course Total Grade">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Course Grade To Pass</label>
+                                    <input type="number" class="form-control" min="0" max="100" name="courseTotalGradetopass" placeholder="Enter Course Grade To Pass">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Course Start Date</label>
+                                    <input type="date" class="form-control" name="coursestart" placeholder="Enter Course Start Date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Course End Date</label>
+                                    <input type="date" class="form-control" name="courseend" placeholder="Enter Course End Date">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Course Description</label>
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                                    <textarea class="form-control" rows="5" name="courseDesc" id="comment"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <div id="list3" class="dropdown-check-list" tabindex="100">
                                         <span class="anchor">Assign Proffessors</span>
                                         <ul class="items">
-                                          <!-- <li><input type="checkbox" /> Dr. Hannibal </li>
-                                          <li><input type="checkbox" /> Dr. No</li>
-                                          <li><input type="checkbox" /> Dr. Strange </li>
-                                          <li><input type="checkbox" /> Dr. Zhivago </li> -->
                                           <?php $AdminView->readinstructos_publishcourse(); ?>
                                         </ul>
                                     </div>
@@ -199,19 +220,13 @@
                                     <div id="list4" class="dropdown-check-list" tabindex="100">
                                         <span class="anchor">Assign Teaching Assistants</span>
                                         <ul class="items">
-                                          <!-- <li><input type="checkbox" /> Jesse Pinkman </li>
-                                          <li><input type="checkbox" /> Miss Moneypenny</li>
-                                          <li><input type="checkbox" /> Gale Boetticher </li>
-                                          <li><input type="checkbox" /> Al Neri </li>
-                                          <li><input type="checkbox" /> Paulie Gualteri </li>
-                                          <li><input type="checkbox" /> Frank Pentangli </li> -->
                                           <?php $AdminView->readTAs_publishcourse(); ?>
                                         </ul>
                                     </div>
                                 </div>
                                 
-                                <button type="submit" class="btn btn-primary">Publish Course</button>
-                              </form>
+                                <button type="submit" name="addCourse" class="btn btn-primary">Publish Course</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -297,6 +312,5 @@
         
     </script>
     
-   
 </body>
 </html>

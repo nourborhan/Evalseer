@@ -9,7 +9,9 @@ class Admin extends model {
     public $allcoursesnames =array();
     public $allcoursesdetalis = array();
     public $allintructorsnames =array();
+    public $allintructorsids =array();
     public $allTAsnames =array();
+    public $allTAsids =array();
     public $allnames = array(); //for suspend section   
 
     function __construct() {
@@ -65,12 +67,14 @@ class Admin extends model {
 
     function readinstructos_publishcourse()
     {
-        $sql2="SELECT user.Name,user.Title FROM user INNER JOIN courseedducator ON courseedducator.UserID=user.UserID and courseedducator.Primaryeducatorflag=1 ";
+        $sql2="SELECT * from user where RoleID='2';";
         $Result2 = mysqli_query($this->db->getConn(),$sql2);
         while($row2=$Result2->fetch_assoc())
         {
             
             array_push($this->allintructorsnames,$row2["Name"]);
+            array_push($this->allintructorsids,$row2["UserID"]);
+            
             
         }
        
@@ -78,28 +82,16 @@ class Admin extends model {
 
     function readTAs_publishcourse()
     {
-        $sql2="SELECT user.Name,user.Title FROM user INNER JOIN courseedducator ON courseedducator.UserID=user.UserID and courseedducator.Assistantflag=1 ";
+        $sql2="SELECT * FROM user where RoleID='4';";
         $Result2 = mysqli_query($this->db->getConn(),$sql2);
         while($row2=$Result2->fetch_assoc())
         {
             array_push($this->allTAsnames,$row2["Name"]);
+            array_push($this->allTAsids,$row2["UserID"]);
             
         }
     }
 
-    // function readcourse__suspendsection()
-    // {
-        
-    //     $sql="SELECT Coursecode FROM course;";
-    //     $Result = mysqli_query($this->db->getConn(),$sql);
-    //     while($row=$Result->fetch_assoc())
-    //         {
-
-    //             echo '<input type="checkbox" class="form-check-input" id="exampleCheck1">
-    //             <label class="form-check-label" for="exampleCheck1">'.$row["Coursecode"].'</label>
-    //             <br>';
-    //         }
-    // }
 
     function readInstructors__suspendsection()
     {
@@ -107,13 +99,51 @@ class Admin extends model {
         $Result = mysqli_query($this->db->getConn(),$sql);
         while($row=$Result->fetch_assoc())
             {
-
-                // echo '<input type="checkbox" class="form-check-input" id="exampleCheck1">
-                // <label class="form-check-label" for="exampleCheck1">'.$row["Name"].'</label>
-                // <br>';
                 array_push($this->allnames,$row["Name"]);
             }
     }
+
+   
+
+    function PublishCourse($creatorid,$coursetitle,$coursecode,$coursedesc,$arrayofinsIDs,$arrayoftasIDs,$coursetotalgrade,$coursegradetopass,$coursestartdate,$courseenddate)
+    {
+        $sql="INSERT INTO `course` (`UserID`, `Coursecode`, `Name`, `Description`, `Grade`, `Gradetopass`, `Startdate`, `Enddate`, `Active`, `Timeceated`, `Timemodified`, `Suspended`) 
+        VALUES ('$creatorid', '$coursecode', '$coursetitle', '$coursedesc', '$coursetotalgrade', '$coursegradetopass', '$coursestartdate', '$courseenddate', '1', NULL, NULL, '0');";
+
+        $Result = mysqli_query($this->db->getConn(),$sql);
+
+        if($Result)
+        {
+
+            $sql2="SELECT MAX(CourseID) as wantedid FROM course;";
+            $Result2 = mysqli_query($this->db->getConn(),$sql2);
+            $row =$Result2->fetch_assoc();
+            $wantedID = $row["wantedid"];
+
+            for($i=0;$i<count($arrayofinsIDs);$i++)
+            {
+                $sql3="INSERT INTO `courseedducator` (`CourseID`, `UserID`, `Primaryeducatorflag`, `Assistantflag`) VALUES ('$wantedID', ".$arrayofinsIDs[$i].", '1', '0');";
+                $Result3 = mysqli_query($this->db->getConn(),$sql3);
+            }
+
+            for($y=0;$y<count($arrayoftasIDs);$y++)
+            {
+                $sql4="INSERT INTO `courseedducator` (`CourseID`, `UserID`, `Primaryeducatorflag`, `Assistantflag`) VALUES ('$wantedID', ".$arrayoftasIDs[$y].", '0', '1');";
+                $Result4 = mysqli_query($this->db->getConn(),$sql4);
+            }
+
+
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+                    </script><script> alert('Successfully Published Course','','success')</script>";
+        }
+        else
+        {
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+            </script><script> alert('Error Publishing Course','','error');</script>";
+        }
+    }
+
+    
 }    
 
 ?>

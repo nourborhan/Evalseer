@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2020 at 09:03 PM
+-- Generation Time: Dec 18, 2020 at 12:29 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -125,11 +125,11 @@ CREATE TABLE `course` (
   `Description` mediumtext NOT NULL,
   `Grade` int(11) NOT NULL,
   `Gradetopass` int(11) NOT NULL,
-  `Startdate` date NOT NULL,
-  `Enddate` date NOT NULL,
+  `Startdate` text DEFAULT NULL,
+  `Enddate` text DEFAULT NULL,
   `Active` tinyint(1) NOT NULL,
-  `Timeceated` date NOT NULL,
-  `Timemodified` date NOT NULL,
+  `Timeceated` date DEFAULT NULL,
+  `Timemodified` date DEFAULT NULL,
   `Suspended` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -312,7 +312,8 @@ INSERT INTO `user` (`UserID`, `RoleID`, `Username`, `Password`, `Email`, `Name`,
 (1, 1, 'test', 'test', 'test@test.com', 'Marlon Brando', 20, 1017377002, 'student', '', '', 0),
 (2, 2, 'instructor', 'test', 'testing@testing.com', 'Dr. Hannibal', 30, 129932002, 'instructor', '', '', 0),
 (3, 3, 'admin', 'admin', 'admin@admin.com', 'Don Corleone', 40, 231299332, 'admin', '', '', 0),
-(4, 4, 'ta', 'ta', 'mail@mail', 'Tom Hagen', 20, 1010203, 'Teaching Assistant', '', '', 0);
+(4, 4, 'ta', 'ta', 'mail@mail', 'Tom Hagen', 20, 1010203, 'Teaching Assistant', '', '', 0),
+(5, 4, 'ta2', 'ta2', 'test@ta@test.com', 'Sonny Corleone', 30, 120, '', '', 'Test Bio', 0);
 
 --
 -- Indexes for dumped tables
@@ -413,7 +414,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `badges`
@@ -431,13 +432,13 @@ ALTER TABLE `capabilities`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `gradingcriteria`
 --
 ALTER TABLE `gradingcriteria`
-  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -455,7 +456,7 @@ ALTER TABLE `test_case`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
