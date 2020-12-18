@@ -115,6 +115,53 @@
     ?>
 
         <?php
+
+        // intital function to check variable names (backup func)
+        function checkvariablename($filename)
+        {
+            $handle = fopen($filename, "r");
+            if ($handle) {
+                while (($line = fgets($handle)) !== false) {
+                    // echo $line."<br>";
+
+
+                        if(strpos($line, '//') !== false || strpos($line, 'main()') !== false)
+                        {
+                            
+                        }
+                        else if(strpos($line, '//') == false)
+                        {
+                            if (strpos($line, 'int ') !== false) {
+                                //should apply regex here
+                                echo 'true'.'<br>';
+                                
+                            }
+                            if (strpos($line, 'float ') !== false) {
+                                //should apply regex here
+                                echo 'true'.'<br>';
+                            }
+                            if (strpos($line, 'double ') !== false) {
+                                //should apply regex here
+                                echo 'true'.'<br>';
+                            }
+                            if (strpos($line, 'boolean ') !== false) {
+                                //should apply regex here
+                                echo 'true'.'<br>';
+                            }
+                            if (strpos($line, 'char ') !== false) {
+                                //should apply regex here
+                                echo 'true'.'<br>';
+                            }
+                        }      
+                }
+                fclose($handle);
+            } else {
+                // error opening the file.
+                echo "error opening file";
+            } 
+        }
+
+
         $filedata="";
         if(isset($_POST['uploadfile']))
         {
@@ -142,50 +189,75 @@
         
                 $myfile = fopen("uploads/".$_SESSION['ID']. "-".$_GET['id'].".".$ext, "r") or die("Unable to open file!");
                 $filedata = fread($myfile,filesize("uploads/".$_SESSION['ID']. "-".$_GET['id'].".".$ext));
-                
-
-
-                // Create a new DOM Document 
-                // $dom = new DOMDocument('1.0', 'iso-8859-1'); 
-                
-                // // Enable validate on parse 
-                // $dom->validateOnParse = true; 
-                // $dom->getElementById('code')->textContent = $filedata;
-                // echo '
-                // <script>
-                // document.getElementById("code").innerHTML = "'.$filedata.'";
-            
-                // </script>
-                // ';
                 fclose($myfile);   
 
-                // cpplint ".$_SESSION['ID']."-".$_GET['id'].".".$ext."
-                // cd uploads && cpplint ".$_SESSION['ID']."-".$_GET['id'].".".$ext."
                 putenv('PATH=' . $_SERVER['PATH']);
                 $styleout = array();
 
                 $stylecheck=shell_exec("cd uploads && cpplint ".$_SESSION['ID']."-".$_GET['id'].".".$ext."");
 
+                $stylecheck=explode("\n",$stylecheck);
 
-                var_dump($stylecheck);
+                $originalstyle=$stylecheck;
+
+
+                // unset($stylecheck[0]);
+                // unset($originalstyle[0]);
+
+                array_pop($stylecheck);
+                array_pop($stylecheck);
+                array_pop($stylecheck);
+                array_pop($originalstyle);
+                array_pop($originalstyle);
+                array_pop($originalstyle);
+                // unset($stylecheck[count($stylecheck)-1]);
+                // unset($stylecheck[count($stylecheck)-1]);
+                // unset($originalstyle[count($stylecheck)-1]);
+                // unset($originalstyle[count($stylecheck)-1]);
+                // unset($stylecheck[count($stylecheck)-1]);
                 
-                // $command1="cd uploads && cpplint ".$_SESSION['ID']."-".$_GET['id'].".".$ext."";
 
-                // $stylecheck= shell_exec($command1);
-                // echo $stylecheck;
+                for ($i=0;$i<count($stylecheck);$i++)
+                {
+                    // echo "line $i <br>";
+                    if (strpos($stylecheck[$i], ':'))
+                    {
+                        $stylecheck[$i]=substr($stylecheck[$i],strrpos($stylecheck[$i],":")+1);
+                    }
+                    // echo $stylecheck[$i]."<br>";
+                   
+                }
 
+                $newarrayofstyle=array_unique($stylecheck);
 
-                // $stylecheck= system($command1,$stylecheckarroutput);
-                // var_dump($stylecheck);
-                // for ($i=0;$i<count($stylecheckarroutput);$i++)
-                // {
-                // echo "=========================================================================";
-                // echo "<pre>".$stylecheckarroutput[$i]."</pre>";
-                // }
                 
-                // echo "<script> alert(".$stylecheck."); </script>";
                 
+                foreach ($newarrayofstyle as $newline)
+                {
+                    // echo "line $i <br>";
+                    $linenumbers="";
 
+                    // echo "<br>".$newline."<br>";
+                   for ($i=0;$i<count($originalstyle);$i++)
+                   {
+                        $substringline=substr($originalstyle[$i],strrpos($originalstyle[$i],":")+1);
+
+                        if($substringline===$newline)
+                        {
+
+                            $length=strrpos($originalstyle[$i],":")-(strpos($originalstyle[1],":")+1);
+                             
+                            $newnumber=substr($originalstyle[$i],strpos($originalstyle[$i],":")+1,$length);
+
+                            $linenumbers=$linenumbers.(string) $newnumber. " ";
+                        }
+                   }
+
+                   echo "In line ".$linenumbers." Error found :" .$newline. "<br>";
+                } 
+
+                // checkvariablename("uploads/".$_SESSION['ID']. "-".$_GET['id'].".".$ext);
+                
                 
             }
             else
