@@ -56,20 +56,23 @@ class StudentController extends Controller{
       for($i=0;$i<count($actualoutputarray);$i++)
       {
         $actualoutputarray[$i]=trim($actualoutputarray[$i]);        
-        $splittedactual=explode(" ",$actualoutputarray[$i]);
-
-        echo $actualoutputarray[$i];
-        // echo $splittedactual[$i];
-   
-       
-        if(in_array($expectedoutputarray[$i],$splittedactual))
+        
+        //check if the actual output contains the expected output 
+        $similarlength=strpbrk($actualoutputarray[$i],$expectedoutputarray[$i]);
+        $similarlength=strlen($similarlength);
+        $expectedlength=strlen($expectedoutputarray[$i]);
+          
+        if($expectedlength==$similarlength)
         {
+         
+         
           $LogicCounter=$LogicCounter+1;
           
         }
         else
         {
           // will be used for reports
+
           
         }   
 

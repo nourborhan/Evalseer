@@ -245,7 +245,7 @@
                         if($substringline===$newline)
                         {
 
-                            $length=strrpos($originalstyle[$i],":")-(strpos($originalstyle[1],":")+1);
+                            $length=strrpos($originalstyle[$i],":")-(strpos($originalstyle[$i],":")+1);
                              
                             $newnumber=substr($originalstyle[$i],strpos($originalstyle[$i],":")+1,$length);
 
