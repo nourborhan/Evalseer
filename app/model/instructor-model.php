@@ -182,23 +182,14 @@ class Instructor extends model {
             $sql5="Insert into submissions (UserID,CourseID,AssignmentID) values ($studentsidarr[$i],$courseid,$wantedid)";
             $Result5=mysqli_query($this->db->getConn(),$sql5);
 
-            if($Result5)
-            {
-                if ($i===(count($studentsidarr)-1))
-                {
-                
-                        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
-                    </script><script> swal('Submitted Successfully','','success');</script>";
-                    
-                    
-                }
-            }
-            else
-            {
-                echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
-            </script><script> swal('Error Adding Assignmet','','error');</script>";
-            }
         }
+
+    
+                
+        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+        </script><script> alert('Submitted Successfully','','success');</script>";
+                    
+              
     }
 
     function addAssignment_mainDetails($creatorid,$courseid,$assignmenttitle,$assignmentdesc,$assignmentstartdate,$assignmentcutoffdate

@@ -57,6 +57,9 @@ class StudentController extends Controller{
       {
         $actualoutputarray[$i]=trim($actualoutputarray[$i]);        
         $splittedactual=explode(" ",$actualoutputarray[$i]);
+
+        echo $actualoutputarray[$i];
+        // echo $splittedactual[$i];
    
        
         if(in_array($expectedoutputarray[$i],$splittedactual))

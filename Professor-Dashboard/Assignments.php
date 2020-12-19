@@ -111,12 +111,12 @@
                                             
                                             <div class="form-group">
                                                 <label>Assignment Title</label>
-                                                <input class="form-control" name="assignment-title" placeholder="Please enter title" />
+                                                <input required class="form-control" name="assignment-title" placeholder="Please enter title" />
                                             </div>
                                             <!-- Assignment Title -->
                                             <div class="form-group">
                                                 <label>Assignment Description</label>
-                                                <textarea name="assignment-desc" class="form-control" rows="3"></textarea>
+                                                <textarea required name="assignment-desc" class="form-control" rows="3"></textarea>
                                             </div>
                                             <!-- Assignment Description -->
                                             <div class="form-group">
@@ -127,22 +127,22 @@
 
                                             <div class="form-group">
                                                 <label>Start Date</label>
-                                                <input name="assignment-start-date" type="date" />
+                                                <input required name="assignment-start-date" type="date" />
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Cutoff Date</label>
-                                                <input name="assignment-cuttoff-date" type="date" />
+                                                <input required name="assignment-cuttoff-date" type="date" />
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Total Grade</label>
-                                                <input name="assignment-total-grade" type="number" />
+                                                <input required name="assignment-total-grade" type="number" />
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Number of Submissions Allowed</label>
-                                                <input type="number" name="assignment-nb" />
+                                                <input required type="number" name="assignment-nb" />
                                             </div>
 
                                             <div class="form-group">
@@ -159,20 +159,20 @@
                                                 <br>
                                                 <br>
                                                 Style with weight
-                                                <input type="number" name="assignment-style-weight" max="100" min="0" style="width: 8%;" value="0" /> %
+                                                <input required type="number" name="assignment-style-weight" max="100" min="0" style="width: 8%;" value="0" /> %
                                                 <br>
                                                 <br>
                                                 Compliation with weight
-                                                <input type="number" max="100" min="0" name="assignment-compile-weight" style="width: 8%;" value="0" /> %
+                                                <input required type="number" max="100" min="0" name="assignment-compile-weight" style="width: 8%;" value="0" /> %
                                                 <br>
                                                 <br>
                                                 Syntax with weight
-                                                <input type="number" max="100" min="0" name="assignment-syntax-weight" style="width: 8%;" value="0" /> %
+                                                <input required type="number" max="100" min="0" name="assignment-syntax-weight" style="width: 8%;" value="0" /> %
                     
                                                 <br>
                                                 <br>
                                                 Logic with weight
-                                                <input type="number" max="100" name="assignment-logic-weight" min="0" style="width: 8%;" value="0" /> %
+                                                <input required type="number" max="100" name="assignment-logic-weight" min="0" style="width: 8%;" value="0" /> %
                                                 <br><br>
                                                  
                                                
@@ -193,7 +193,7 @@
                                                     <label>Test Cases</label>
                                                     <button id="btn1" type="button" class="btn btn-primary">Add Test Case</button>
                                                     <div id="test-cases"></div>
-                                                    <input type="text" placeholder="hiddenfield" name="testcasenumberarray" id="hiddenfield">
+                                                    <input type="hidden" placeholder="hiddenfield" name="testcasenumberarray" id="hiddenfield">
                                                     
                                                 </div>
                                                 
@@ -289,7 +289,7 @@
                         <button type='button' id='testcase"+testcasenum+"inputsbtn'  class='btn btn-primary'>Add Another input</button>\
                     </div>\
                     <br><br>\
-                    Enter Expected Ouput <input id='testcase"+testcasenum+"expectedoutput' name='outputsArray[]' type='text'> \
+                    Enter Expected Ouput <input id='testcase"+testcasenum+"expectedoutput' name='outputsArray[]' required type='text'> \
                 </div>\
                 <br>\
                 <button type='button'  class='btn btn-danger removeDiv' id='removeDiv"+testcasenum+"'>Remove Test Case</button>\
