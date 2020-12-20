@@ -19,7 +19,7 @@ class StudentView extends View
                                 <div class="timeline__content img-bg-02">
                                     <h2>'.$var[$i]->getAssignmentname().'</h2>
                                     <p>Grade: '.$var[$i]->getAssignmentgrade().'%</p>
-                                    <p>'.$var[$i]->getAssignmentdesc().'</p>
+                                    <p>'.substr($var[$i]->getAssignmentdesc(),0,200).'...'.'</p>
                                 </div>
                                 </a>
                             </div>';
@@ -31,7 +31,7 @@ class StudentView extends View
                                 <div class="timeline__content img-bg-02">
                                     <h2>'.$var[$i]->getAssignmentname().'</h2>
                                     <p>Grade: '.$var[$i]->getAssignmentgrade().'</p><br>
-                                    <p>'.$var[$i]->getAssignmentdesc().'</p>
+                                    <p>'.substr($var[$i]->getAssignmentdesc(),0,200).'...'.'</p>
                                 </div>
                       
                             </div>';
@@ -138,8 +138,8 @@ class StudentView extends View
                                 
                                 <div class="timeline__content img-bg-02">
                                     <h2>'.$var[$i]->getAssignmentname().'</h2>
-                                    <p>Grade: '.$var[$i]->getAssignmentgrade().'%</p>
-                                    <p>'.$var[$i]->getAssignmentdesc().'</p>
+                                    <p>Grade: '.$var[$i]->getAssignmentgrade().'</p>
+                                    <p>'.substr($var[$i]->getAssignmentdesc(),0,200).'...'.'</p>
                                 </div>
                                 </a>
                             </div>';
@@ -151,7 +151,7 @@ class StudentView extends View
                                 <div class="timeline__content img-bg-02">
                                     <h2>'.$var[$i]->getAssignmentname().'</h2>
                                     <p>Grade: '.$var[$i]->getAssignmentgrade().'</p><br>
-                                    <p>'.$var[$i]->getAssignmentdesc().'</p>
+                                    <p>'.substr($var[$i]->getAssignmentdesc(),0,200).'...'.'</p>
                                 </div>
                       
                             </div>';

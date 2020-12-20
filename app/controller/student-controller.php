@@ -85,13 +85,12 @@ class StudentController extends Controller{
         $actualoutputarray[$i]=trim($actualoutputarray[$i]);        
         
         //check if the actual output contains the expected output 
-        $similarlength=strpbrk($actualoutputarray[$i],$expectedoutputarray[$i]);
-        echo $similarlength;
-        $similarlength=strlen($similarlength);
-        $expectedlength=strlen($expectedoutputarray[$i]);
+        
+        
+        $regexp='/('.$expectedoutputarray[$i].')/';
 
           
-        if($expectedlength==$similarlength)
+        if(preg_match($regexp, $actualoutputarray[$i],$matches))
         {
          
          
@@ -104,16 +103,18 @@ class StudentController extends Controller{
           // will be used for reports
           
 
-          $logicfeedback = $logicfeedback."You may have a logical error because the following test failed for your code with inputs".$testcasesiunputs[$i]."did not match
-          the expected output".$expectedoutputarray[$i]."<br><br>";
+          $logicfeedback = $logicfeedback."You may have a logical error because the following test failed for your code with inputs ".$testcasesiunputs[$i]." did not match
+          the expected output ".$expectedoutputarray[$i]."<br><br>";
 
 
           
         }   
 
+        
+
       }
 
-
+      $logicfeedback=$logicfeedback.$LogicCounter."/".count($actualoutputarray)." Test cases passed! <br><br>";
       //test case weight calculation
       $testfailweight=($LogicCounter/count($actualoutputarray));
       $testfailweight=1-$testfailweight;
