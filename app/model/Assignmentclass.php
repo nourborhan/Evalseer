@@ -25,10 +25,6 @@ class Assignment extends model{
     protected $syntaxweight;
     protected $logicweight;
     protected $styleweight;
-    protected $stylefeedback;
-    protected $compilefeedback;
-    protected $logicfeedback;
-    protected $syntaxfeedback;
 
 
     function __construct()
@@ -475,86 +471,6 @@ class Assignment extends model{
     public function setCompilingweight($compilingweight)
     {
         $this->compilingweight = $compilingweight;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of stylefeedback
-     */ 
-    public function getStylefeedback()
-    {
-        return $this->stylefeedback;
-    }
-
-    /**
-     * Set the value of stylefeedback
-     *
-     * @return  self
-     */ 
-    public function setStylefeedback($stylefeedback)
-    {
-        $this->stylefeedback = $stylefeedback;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of compilefeedback
-     */ 
-    public function getCompilefeedback()
-    {
-        return $this->compilefeedback;
-    }
-
-    /**
-     * Set the value of compilefeedback
-     *
-     * @return  self
-     */ 
-    public function setCompilefeedback($compilefeedback)
-    {
-        $this->compilefeedback = $compilefeedback;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of logicfeedback
-     */ 
-    public function getLogicfeedback()
-    {
-        return $this->logicfeedback;
-    }
-
-    /**
-     * Set the value of logicfeedback
-     *
-     * @return  self
-     */ 
-    public function setLogicfeedback($logicfeedback)
-    {
-        $this->logicfeedback = $logicfeedback;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of syntaxfeedback
-     */ 
-    public function getSyntaxfeedback()
-    {
-        return $this->syntaxfeedback;
-    }
-
-    /**
-     * Set the value of syntaxfeedback
-     *
-     * @return  self
-     */ 
-    public function setSyntaxfeedback($syntaxfeedback)
-    {
-        $this->syntaxfeedback = $syntaxfeedback;
 
         return $this;
     }

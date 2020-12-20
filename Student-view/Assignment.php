@@ -116,8 +116,6 @@
 
         <?php
 
-        $stylefeedback = "";
-
         // intital function to check variable names (backup func)
         function checkvariablename($filename)
         {
@@ -255,10 +253,8 @@
                         }
                    }
 
-                   $stylefeedback = $stylefeedback."In line ".$linenumbers." Error found :" .$newline. "<br>";
+                   echo "In line ".$linenumbers." Error found :" .$newline. "<br>";
                 } 
-                
-                $_SESSION["stylefeedback"] = $stylefeedback;
 
                 // checkvariablename("uploads/".$_SESSION['ID']. "-".$_GET['id'].".".$ext);
                 
@@ -468,22 +464,7 @@
                     </div>
             </div><!-- end row -->
 
-            <div class="row mt-4 mb-4">
-                <div class="col-12 add-pad mx-auto">
-                    <h2>Feedback on latest submission</h2>
-
-                    <h4>Logic Feedback</h4>
-                    <div id="logic-feedback"> <?php echo $assignment->getLogicfeedback(); ?> </div>
-
-                    <h4>Compliation Feedback</h4>
-                    <div id="compile-feedback"> <?php echo $assignment->getCompilefeedback(); ?> </div>
-
-                    <h4>Style Feedback</h4>
-                    <div id="style-feedback"> <?php echo $assignment->getStylefeedback(); ?> </div>
-
-                </div>
-            </div>
-                                    
+            
             </div>
 
             
@@ -520,16 +501,10 @@
         </div><!-- end container -->
     </div><!-- end section -->
     <textarea style="display:none;" id="inputvariablstests"  ><?php
-            
-            $testcasesinputs;
             for($i=0;$i<count($inputarray);$i++)
             {
                 echo $inputarray[$i]."~!";
-                $testcasesinputs = $testcasesinputs.$inputarray[$i]."~!";
-            }
-
-            $_SESSION["testcasesinputs"]= $testcasesinputs;
-            ?>
+            }?>
      </textarea>
 
 
