@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2020 at 12:29 AM
+-- Generation Time: Dec 20, 2020 at 09:11 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -147,6 +147,7 @@ INSERT INTO `course` (`CourseID`, `UserID`, `Coursecode`, `Name`, `Description`,
 --
 
 CREATE TABLE `courseedducator` (
+  `RecordID` int(11) NOT NULL,
   `CourseID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL COMMENT 'Doctors id ',
   `Primaryeducatorflag` tinyint(1) NOT NULL,
@@ -157,9 +158,9 @@ CREATE TABLE `courseedducator` (
 -- Dumping data for table `courseedducator`
 --
 
-INSERT INTO `courseedducator` (`CourseID`, `UserID`, `Primaryeducatorflag`, `Assistantflag`) VALUES
-(1, 2, 1, 0),
-(1, 4, 0, 1);
+INSERT INTO `courseedducator` (`RecordID`, `CourseID`, `UserID`, `Primaryeducatorflag`, `Assistantflag`) VALUES
+(1, 1, 2, 1, 0),
+(2, 1, 4, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -236,6 +237,7 @@ INSERT INTO `studentsenrolled` (`StudentID`, `CourseID`, `StduentGrade`, `Rank`)
 --
 
 CREATE TABLE `submissions` (
+  `SubmissionID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL COMMENT 'Students ID',
   `CourseID` int(11) NOT NULL,
   `AssignmentID` int(11) NOT NULL,
@@ -244,21 +246,24 @@ CREATE TABLE `submissions` (
   `Submissiondate` date DEFAULT NULL,
   `Modificationdate` date DEFAULT NULL,
   `Code_submitted` varchar(3000) DEFAULT NULL,
-  `Feedback` text DEFAULT NULL,
+  `compile_feedback` text DEFAULT NULL,
+  `style_feedback` longtext DEFAULT NULL,
   `Badgereceivedflag` tinyint(1) DEFAULT NULL,
   `Submittedflag` tinyint(4) NOT NULL DEFAULT 0,
   `Compiling_Grade` int(11) DEFAULT NULL,
   `Syntax_Grade` int(11) DEFAULT NULL,
   `Logic_Grade` int(11) DEFAULT NULL,
-  `Style_Grade` int(11) DEFAULT NULL
+  `Style_Grade` int(11) DEFAULT NULL,
+  `logic_feedback` longtext DEFAULT NULL,
+  `syntax_feedback` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `submissions`
 --
 
-INSERT INTO `submissions` (`UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Code_submitted`, `Feedback`, `Badgereceivedflag`, `Submittedflag`, `Compiling_Grade`, `Syntax_Grade`, `Logic_Grade`, `Style_Grade`) VALUES
-(1, 1, 1, NULL, 4, '2020-12-15', NULL, '#include <iostream>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int firstNumber, secondNumber, sumOfTwoNumbers;\r\n    \r\n    cout << \"Enter two integers: \";\r\n    cin >> firstNumber >> secondNumber;\r\n\r\n    // sum of two numbers in stored in variable sumOfTwoNumbers\r\n    sumOfTwoNumbers = firstNumber + secondNumber;\r\n\r\n    // Prints sum \r\n    cout << firstNumber << \" + \" <<  secondNumber << \" = \" << sumOfTwoNumbers;     \r\n\r\n    return 0;\r\n}', NULL, NULL, 0, 50, 0, 38, 0);
+INSERT INTO `submissions` (`SubmissionID`, `UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Code_submitted`, `compile_feedback`, `style_feedback`, `Badgereceivedflag`, `Submittedflag`, `Compiling_Grade`, `Syntax_Grade`, `Logic_Grade`, `Style_Grade`, `logic_feedback`, `syntax_feedback`) VALUES
+(1, 1, 1, 1, NULL, 3, '2020-12-20', NULL, '#include <iostream>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int firstNumber, secondNumber, sumOfTwoNumbers;\r\n    \r\n    cout << \"Enter two integers: \";\r\n    cin >> firstNumber >> secondNumber;\r\n\r\n    // sum of two numbers in stored in variable sumOfTwoNumbers\r\n    sumOfTwoNumbers = firstNumber + secondNumber;\r\n\r\n    // Prints sum \r\n    cout << firstNumber << \" + \" <<  secondNumber << \" = \" << sumOfTwoNumbers;     \r\n\r\n    return 0;\r\n}', 'Your Code Compiled Successfully', 'In line 0:  No copyright message found.  You should have a line  Error found : \"Copyright [year] <Copyright Owner>\"  [legal/copyright] [5] <br>In line 2  Error found :  Do not use namespace using-directives.  Use using-declarations instead.  [build/namespaces] [5] <br>In line 5  Error found :  { should almost always be at the end of the previous line  [whitespace/braces] [4] <br>In line 7 14 15  Error found :  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4] <br>In line 15  Error found :  Lines should be <= 80 characters long  [whitespace/line_length] [2] <br>In line 18  Error found :  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5] <br>', NULL, 0, 50, 0, 13, 0, 'You may have a logical error because the following test failed for your code with inputs5 5did not match\r\n          the expected output10<br><br>You may have a logical error because the following test failed for your code with inputs10 10did not match\r\n          the expected output20<br><br>You may have a logical error because the following test failed for your code with inputs20 20did not match\r\n          the expected output99999<br><br>', NULL);
 
 -- --------------------------------------------------------
 
@@ -359,6 +364,7 @@ ALTER TABLE `course`
 -- Indexes for table `courseedducator`
 --
 ALTER TABLE `courseedducator`
+  ADD PRIMARY KEY (`RecordID`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `CourseID` (`CourseID`);
 
@@ -387,6 +393,7 @@ ALTER TABLE `studentsenrolled`
 -- Indexes for table `submissions`
 --
 ALTER TABLE `submissions`
+  ADD PRIMARY KEY (`SubmissionID`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `CourseID` (`CourseID`),
   ADD KEY `AssignmentID` (`AssignmentID`),
@@ -414,7 +421,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `badges`
@@ -435,10 +442,16 @@ ALTER TABLE `course`
   MODIFY `CourseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `courseedducator`
+--
+ALTER TABLE `courseedducator`
+  MODIFY `RecordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `gradingcriteria`
 --
 ALTER TABLE `gradingcriteria`
-  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -447,10 +460,16 @@ ALTER TABLE `role`
   MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `submissions`
+--
+ALTER TABLE `submissions`
+  MODIFY `SubmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `test_case`
 --
 ALTER TABLE `test_case`
-  MODIFY `TcasesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `TcasesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`

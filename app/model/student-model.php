@@ -61,6 +61,12 @@ class Student extends User{
             $assingment->setFilepath($row['Code_submitted']);
             $assingment->setSubmissiondate($row['Submissiondate']);
             $assingment->setGrade($row['submittedgrade']);
+
+            //feedbacks
+            $assingment->setSyntaxfeedback($row["syntax_feedback"]);
+            $assingment->setLogicfeedback($row["logic_feedback"]);
+            $assingment->setCompilefeedback($row["compile_feedback"]);
+            $assingment->setStylefeedback($row["style_feedback"]);
             
 
             $this->assignmentdetail=$assingment;
@@ -139,10 +145,11 @@ class Student extends User{
         }
     }
 
-    function SubmitAssignment($userid,$assingmentid,$date,$code,$totalgrade,$compilinggrade,$LogicGrade,$StyleGrade,$SyntaxGrade)
+    function SubmitAssignment($userid,$assingmentid,$date,$code,$totalgrade,$compilinggrade,$LogicGrade,$StyleGrade,$SyntaxGrade,$compilefeedback,$logicfeedback,$stylefeedback)
     {
         $sql="UPDATE submissions
             set Submissiondate='$date',Code_submitted='$code',Submittedflag='0',Grade=$totalgrade,Compiling_Grade=$compilinggrade,Syntax_Grade=$SyntaxGrade,Logic_Grade=$LogicGrade,Style_Grade=$StyleGrade
+            ,compile_feedback='$compilefeedback',style_feedback='$stylefeedback',logic_feedback='$logicfeedback'
             where AssignmentID=$assingmentid and UserID=$userid";
 
         $result=mysqli_query($this->db->getConn(),$sql);
@@ -152,6 +159,11 @@ class Student extends User{
             echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
             </script><script> swal('Submitted Successfully','','success');</script>";
         }
+    }
+
+    function insertfeedback($assignmentid,$stylefeedback,$logicfeedback,$compilefeedback)
+    {
+
     }
 
     /**
