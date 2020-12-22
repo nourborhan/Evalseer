@@ -161,10 +161,7 @@ class Student extends User{
         }
     }
 
-    function insertfeedback($assignmentid,$stylefeedback,$logicfeedback,$compilefeedback)
-    {
 
-    }
 
     /**
      * Get the value of AllAssignments
