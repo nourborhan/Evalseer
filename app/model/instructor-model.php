@@ -58,7 +58,7 @@ class Instructor extends model {
         $wantedAssignmentID = $row["wantedid"]; 
 
         $sql2 = "INSERT INTO `gradingcriteria` ( `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) 
-        VALUES ('$wantedAssignmentID', '1', '$complieweight', '1', '$styleweight', '1', '$syntaxweight', '1', '$logicweight');";
+        VALUES ( '1', '$complieweight', '1', '$styleweight', '1', '$syntaxweight', '1', '$logicweight');";
         $result=mysqli_query($this->db->getConn(),$sql2);
 
         if($result)
