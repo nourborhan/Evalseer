@@ -55,9 +55,9 @@ class Instructor extends model {
         $Result = mysqli_query($this->db->getConn(),$sql);
         $row =$Result->fetch_assoc();
         $wantedcourseid=$row['CourseID'];
-        $wantedAssignmentID = $row["wantedid"];
+        $wantedAssignmentID = $row["wantedid"]; 
 
-        $sql2 = "INSERT INTO `gradingcriteria` (`AssignmentsID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) 
+        $sql2 = "INSERT INTO `gradingcriteria` ( `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) 
         VALUES ('$wantedAssignmentID', '1', '$complieweight', '1', '$styleweight', '1', '$syntaxweight', '1', '$logicweight');";
         $result=mysqli_query($this->db->getConn(),$sql2);
 
@@ -65,7 +65,7 @@ class Instructor extends model {
         {
             
 
-            $sql2="SELECT * From gradingcriteria WHERE AssignmentsID='$wantedAssignmentID';";
+            $sql2="SELECT * FROM gradingcriteria WHERE FeaturesID=(SELECT max(FeaturesID) FROM gradingcriteria) ";
             $Result2 = mysqli_query($this->db->getConn(),$sql2);
             $row = $Result2->fetch_assoc();
             $wantedFeaturesID = $row["FeaturesID"];
