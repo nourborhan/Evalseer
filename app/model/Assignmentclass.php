@@ -39,7 +39,7 @@ class Assignment extends model{
     function gettestcase($id)
     {
 
-        $sql="select * from test_case where AssignmentsID='$id'";
+        $sql="select * from test_case  where AssignmentsID='$id'";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {
@@ -50,7 +50,7 @@ class Assignment extends model{
 
     function getgrades($id)
     {
-        $sql="select * from gradingcriteria where AssignmentsID='$id'";
+        $sql="select * from gradingcriteria join assignments on gradingcriteria.FeaturesID=assignments.GradingcriteriaID where assignments.AssignmentID='$id'";
         $result=mysqli_query($this->db->getConn(),$sql);
         while($row=$result->fetch_assoc())
         {

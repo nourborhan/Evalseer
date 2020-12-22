@@ -80,7 +80,7 @@ class Instructor extends model {
                 //should adding test cases mechinanism here
 
                 
-                   $this->addAssignment_addTestCases();
+                   $this->addAssignment_addTestCases($wantedAssignmentID,$wantedcourseid);
 
 
 
@@ -99,7 +99,7 @@ class Instructor extends model {
         }
     }
 
-    function addAssignment_addTestCases()
+    function addAssignment_addTestCases($wantedAssignmentID,$wantedcourseid)
     {
         if($_POST['outputsArray'])
         {
