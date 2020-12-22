@@ -53,7 +53,10 @@
 	<!-- END LOADER -->	
 
     <!-- Start header -->
-	<?php include_once("partials/header.php") ?>
+    <?php   
+        session_start();
+        include_once("partials/header.php")
+    ?>
 	<!-- End header -->
 	
 	<div class="all-title-box" style="background: url(images/badges_banner.png)no-repeat;background-size: cover;background-position: center;min-height: 300px;">

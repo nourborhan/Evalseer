@@ -23,7 +23,7 @@ body {
   box-shadow: 0px 10px 20px -9px rgba(0, 0, 0, 0.5);
   text-align: center;
   transition:all 0.4s;
-  background: url(https://pbs.twimg.com/profile_images/1093639847250722816/-A8kf6-1_400x400.jpg) center no-repeat;
+  background: url('../images/doncorleone.jpg') center no-repeat;
   background-size: 100%;
 }
 .blog-card a{ 

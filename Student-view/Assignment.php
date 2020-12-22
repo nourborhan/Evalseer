@@ -116,6 +116,17 @@
 
         <?php
 
+        $stylefeedback = "";
+        
+        $testcasesinputs="";
+
+        for($i=0;$i<count($inputarray);$i++)
+        {
+            $testcasesinputs = $testcasesinputs.$inputarray[$i]."~!";
+        }
+
+        $_SESSION["testcasesinputs"]= $testcasesinputs;
+
         // intital function to check variable names (backup func)
         function checkvariablename($filename)
         {
@@ -201,8 +212,6 @@
                 $originalstyle=$stylecheck;
 
 
-                // unset($stylecheck[0]);
-                // unset($originalstyle[0]);
 
                 array_pop($stylecheck);
                 array_pop($stylecheck);
@@ -210,11 +219,6 @@
                 array_pop($originalstyle);
                 array_pop($originalstyle);
                 array_pop($originalstyle);
-                // unset($stylecheck[count($stylecheck)-1]);
-                // unset($stylecheck[count($stylecheck)-1]);
-                // unset($originalstyle[count($stylecheck)-1]);
-                // unset($originalstyle[count($stylecheck)-1]);
-                // unset($stylecheck[count($stylecheck)-1]);
                 
 
                 for ($i=0;$i<count($stylecheck);$i++)
@@ -234,10 +238,8 @@
                 
                 foreach ($newarrayofstyle as $newline)
                 {
-                    // echo "line $i <br>";
                     $linenumbers="";
 
-                    // echo "<br>".$newline."<br>";
                    for ($i=0;$i<count($originalstyle);$i++)
                    {
                         $substringline=substr($originalstyle[$i],strrpos($originalstyle[$i],":")+1);
@@ -253,8 +255,10 @@
                         }
                    }
 
-                   echo "In line ".$linenumbers." Error found :" .$newline. "<br>";
+                   $stylefeedback = $stylefeedback."In line ".$linenumbers." Error found :" .$newline. "<br><br>";
                 } 
+                
+                $_SESSION["stylefeedback"] = $stylefeedback;
 
                 // checkvariablename("uploads/".$_SESSION['ID']. "-".$_GET['id'].".".$ext);
                 
@@ -425,46 +429,62 @@
                 </div>
 
                 <div class="row mx-auto" style="width:98%"> 
-                <div class="table-responsive">
-                    <table class="table table-hover table-dark "style="margin-bottom: 0px;">
-                        <thead>
-                        <tr>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-dark "style="margin-bottom: 0px;">
+                            <thead>
+                            <tr>
+                                
+                                <th scope="col">Submitted Date</th>
+                                <th scope="col">Submitted Code</th>
+                                <th scope="col">Submitted Grade</th>
                             
-                            <th scope="col">Submitted Date</th>
-                            <th scope="col">Submitted Code</th>
-                            <th scope="col">Submitted Grade</th>
-                        
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                
+                                <?php  
+                                        $studentcontroller->getAssignmentdetails();  
+                                        $assignment=$studentmodel->getAssignmentdetail();
+                                        if($assignment->getSubmissiondate()==null && $assignment->getFilepath()==null )
+                                        {   
+                                            echo "<td colspan='3'> No Submissions Yet</td>";
+                                        }
+                                        else
+                                        {
+                                            echo "<td>". $assignment->getSubmissiondate()."</td>
+                                                <td>". $assignment->getFilepath()."</td>
+                                                <td>" .$assignment->getGrade()."</td>
+                                                "
+                                                ;
+                                        }                     
+                            ?>
+                                
+                            </tr>
                             
-                            <?php  
-                                    $studentcontroller->getAssignmentdetails();  
-                                    $assignment=$studentmodel->getAssignmentdetail();
-                                    if($assignment->getSubmissiondate()==null && $assignment->getFilepath()==null )
-                                    {   
-                                        echo "<td colspan='3'> No Submissions Yet</td>";
-                                    }
-                                    else
-                                    {
-                                        echo "<td>". $assignment->getSubmissiondate()."</td>
-                                            <td>". $assignment->getFilepath()."</td>
-                                            <td>" .$assignment->getGrade()."</td>
-                                            "
-                                            ;
-                                    }                     
-                           ?>
                             
-                        </tr>
-                        
-                        
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
                     </div>
-            </div><!-- end row -->
+                </div><!-- end row -->
 
             
+            </div>
+            <div class="row mt-4 mb-4">
+                <div class="col-12  add-pad mx-auto" style="width=98%">
+                    <h2 >Feedback on latest submission</h2>
+
+                    <h4 class="mt-3">Logic Feedback</h4>
+                    
+                    <div class="mt-3" id="logic-feedback"> <?php echo $assignment->getLogicfeedback(); ?> </div>
+
+                    <h4 class="mt-3">Compliation Feedback</h4>
+                    <div class="mt-3" id="compile-feedback"> <?php echo $assignment->getCompilefeedback(); ?> </div>
+
+                    <h4 class="mt-3">Style Feedback</h4>
+                    <div class="mt-3" id="style-feedback"> <?php echo $assignment->getStylefeedback(); ?> </div>
+
+                </div>                 
             </div>
 
             
@@ -504,7 +524,8 @@
             for($i=0;$i<count($inputarray);$i++)
             {
                 echo $inputarray[$i]."~!";
-            }?>
+            }
+            ?>
      </textarea>
 
 
@@ -531,72 +552,28 @@
 
     <script>
 
-	// $('#outputdiv').ready(function(){
-
-	// 	let valueofcode=$('#code').val();
-    //     if(valueofcode!="")
-    //     {
-    //         // $('#st').click();
-    //     }
-	// })
-
-        // document.onreadystatechange = function () {
-        // if (document.readyState == 'complete') {
-        //    $('#st').click();   
-        // }
-        
 
 	</script>
 
         <script>
+
+            let stringofinput=$("#inputvariablstests").val();
+            let splitofinp=stringofinput.split("~!");
+            $("#inputtext").html(splitofinp[0]);
+            let counter=splitofinp.length;
+            splitofinp.shift();
+
             document.addEventListener('readystatechange', event => {
                 if (event.target.readyState === 'complete') {
 
-
-                    let stringofinput=$("#inputvariablstests").val();
-
-
                     let valueofcode=$("#code").val();
-
-                    let splitofinp=stringofinput.split("~!");
- 
-
-                    $("#inputtext").html(splitofinp[0]);
-
-
-                    
-
-
                     valueofcode=valueofcode.replace(/\s/g,'');
                     
-                
-
                     if(valueofcode!="")
                     {
-                        
-                        let counter=splitofinp.length;
-                        splitofinp.shift();
                         $("#pac-loader").attr('style','display:flex;flex-direction:column;align-items: center;');
-                        for(let i=0;i<counter-1;i++)
-                        {
-                            $('#st').click();
-                            console.log(splitofinp[0]);
-                            $("#inputtext").html(splitofinp[0]);
-                            splitofinp.shift();
-                           
-                        }
-
-                        setTimeout(() => {
-                            $("#pac-loader").attr('style','display:none');
-                            $('#Submit_assinment_btn').show();
-                        }, 10000);
-                        
-                        
-                    }
-
-                    
-                    
-                    
+                        $('#st').click();
+                    }    
                 }
             });
             //wait for page load to initialize script
@@ -628,6 +605,20 @@
                                 actualoutputval=$("#actualoutput").val()+"~!"+result;
                             }
                             $('#actualoutput').html(actualoutputval);
+
+                            counter=splitofinp.length-1;
+                            if(counter>0)
+                            {
+                                $("#inputtext").html(splitofinp[0]);
+                                splitofinp.shift();
+                                $('#st').click();
+                            }
+                            else
+                            {
+                                $("#pac-loader").attr('style','display:none');
+                                $('#Submit_assinment_btn').show();
+                            }
+                            
                            
                         }
                     });

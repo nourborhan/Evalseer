@@ -52,7 +52,10 @@
 	<!-- END LOADER -->	
 
     <!-- Start header -->
-	<?php include_once("partials/header.php") ?>
+    <?php
+        session_start();
+        include_once("partials/header.php")
+    ?>
 	<!-- End header -->
 	
 	<div class="all-title-box">

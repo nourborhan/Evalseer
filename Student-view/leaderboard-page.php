@@ -51,7 +51,10 @@
 	<!-- END LOADER -->	
 
     <!-- Start header -->
-	<?php include_once("partials/header.php") ?>
+    <?php
+        session_start();
+        include_once("partials/header.php")
+    ?>
 	<!-- End header -->
 	
 	<!-- <div style="background: url(images/b4.png)no-repeat;" class="all-title-box">
