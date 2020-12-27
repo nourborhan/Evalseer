@@ -58,14 +58,14 @@ class Instructor extends model {
         $wantedAssignmentID = $row["wantedid"]; 
 
         $sql2 = "INSERT INTO `gradingcriteria` ( `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) 
-        VALUES ( '1', '$complieweight', '1', '$styleweight', '1', '$syntaxweight', '1', '$logicweight');";
+        VALUES ('1', '$complieweight', '1', '$styleweight', '1', '$syntaxweight', '1', '$logicweight');";
         $result=mysqli_query($this->db->getConn(),$sql2);
 
         if($result)
         {
             
 
-            $sql2="SELECT * FROM gradingcriteria WHERE FeaturesID=(SELECT max(FeaturesID) FROM gradingcriteria) ";
+            $sql2="SELECT * FROM gradingcriteria WHERE FeaturesID=(SELECT max(FeaturesID) FROM gradingcriteria)";
             $Result2 = mysqli_query($this->db->getConn(),$sql2);
             $row = $Result2->fetch_assoc();
             $wantedFeaturesID = $row["FeaturesID"];
@@ -80,74 +80,7 @@ class Instructor extends model {
                 //should adding test cases mechinanism here
 
                 
-                if($_POST['outputsArray'])
-                {
-                    //outputs array
-                    $outputsarray = array();
-
-                    foreach ($_POST['outputsArray'] as $element) 
-                    { 
-                        // echo $element." "; 
-                        array_push($outputsarray,$element);
-                        
-                    }
-
-                    $testcasenumbers=$_POST['testcasenumberarray'];
-
-                    $splittestcases=explode(',',$testcasenumbers);
-
-
-                    $inputsarray=array();
-
-                    for ($i=0;$i<count($splittestcases);$i++)
-                    {
-                       $inputs="";
-
-                        foreach($_POST[trim($splittestcases[$i]).'inputnum'] as $inputelement)
-                        {
-                            if($inputs==="")
-                            {
-                                $inputs=$inputelement;
-                            }
-                            else
-                            {
-                                $inputs=$inputs." ".$inputelement;
-                            }
-                        }
-
-                        array_push($inputsarray,$inputs);
-
-                    }
-
-                    //here the test cases can be counted by the size of outputsarray
-                    for($i=0;$i<count($outputsarray);$i++)
-                    {
-                        // echo $outputsarray[$i];
-                        //the insert sql statement in test cases table should be here
-
-                        $sql3="insert into test_case (AssignmentsID,Input_variable,Expected_output) values('$wantedAssignmentID','$inputsarray[$i]','$outputsarray[$i]')";
-                        $Result3 = mysqli_query($this->db->getConn(),$sql3);
-
-                        if($Result3)
-                        {
-                            if($i===(count($outputsarray)-1))
-                            {
-                                $this->addAssignment_addtostudents($wantedAssignmentID,$wantedcourseid);
-                            }
-                        }
-                        else
-                        {
-                            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
-                            </script><script> swal('Error Adding Assignmet','','error');</script>"; 
-                        }
-                        
-
-                    }
-                }
-                else
-                {
-                    echo "no test case for this assignment";
-                }   
+                   $this->addAssignment_addTestCases($wantedAssignmentID,$wantedcourseid);
 
 
 
@@ -163,6 +96,78 @@ class Instructor extends model {
         else{
             echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
             </script><script> swal('Error Adding Assignmet','','error');</script>";
+        }
+    }
+
+    function addAssignment_addTestCases($wantedAssignmentID,$wantedcourseid)
+    {
+        if($_POST['outputsArray'])
+        {
+            //outputs array
+            $outputsarray = array();
+
+            foreach ($_POST['outputsArray'] as $element) 
+            { 
+                // echo $element." "; 
+                array_push($outputsarray,$element);
+                
+            }
+
+            $testcasenumbers=$_POST['testcasenumberarray'];
+
+            $splittestcases=explode(',',$testcasenumbers);
+
+
+            $inputsarray=array();
+
+            for ($i=0;$i<count($splittestcases);$i++)
+            {
+                $inputs="";
+
+                foreach($_POST[trim($splittestcases[$i]).'inputnum'] as $inputelement)
+                {
+                    if($inputs==="")
+                    {
+                        $inputs=$inputelement;
+                    }
+                    else
+                    {
+                        $inputs=$inputs." ".$inputelement;
+                    }
+                }
+
+                array_push($inputsarray,$inputs);
+
+            }
+
+            //here the test cases can be counted by the size of outputsarray
+            for($i=0;$i<count($outputsarray);$i++)
+            {
+                // echo $outputsarray[$i];
+                //the insert sql statement in test cases table should be here
+
+                $sql3="insert into test_case (AssignmentsID,Input_variable,Expected_output) values('$wantedAssignmentID','$inputsarray[$i]','$outputsarray[$i]')";
+                $Result3 = mysqli_query($this->db->getConn(),$sql3);
+
+                if($Result3)
+                {
+                    if($i===(count($outputsarray)-1))
+                    {
+                        $this->addAssignment_addtostudents($wantedAssignmentID,$wantedcourseid);
+                    }
+                }
+                else
+                {
+                    echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'>
+                    </script><script> swal('Error Adding Assignmet','','error');</script>"; 
+                }
+                
+
+            }
+        }
+        else
+        {
+            echo "no test case for this assignment";
         }
     }
 

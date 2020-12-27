@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2020 at 12:29 AM
+-- Generation Time: Dec 27, 2020 at 07:21 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -51,7 +51,7 @@ CREATE TABLE `assignments` (
 --
 
 INSERT INTO `assignments` (`AssignmentID`, `EducatorID`, `CourseID`, `GradingcriteriaID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `Numberofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`, `Hidden`) VALUES
-(1, 2, 1, 1, 'Your First C++ Program', '\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero. Fusce non facilisis nisi. Vivamus rutrum varius dui, ac ornare tortor gravida varius. Phasellus pulvinar rutrum ullamcorper. Donec eu nunc magna. Sed rhoncus quam in odio consectetur, eu ullamcorper arcu rutrum. Cras quis diam maximus, ultricies dui quis, tristique orci. Ut auctor felis nec ipsum lacinia aliquam. Vivamus eget pretium erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed porttitor, ipsum non tincidunt consectetur, odio eros dignissim augue, id congue dolor urna sed enim. Nulla malesuada aliquet pretium.\r\n\r\nSed dictum vehicula ultrices. Pellentesque placerat sed felis sit amet porta. Aenean tristique, arcu ac malesuada sollicitudin, nulla metus varius tortor, et tristique quam odio ac tellus. Donec pellentesque blandit nunc sed lobortis. Nam id elit facilisis mauris tempor varius. Curabitur pellentesque volutpat mauris, vitae posuere sem luctus a. Aliquam posuere metus maximus ipsum vestibulum interdum. Donec congue vel augue sed placerat. Proin eu nibh eu ex pulvinar euismod. ', '2020-10-06', '2020-10-08', 5, 2, '2020-10-02', '2020-10-06', 'Automatic', 0, 'False');
+(1, 4, 1, 1, 'Prime Numbers', 'A prime number is a whole number greater than 1 whose only factors are 1 and itself.\r\nWrite a program in C++ to check whether a number is prime or not. \r\n\r\nSample Output:\r\nInput a number to check prime or not: 13\r\nThe entered number is a prime number.\r\n------------------------\r\nInput a number to check prime or not: 9\r\nThe entered number is not a prime number.', '2020-12-29', '2021-01-01', 10, 2, NULL, NULL, 'Automatic', 0, 'False');
 
 -- --------------------------------------------------------
 
@@ -169,7 +169,6 @@ INSERT INTO `courseedducator` (`CourseID`, `UserID`, `Primaryeducatorflag`, `Ass
 
 CREATE TABLE `gradingcriteria` (
   `FeaturesID` int(11) NOT NULL,
-  `AssignmentsID` int(11) NOT NULL,
   `Compiling` tinyint(1) NOT NULL,
   `Compiling_weight` int(11) NOT NULL,
   `Sytling` tinyint(1) NOT NULL,
@@ -184,8 +183,8 @@ CREATE TABLE `gradingcriteria` (
 -- Dumping data for table `gradingcriteria`
 --
 
-INSERT INTO `gradingcriteria` (`FeaturesID`, `AssignmentsID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) VALUES
-(1, 1, 1, 50, 1, 0, 0, 0, 1, 50);
+INSERT INTO `gradingcriteria` (`FeaturesID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) VALUES
+(1, 1, 30, 1, 0, 1, 0, 1, 70);
 
 -- --------------------------------------------------------
 
@@ -243,8 +242,9 @@ CREATE TABLE `submissions` (
   `Grade` int(11) DEFAULT NULL,
   `Submissiondate` date DEFAULT NULL,
   `Modificationdate` date DEFAULT NULL,
-  `Code_submitted` varchar(3000) DEFAULT NULL,
-  `Feedback` text DEFAULT NULL,
+  `Code_submitted` longtext DEFAULT NULL,
+  `compile_feedback` longtext DEFAULT NULL,
+  `style_feedback` longtext DEFAULT NULL,
   `Badgereceivedflag` tinyint(1) DEFAULT NULL,
   `Submittedflag` tinyint(4) NOT NULL DEFAULT 0,
   `Compiling_Grade` int(11) DEFAULT NULL,
@@ -257,8 +257,8 @@ CREATE TABLE `submissions` (
 -- Dumping data for table `submissions`
 --
 
-INSERT INTO `submissions` (`UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Code_submitted`, `Feedback`, `Badgereceivedflag`, `Submittedflag`, `Compiling_Grade`, `Syntax_Grade`, `Logic_Grade`, `Style_Grade`) VALUES
-(1, 1, 1, NULL, 4, '2020-12-15', NULL, '#include <iostream>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int firstNumber, secondNumber, sumOfTwoNumbers;\r\n    \r\n    cout << \"Enter two integers: \";\r\n    cin >> firstNumber >> secondNumber;\r\n\r\n    // sum of two numbers in stored in variable sumOfTwoNumbers\r\n    sumOfTwoNumbers = firstNumber + secondNumber;\r\n\r\n    // Prints sum \r\n    cout << firstNumber << \" + \" <<  secondNumber << \" = \" << sumOfTwoNumbers;     \r\n\r\n    return 0;\r\n}', NULL, NULL, 0, 50, 0, 38, 0);
+INSERT INTO `submissions` (`SubmissionID`, `UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Code_submitted`, `compile_feedback`, `style_feedback`, `Badgereceivedflag`, `Submittedflag`, `Compiling_Grade`, `Syntax_Grade`, `Logic_Grade`, `Style_Grade`, `logic_feedback`, `syntax_feedback`) VALUES
+(1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -278,10 +278,10 @@ CREATE TABLE `test_case` (
 --
 
 INSERT INTO `test_case` (`TcasesID`, `AssignmentsID`, `Input_variable`, `Expected_output`) VALUES
-(1, 1, '2 2', '4'),
-(2, 1, '5 5', '10'),
-(3, 1, '10 10', '20'),
-(4, 1, '20 20', '99999');
+(1, 1, '7', 'The entered number is a prime number'),
+(2, 1, '11', 'The entered number is a prime number'),
+(3, 1, '9', 'The entered number is not a prime number'),
+(4, 1, '6', 'The entered number is not a prime number');
 
 -- --------------------------------------------------------
 
@@ -366,8 +366,7 @@ ALTER TABLE `courseedducator`
 -- Indexes for table `gradingcriteria`
 --
 ALTER TABLE `gradingcriteria`
-  ADD PRIMARY KEY (`FeaturesID`),
-  ADD KEY `AssignmentsID` (`AssignmentsID`);
+  ADD PRIMARY KEY (`FeaturesID`);
 
 --
 -- Indexes for table `role`
@@ -414,7 +413,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `badges`
@@ -438,7 +437,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `gradingcriteria`
 --
 ALTER TABLE `gradingcriteria`
-  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `role`

@@ -290,7 +290,7 @@
                 <div class="col-12 add-pad mx-auto">
                     <!-- Assignment Details div -->
                     <h2 class="font-weight-normal mb-3 ">Assignment Details</h2>
-                    <p class="text-justify"> <?php echo $assignment->getAssignmentdesc(); ?> <br><br> 
+                    <p class="text-justify"><pre> <?php echo $assignment->getAssignmentdesc(); ?></pre> <br><br> 
                     
                     Assignment Grade : <?php echo $assignment->getAssignmentgrade();?> Marks
                     </p>
@@ -373,7 +373,7 @@
                     <h6>Click Run Code Then Submit Assignment</h6>
 
                     <form action="" method="post" enctype="multipart/form-data">
-                        Select image to upload:
+                        Select cpp file to upload:
                         <input type="file" name="fileToUpload"  id="fileToUpload" accept=".cpp">
                         <input type="submit" value="Upload File" class="btn" name="uploadfile">
                     </form>
@@ -453,7 +453,7 @@
                                         else
                                         {
                                             echo "<td>". $assignment->getSubmissiondate()."</td>
-                                                <td>". $assignment->getFilepath()."</td>
+                                                <td><pre style='color:white'>". $assignment->getFilepath()."</pre></td>
                                                 <td>" .$assignment->getGrade()."</td>
                                                 "
                                                 ;
@@ -470,22 +470,28 @@
 
             
             </div>
-            <div class="row mt-4 mb-4">
-                <div class="col-12  add-pad mx-auto" style="width=98%">
-                    <h2 >Feedback on latest submission</h2>
+            <?php 
+                if ($assignment->getLogicfeedback())
+                {
+                    echo '<div class="row mt-4 mb-4">
+                    <div class="col-12  add-pad mx-auto" style="width=98%">
+                        
 
-                    <h4 class="mt-3">Logic Feedback</h4>
-                    
-                    <div class="mt-3" id="logic-feedback"> <?php echo $assignment->getLogicfeedback(); ?> </div>
+                        <h2 class="mt-3 text-center">Logic Feedback</h2>
+                        
+                        <div class="mt-3" id="logic-feedback">'.$assignment->getLogicfeedback().'<br><hr> </div>
 
-                    <h4 class="mt-3">Compliation Feedback</h4>
-                    <div class="mt-3" id="compile-feedback"> <?php echo $assignment->getCompilefeedback(); ?> </div>
+                        <h2 class="mt-3 text-center">Compliation Feedback</h2>
+                        <div class="mt-3" style="color:green" id="compile-feedback">'.$assignment->getCompilefeedback().'<br> <hr> </div>
 
-                    <h4 class="mt-3">Style Feedback</h4>
-                    <div class="mt-3" id="style-feedback"> <?php echo $assignment->getStylefeedback(); ?> </div>
+                        <h2 class="mt-3 text-center">Style Feedback</h2>
+                        <div class="mt-3" style="color:crimson" id="style-feedback">'.$assignment->getStylefeedback().'<hr>  </div>
 
-                </div>                 
-            </div>
+                    </div>                 
+                </div>';
+                } 
+            ?>
+           
 
             
             
