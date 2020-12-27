@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2020 at 07:39 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.11
+-- Generation Time: Dec 27, 2020 at 06:38 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -50,8 +51,8 @@ CREATE TABLE `assignments` (
 --
 
 INSERT INTO `assignments` (`AssignmentID`, `EducatorID`, `CourseID`, `GradingcriteriaID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `Numberofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`, `Hidden`) VALUES
-(1, 2, 1, 1, 'Your First C++ Program', '\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc non felis eu velit sollicitudin auctor ac non justo. Pellentesque arcu purus, consequat maximus urna sed, gravida congue nisi. Nunc congue laoreet consectetur. Fusce at massa id massa rutrum luctus. Aliquam ac diam congue, consequat libero quis, facilisis libero. Fusce non facilisis nisi. Vivamus rutrum varius dui, ac ornare tortor gravida varius. Phasellus pulvinar rutrum ullamcorper. Donec eu nunc magna. Sed rhoncus quam in odio consectetur, eu ullamcorper arcu rutrum. Cras quis diam maximus, ultricies dui quis, tristique orci. Ut auctor felis nec ipsum lacinia aliquam. Vivamus eget pretium erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed porttitor, ipsum non tincidunt consectetur, odio eros dignissim augue, id congue dolor urna sed enim. Nulla malesuada aliquet pretium.\r\n\r\nSed dictum vehicula ultrices. Pellentesque placerat sed felis sit amet porta. Aenean tristique, arcu ac malesuada sollicitudin, nulla metus varius tortor, et tristique quam odio ac tellus. Donec pellentesque blandit nunc sed lobortis. Nam id elit facilisis mauris tempor varius. Curabitur pellentesque volutpat mauris, vitae posuere sem luctus a. Aliquam posuere metus maximus ipsum vestibulum interdum. Donec congue vel augue sed placerat. Proin eu nibh eu ex pulvinar euismod. ', '2020-10-06', '2020-10-08', 5, 2, '2020-10-02', '2020-10-06', 'Automatic', 0, 'False'),
-(45, 4, 1, 31, 'Testing 1', 'fujhgf', '2020-12-22', '2020-12-30', 5, 1, NULL, NULL, 'Automatic', 0, 'False');
+(1, 4, 1, 1, 'Prime Numbers', 'A prime number is a whole number greater than 1 whose only factors are 1 and itself.\r\nWrite a program in C++ to check whether a number is prime or not. \r\n\r\nSample Output:\r\nInput a number to check prime or not: 13\r\nThe entered number is a prime number.\r\n------------------------\r\nInput a number to check prime or not: 9\r\nThe entered number is not a prime number.', '2020-12-29', '2021-01-01', 10, 2, NULL, NULL, 'Automatic', 0, 'False'),
+(2, 4, 1, 2, 'Days Of The Week', 'Write a C++ program that asks the user to enter a number between 1 to 7\r\nthen print the day of the week this number represent, \r\n1 is Sunday .... and 7 is Saturday\r\nif the user enters any other number print an error message\r\n\r\nSample output:\r\nPlease enter a number: 2\r\nThis is monday', '2020-12-16', '2020-12-30', 15, 2, NULL, NULL, 'Automatic', 0, 'False');
 
 -- --------------------------------------------------------
 
@@ -185,8 +186,8 @@ CREATE TABLE `gradingcriteria` (
 --
 
 INSERT INTO `gradingcriteria` (`FeaturesID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) VALUES
-(1, 1, 50, 1, 0, 0, 0, 1, 50),
-(31, 1, 12, 1, 12, 1, 12, 1, 12);
+(1, 1, 30, 1, 0, 1, 0, 1, 70),
+(2, 1, 20, 1, 0, 1, 0, 1, 80);
 
 -- --------------------------------------------------------
 
@@ -245,8 +246,8 @@ CREATE TABLE `submissions` (
   `Grade` int(11) DEFAULT NULL,
   `Submissiondate` date DEFAULT NULL,
   `Modificationdate` date DEFAULT NULL,
-  `Code_submitted` varchar(3000) DEFAULT NULL,
-  `compile_feedback` text DEFAULT NULL,
+  `Code_submitted` longtext DEFAULT NULL,
+  `compile_feedback` longtext DEFAULT NULL,
   `style_feedback` longtext DEFAULT NULL,
   `Badgereceivedflag` tinyint(1) DEFAULT NULL,
   `Submittedflag` tinyint(4) NOT NULL DEFAULT 0,
@@ -263,7 +264,8 @@ CREATE TABLE `submissions` (
 --
 
 INSERT INTO `submissions` (`SubmissionID`, `UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Code_submitted`, `compile_feedback`, `style_feedback`, `Badgereceivedflag`, `Submittedflag`, `Compiling_Grade`, `Syntax_Grade`, `Logic_Grade`, `Style_Grade`, `logic_feedback`, `syntax_feedback`) VALUES
-(1, 1, 1, 1, NULL, 3, '2020-12-20', NULL, '#include <iostream>\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n    int firstNumber, secondNumber, sumOfTwoNumbers;\r\n    \r\n    cout << \"Enter two integers: \";\r\n    cin >> firstNumber >> secondNumber;\r\n\r\n    // sum of two numbers in stored in variable sumOfTwoNumbers\r\n    sumOfTwoNumbers = firstNumber + secondNumber;\r\n\r\n    // Prints sum \r\n    cout << firstNumber << \" + \" <<  secondNumber << \" = \" << sumOfTwoNumbers;     \r\n\r\n    return 0;\r\n}', 'Your Code Compiled Successfully', 'In line 0:  No copyright message found.  You should have a line  Error found : \"Copyright [year] <Copyright Owner>\"  [legal/copyright] [5] <br>In line 2  Error found :  Do not use namespace using-directives.  Use using-declarations instead.  [build/namespaces] [5] <br>In line 5  Error found :  { should almost always be at the end of the previous line  [whitespace/braces] [4] <br>In line 7 14 15  Error found :  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4] <br>In line 15  Error found :  Lines should be <= 80 characters long  [whitespace/line_length] [2] <br>In line 18  Error found :  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5] <br>', NULL, 0, 50, 0, 13, 0, 'You may have a logical error because the following test failed for your code with inputs5 5did not match\r\n          the expected output10<br><br>You may have a logical error because the following test failed for your code with inputs10 10did not match\r\n          the expected output20<br><br>You may have a logical error because the following test failed for your code with inputs20 20did not match\r\n          the expected output99999<br><br>', NULL);
+(1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 1, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -283,10 +285,13 @@ CREATE TABLE `test_case` (
 --
 
 INSERT INTO `test_case` (`TcasesID`, `AssignmentsID`, `Input_variable`, `Expected_output`) VALUES
-(1, 1, '2 2', '4'),
-(2, 1, '5 5', '10'),
-(3, 1, '10 10', '20'),
-(4, 1, '20 20', '99999');
+(1, 1, '7', 'The entered number is a prime number.'),
+(2, 1, '11', 'The entered number is a prime number.'),
+(3, 1, '9', 'The entered number is a not prime number.'),
+(4, 1, '6', 'The entered number is a not prime number.'),
+(5, 2, '1', 'This is sunday'),
+(6, 2, '2', 'This is monday'),
+(7, 2, '3', 'This is tuesday');
 
 -- --------------------------------------------------------
 
@@ -420,7 +425,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `badges`
@@ -450,7 +455,7 @@ ALTER TABLE `courseedducator`
 -- AUTO_INCREMENT for table `gradingcriteria`
 --
 ALTER TABLE `gradingcriteria`
-  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -462,13 +467,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `submissions`
 --
 ALTER TABLE `submissions`
-  MODIFY `SubmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `SubmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `test_case`
 --
 ALTER TABLE `test_case`
-  MODIFY `TcasesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `TcasesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
