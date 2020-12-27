@@ -470,22 +470,28 @@
 
             
             </div>
-            <div class="row mt-4 mb-4">
-                <div class="col-12  add-pad mx-auto" style="width=98%">
-                    <h2 >Feedback on latest submission</h2>
+            <?php 
+                if ($assignment->getLogicfeedback())
+                {
+                    echo '<div class="row mt-4 mb-4">
+                    <div class="col-12  add-pad mx-auto" style="width=98%">
+                        
 
-                    <h4 class="mt-3">Logic Feedback</h4>
-                    
-                    <div class="mt-3" id="logic-feedback"> <?php echo $assignment->getLogicfeedback(); ?> </div>
+                        <h2 class="mt-3 text-center">Logic Feedback</h2>
+                        
+                        <div class="mt-3" id="logic-feedback">'.$assignment->getLogicfeedback().'<br><hr> </div>
 
-                    <h4 class="mt-3">Compliation Feedback</h4>
-                    <div class="mt-3" id="compile-feedback"> <?php echo $assignment->getCompilefeedback(); ?> </div>
+                        <h2 class="mt-3 text-center">Compliation Feedback</h2>
+                        <div class="mt-3" style="color:green" id="compile-feedback">'.$assignment->getCompilefeedback().'<br> <hr> </div>
 
-                    <h4 class="mt-3">Style Feedback</h4>
-                    <div class="mt-3" id="style-feedback"> <?php echo $assignment->getStylefeedback(); ?> </div>
+                        <h2 class="mt-3 text-center">Style Feedback</h2>
+                        <div class="mt-3" style="color:crimson" id="style-feedback">'.$assignment->getStylefeedback().'<hr>  </div>
 
-                </div>                 
-            </div>
+                    </div>                 
+                </div>';
+                } 
+            ?>
+           
 
             
             
