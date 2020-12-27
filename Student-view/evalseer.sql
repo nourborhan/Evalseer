@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2020 at 06:38 PM
+-- Generation Time: Dec 27, 2020 at 07:21 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -51,8 +51,7 @@ CREATE TABLE `assignments` (
 --
 
 INSERT INTO `assignments` (`AssignmentID`, `EducatorID`, `CourseID`, `GradingcriteriaID`, `Assignmentname`, `Assignmentdesc.`, `Startdate`, `Cutoffdate`, `Grade`, `Numberofsubmissions`, `Timecreated`, `timemodified`, `Gradingtype`, `Suspended`, `Hidden`) VALUES
-(1, 4, 1, 1, 'Prime Numbers', 'A prime number is a whole number greater than 1 whose only factors are 1 and itself.\r\nWrite a program in C++ to check whether a number is prime or not. \r\n\r\nSample Output:\r\nInput a number to check prime or not: 13\r\nThe entered number is a prime number.\r\n------------------------\r\nInput a number to check prime or not: 9\r\nThe entered number is not a prime number.', '2020-12-29', '2021-01-01', 10, 2, NULL, NULL, 'Automatic', 0, 'False'),
-(2, 4, 1, 2, 'Days Of The Week', 'Write a C++ program that asks the user to enter a number between 1 to 7\r\nthen print the day of the week this number represent, \r\n1 is Sunday .... and 7 is Saturday\r\nif the user enters any other number print an error message\r\n\r\nSample output:\r\nPlease enter a number: 2\r\nThis is monday', '2020-12-16', '2020-12-30', 15, 2, NULL, NULL, 'Automatic', 0, 'False');
+(1, 4, 1, 1, 'Prime Numbers', 'A prime number is a whole number greater than 1 whose only factors are 1 and itself.\r\nWrite a program in C++ to check whether a number is prime or not. \r\n\r\nSample Output:\r\nInput a number to check prime or not: 13\r\nThe entered number is a prime number.\r\n------------------------\r\nInput a number to check prime or not: 9\r\nThe entered number is not a prime number.', '2020-12-29', '2021-01-01', 10, 2, NULL, NULL, 'Automatic', 0, 'False');
 
 -- --------------------------------------------------------
 
@@ -186,8 +185,7 @@ CREATE TABLE `gradingcriteria` (
 --
 
 INSERT INTO `gradingcriteria` (`FeaturesID`, `Compiling`, `Compiling_weight`, `Sytling`, `Styling_weight`, `Syntax`, `Syntax_weight`, `Logic`, `Logic_weight`) VALUES
-(1, 1, 30, 1, 0, 1, 0, 1, 70),
-(2, 1, 20, 1, 0, 1, 0, 1, 80);
+(1, 1, 30, 1, 0, 1, 0, 1, 70);
 
 -- --------------------------------------------------------
 
@@ -264,8 +262,7 @@ CREATE TABLE `submissions` (
 --
 
 INSERT INTO `submissions` (`SubmissionID`, `UserID`, `CourseID`, `AssignmentID`, `BaadgeID`, `Grade`, `Submissiondate`, `Modificationdate`, `Code_submitted`, `compile_feedback`, `style_feedback`, `Badgereceivedflag`, `Submittedflag`, `Compiling_Grade`, `Syntax_Grade`, `Logic_Grade`, `Style_Grade`, `logic_feedback`, `syntax_feedback`) VALUES
-(1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 1, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -285,13 +282,10 @@ CREATE TABLE `test_case` (
 --
 
 INSERT INTO `test_case` (`TcasesID`, `AssignmentsID`, `Input_variable`, `Expected_output`) VALUES
-(1, 1, '7', 'The entered number is a prime number.'),
-(2, 1, '11', 'The entered number is a prime number.'),
-(3, 1, '9', 'The entered number is a not prime number.'),
-(4, 1, '6', 'The entered number is a not prime number.'),
-(5, 2, '1', 'This is sunday'),
-(6, 2, '2', 'This is monday'),
-(7, 2, '3', 'This is tuesday');
+(1, 1, '7', 'The entered number is a prime number'),
+(2, 1, '11', 'The entered number is a prime number'),
+(3, 1, '9', 'The entered number is not a prime number'),
+(4, 1, '6', 'The entered number is not a prime number');
 
 -- --------------------------------------------------------
 
@@ -425,7 +419,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `badges`
@@ -455,7 +449,7 @@ ALTER TABLE `courseedducator`
 -- AUTO_INCREMENT for table `gradingcriteria`
 --
 ALTER TABLE `gradingcriteria`
-  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `FeaturesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -467,13 +461,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `submissions`
 --
 ALTER TABLE `submissions`
-  MODIFY `SubmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `SubmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `test_case`
 --
 ALTER TABLE `test_case`
-  MODIFY `TcasesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `TcasesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`

@@ -290,7 +290,7 @@
                 <div class="col-12 add-pad mx-auto">
                     <!-- Assignment Details div -->
                     <h2 class="font-weight-normal mb-3 ">Assignment Details</h2>
-                    <p class="text-justify"> <?php echo $assignment->getAssignmentdesc(); ?> <br><br> 
+                    <p class="text-justify"><pre> <?php echo $assignment->getAssignmentdesc(); ?></pre> <br><br> 
                     
                     Assignment Grade : <?php echo $assignment->getAssignmentgrade();?> Marks
                     </p>
@@ -373,7 +373,7 @@
                     <h6>Click Run Code Then Submit Assignment</h6>
 
                     <form action="" method="post" enctype="multipart/form-data">
-                        Select image to upload:
+                        Select cpp file to upload:
                         <input type="file" name="fileToUpload"  id="fileToUpload" accept=".cpp">
                         <input type="submit" value="Upload File" class="btn" name="uploadfile">
                     </form>
@@ -453,7 +453,7 @@
                                         else
                                         {
                                             echo "<td>". $assignment->getSubmissiondate()."</td>
-                                                <td>". $assignment->getFilepath()."</td>
+                                                <td><pre style='color:white'>". $assignment->getFilepath()."</pre></td>
                                                 <td>" .$assignment->getGrade()."</td>
                                                 "
                                                 ;
