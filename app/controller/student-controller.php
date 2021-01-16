@@ -53,13 +53,21 @@ class StudentController extends Controller{
       $logicfeedback = "";
       $stylefeedback = $_SESSION["stylefeedback"];
 
-      if($compilinggrade == 100)
+      if(isset($_COOKIE['compilefeedback']))
       {
-        $compilefeedback = "Your Code Compiled Successfully";
+        $compilefeedback=$_COOKIE['compilefeedback'];
       }
-      else
-      {
-        $compilefeedback = "Your Code Failed to Compile";
+      else {
+
+        if($compilinggrade == 100)
+        {
+          $compilefeedback = "Your Code Compiled Successfully";
+        }
+        else
+        {
+          $compilefeedback = "Your Code Failed to Compile";
+        }
+        
       }
     
 

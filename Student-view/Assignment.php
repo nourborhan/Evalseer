@@ -597,7 +597,20 @@
                         cache: false, //important or else you might get wrong data returned to you
                         url: "compile.php", //destination
                         datatype: "html", //expected data format from process.php
-                        data: $('form').serialize(), //target your form's data and serialize for a POST
+                        data: $('form').serialize(),//target your form's data and serialize for a POST
+                        timeout:10000,
+                        error: function(jqXHR,textStatus){
+                            $.ajax({
+                                type:'POST',
+                                url: "close.php",
+                                success: function (errordata) {
+
+                                    $("#pac-loader").attr('style','display:none');
+                                    $('#Submit_assinment_btn').show();
+                                },
+                            });
+                            // console.log(textStatus);
+                        },
                         success: function(result) { // data is the var which holds the output of your process.php
 
                             // locate the div with #result and fill it with returned data from process.php
