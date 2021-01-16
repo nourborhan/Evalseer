@@ -11,11 +11,11 @@ setcookie("compilefeedback","compile fail due to infinite loop");
 
 
 
-shell_exec("start del ".$_SESSION['ID']."-".$_SESSION['assignmentid'].".cpp && start taskkill /F /IM cmd.exe /T");
-shell_exec("start del *.o && start taskkill /F /IM cmd.exe /T");
-shell_exec("start del ".$_SESSION['ID']."-".$_SESSION['assignmentid']."-input.txt && start taskkill /F /IM cmd.exe /T");
-shell_exec("start del ".$_SESSION['ID']."-".$_SESSION['assignmentid']."-error.txt && start taskkill /F /IM cmd.exe /T");
-shell_exec("start del ".$_SESSION['ID']."-".$_SESSION['assignmentid'].".exe && start taskkill /F /IM cmd.exe /T");
+shell_exec("start cmd /c del ".$_SESSION['ID']."-".$_SESSION['assignmentid'].".cpp");
+shell_exec("start cmd /c del *.o");
+shell_exec("start cmd /c del ".$_SESSION['ID']."-".$_SESSION['assignmentid']."-input.txt");
+shell_exec("start cmd /c del ".$_SESSION['ID']."-".$_SESSION['assignmentid']."-error.txt");
+shell_exec("start cmd /c del ".$_SESSION['ID']."-".$_SESSION['assignmentid'].".exe");
 
 echo "hello from the close.cpp <br>";
 echo $_COOKIE['compilefeedback']."<br> $test";
