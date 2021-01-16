@@ -2,14 +2,14 @@
 	session_start();
     putenv("PATH=C:\\xampp\\htdocs\\Evalseer\\Student-view\\Dev-Cpp\\MinGW64\\bin");
 	$CC="g++";
-	$out="a.exe";
+	$out=$_SESSION['ID']."-".$_POST['assignmentid'].".exe";
 	$code=$_POST["code"];
 	$input=$_POST["input"];
-	$filename_code="main.cpp";
-	$filename_in="input.txt";
-	$filename_error="error.txt";
-	$executable="a.exe";
-	$command=$CC." -lm ".$filename_code;	
+	$filename_code=$_SESSION['ID']."-".$_POST['assignmentid'].".cpp";
+	$filename_in=$_SESSION['ID']. "-".$_POST['assignmentid']."-input.txt";
+	$filename_error=$_SESSION['ID']."-".$_POST['assignmentid']."-error.txt";
+	$executable=$_SESSION['ID']."-".$_POST['assignmentid'].".exe";
+	$command=$CC." -lm -o ".$_SESSION['ID']."-".$_POST['assignmentid'].".exe ".$filename_code;	
 	$command_error=$command." 2>".$filename_error;
 
 
@@ -41,8 +41,9 @@
 		echo "$output";
 		$grade = 100;
 		setcookie("compilinggrade", $grade); 
-		// $_SESSION["compilinggrade"] = $grade;
-   }
+		setcookie("compilefeedback", "Your Code Compiled Successfully"); 
+		// $_COOKIE[""] = $grade;
+	}
 	else if(!strpos($error,"error"))
 	{
 		echo "<pre style='color:red'>$error</pre>";
@@ -59,17 +60,20 @@
 		echo "$output";
 		$grade = 100;
 		setcookie("compilinggrade", $grade); 
-		            
+		setcookie("compilefeedback", "Your Code Compiled Successfully"); 
+		
 	}
 	else
 	{
 		echo "<pre>$error</pre>";
 		$grade = 0;
 		setcookie("compilinggrade", $grade); 
-
+		setcookie("compilefeedback", "Your Code Failed to Compile"); 
+		
 	}
 	exec("del $filename_code");
 	exec("del *.o");
-	exec("del *.txt");
+	exec("del ".$_SESSION['ID']."-".$_SESSION['assignmentid']."-input.txt");
+	exec("del ".$_SESSION['ID']."-".$_SESSION['assignmentid']."-error.txt");
 	exec("del $executable");
 ?>

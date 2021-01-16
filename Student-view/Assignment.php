@@ -80,6 +80,7 @@
     $logicweight=$assignmentclass->getLogicweight();
     $styleweight=$assignmentclass->getStyleweight();
     
+    $_SESSION['assignmentid']=$_GET['id'];
 
 
     $studentmodel=new Student();
